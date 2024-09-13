@@ -1,0 +1,34 @@
+<section>
+    100% chance of Success
+</section>
+<section>
+    <form [formGroup]="skillCheckForm" (submit)="skillCheckSubmit()">
+        <label for="target-dc">Target DC</label>
+        <input formControlName="targetDC" id="target-dc" type="number" inputmode="decimal" />
+        <label for="skill-modifier">Skill Modifier</label>
+        <input formControlName="skillModifier" id="skill-modifier" type="number" [defaultValue]="0" inputmode="decimal" />
+        Die Bonus:
+        <!-- <div *ngFor="let option of dieBonusOptions">
+            <input type="checkbox" value="{{option}}" id="{{option}}" 
+                name="dieBonus" formControlName="dieBonus"
+            >
+            <label for="{{option}}">{{option}}</label>
+        </div> -->
+        <!-- <div *ngfor="let formcontrol of diebonusform.controls | keyvalue">
+            {{formcontrol.key}}:
+            <app-stepper [formcontrol]="formcontrol.value"></app-stepper>
+        </div> -->
+        <app-dice-bonus-form label="Die Bonus" controlKey="dieBonuses"></app-dice-bonus-form>
+        <div *ngFor="let option of advantageOptions">
+            <input type="radio" value="{{option.value}}"
+                id="advantage-{{option.id}}" formControlName="advantage"
+            >
+            <label for="advantage-{{option.id}}">{{option.name}}</label>
+        </div>
+        <label for="attempts">Attempts</label>
+        <input formControlName="attempts" id="attempts" type="number" 
+            min="1" inputmode="decimal"
+        />
+        <button type="submit">Calc!</button>
+    </form>
+</section>

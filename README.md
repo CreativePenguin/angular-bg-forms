@@ -1,5 +1,16 @@
 # AngularBg3Cheats
 
+## Feature Goals
+
+### Core Features
+- [ ] User has option to set target DC
+- [ ] User has option to denote advantage / savage attacker
+- [ ] Visually show the possible dice roll options
+
+### Additional Features
+- [ ] Give option to save character stats to make calculations easier
+- [ ] Use API https://www.dnd5eapi.co/ to add predefined spells
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.9.
 
 ## Development server
