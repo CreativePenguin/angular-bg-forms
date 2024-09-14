@@ -1,5 +1,5 @@
 import { Component, forwardRef } from '@angular/core';
-import { FormControl, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-stepper',
@@ -15,20 +15,20 @@ import { FormControl, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
   templateUrl: './stepper.component.html',
   styleUrl: './stepper.component.css'
 })
-export class StepperComponent {
-  value = 0;
-  onChange(value: number) {
+export class StepperComponent implements ControlValueAccessor {
+  value: number | null = 0;
+  onChange(value: number | null) {
     this.value = value;
   }
   onTouch() {}
   increment() {
-    this.value = Math.floor(this.value + 1);
+    this.updateValue(this.value !== null ? this.value + 1 : 1);
   }
   decrement() {
-    if (this.value >= 1) {
-      this.value = this.value -= 1;
-    } else if (this.value < 1) {
-      this.value = 0;
+    if (this.value ?? 0 >= 1) {
+      this.updateValue(this.value != null ? this.value - 1 : 0);
+    } else if (this.value ?? 1 < 1) {
+      this.updateValue(0);
     }
   }
   writeValue(value: string) {
@@ -39,6 +39,13 @@ export class StepperComponent {
   }
   registerOnTouched(fn: any) {
     this.onTouch = fn;
+  }
+  updateValue(newValue: number | null): void {
+    if (newValue !== this.value) {
+      this.value = newValue;
+      this.onChange(newValue);
+      this.onTouch();
+    }
   }
   setDisabledState?(isDisabled: boolean) {}
 }

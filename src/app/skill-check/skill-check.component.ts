@@ -53,6 +53,7 @@ export class SkillCheckComponent {
     {id: 3, name: 'Disadvantage', value: 'disadvantage'},
   ];
   generateDiceSet(): DiceSet {
+    JSON.stringify(this.skillCheckForm.value);
     var diceSet: DiceSet = {
       d4: this.dieBonusForm.value[' d4'] ?? 0,
       d6: this.dieBonusForm.value[' d6'] ?? 0,
@@ -67,6 +68,7 @@ export class SkillCheckComponent {
   skillCheckSubmit() {
     var diceSet = this.generateDiceSet();
     console.log(this.skillCheckForm.value);
+    console.log('strigify', JSON.stringify(this.skillCheckForm.value));
     console.log(
       'max possible skill check',
       this.diceCalcService.diceSetString(diceSet),
