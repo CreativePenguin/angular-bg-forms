@@ -53,7 +53,7 @@ export class DiceSet implements DiceSetI {
         return {
             next() {
                 if (i < values.length) {
-                    return {value: [keys[i++], values[i++]], done: false};
+                    return {value: [keys[i], values[i++]], done: false};
                 } else {
                     return {value: null, done: true};
                 }

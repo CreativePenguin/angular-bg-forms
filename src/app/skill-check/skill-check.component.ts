@@ -50,6 +50,7 @@ export class SkillCheckComponent {
     {id: 2, name: 'Advantage', value: 'advantage'},
     {id: 3, name: 'Disadvantage', value: 'disadvantage'},
   ];
+
   generateDiceSet(): DiceSetI {
     var dieBonus = this.skillCheckForm.value['dieBonuses'] ?? {};
     var diceSet: DiceSetI = new DiceSet({
@@ -73,8 +74,7 @@ export class SkillCheckComponent {
       this.diceCalcService.diceSetString(diceSet),
       this.diceCalcService.maxRoll(diceSet)
     );
+    this.diceCalcService.printDiceSet(diceSet);
   }
-  constructor() {
-
-  }
+  constructor() {}
 }

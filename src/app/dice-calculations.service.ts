@@ -17,6 +17,7 @@ export class DiceCalculationsService {
     dicesum += diceset.modifier;
     return dicesum;
   }
+
   diceSetString(diceSet: DiceSetI): string {
     return `d4: ${diceSet.d4}\t
       d6: ${diceSet.d6}\t
@@ -25,5 +26,11 @@ export class DiceCalculationsService {
       d12: ${diceSet.d12}\t
       d20: ${diceSet.d20}\t
       modifier: ${diceSet.modifier}`;
+  }
+
+  printDiceSet(diceSet: DiceSetI) {
+    for(let i of diceSet) {
+      console.log(i[0], i[1]);
+    }
   }
 }
