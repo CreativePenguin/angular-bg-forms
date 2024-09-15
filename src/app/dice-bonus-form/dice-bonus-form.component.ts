@@ -33,7 +33,7 @@ export class DiceBonusFormComponent {
         d10: new FormControl(0),
         d12: new FormControl(0),
       })
-    )
+    );
   }
 
   ngOnDestroy() {

@@ -2,9 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { StepperComponent } from "../stepper/stepper.component";
-import { DiceSet } from '../../diceset';
+import { DiceSet, DiceSetI } from '../../diceset';
 import { DiceCalculationsService } from '../dice-calculations.service';
-import { InputIncrementerComponent } from '../input-incrementer/input-incrementer.component';
 import { DiceBonusFormComponent } from '../dice-bonus-form/dice-bonus-form.component';
 
 @Component({
@@ -12,8 +11,7 @@ import { DiceBonusFormComponent } from '../dice-bonus-form/dice-bonus-form.compo
   standalone: true,
   imports: [
     ReactiveFormsModule, CommonModule, 
-    StepperComponent, InputIncrementerComponent,
-    DiceBonusFormComponent
+    StepperComponent, DiceBonusFormComponent
   ],
   templateUrl: './skill-check.component.html',
   styleUrl: './skill-check.component.css'
@@ -21,20 +19,20 @@ import { DiceBonusFormComponent } from '../dice-bonus-form/dice-bonus-form.compo
 export class SkillCheckComponent {
   diceCalcService: DiceCalculationsService = inject(DiceCalculationsService);
   skillCheckForm = new FormGroup({
-    targetDC: new FormControl<Number>(0, [
+    targetDC: new FormControl<number>(0, [
       Validators.required,
       Validators.min(0)
     ]),
     skillModifier: new FormControl(),
-    // dieBonuses: new FormGroup({
-    //   ' d4': new FormControl(0),
-    //   ' d6': new FormControl(0),
-    //   ' d8': new FormControl(0),
-    //   'd10': new FormControl(0),
-    //   'd12': new FormControl(0),
-    // }),
+    dieBonuses: new FormGroup({
+      ' d4': new FormControl(0),
+      ' d6': new FormControl(0),
+      ' d8': new FormControl(0),
+      'd10': new FormControl(0),
+      'd12': new FormControl(0),
+    }),
     advantage: new FormControl('none'),
-    attempts: new FormControl<Number>(1, [
+    attempts: new FormControl<number>(1, [
       Validators.required,
       Validators.min(0)
     ])
@@ -52,9 +50,9 @@ export class SkillCheckComponent {
     {id: 2, name: 'Advantage', value: 'advantage'},
     {id: 3, name: 'Disadvantage', value: 'disadvantage'},
   ];
-  generateDiceSet(): DiceSet {
-    JSON.stringify(this.skillCheckForm.value);
-    var diceSet: DiceSet = {
+  generateDiceSet(): DiceSetI {
+    var dieBonus = this.skillCheckForm.value['dieBonuses'] ?? {};
+    var diceSet: DiceSetI = new DiceSet({
       d4: this.dieBonusForm.value[' d4'] ?? 0,
       d6: this.dieBonusForm.value[' d6'] ?? 0,
       d8: this.dieBonusForm.value[' d8'] ?? 0,
@@ -62,7 +60,8 @@ export class SkillCheckComponent {
       d12: this.dieBonusForm.value.d12 ?? 0,
       d20: 1,
       modifier: this.skillCheckForm.value.skillModifier ?? 0,
-    };
+      target: this.skillCheckForm.value.targetDC ?? 0
+    });
     return diceSet;
   }
   skillCheckSubmit() {
