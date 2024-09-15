@@ -24,13 +24,13 @@ export class SkillCheckComponent {
       Validators.min(0)
     ]),
     skillModifier: new FormControl(),
-    dieBonuses: new FormGroup({
-      ' d4': new FormControl(0),
-      ' d6': new FormControl(0),
-      ' d8': new FormControl(0),
-      'd10': new FormControl(0),
-      'd12': new FormControl(0),
-    }),
+    // dieBonuses: new FormGroup({
+    //   ' d4': new FormControl(0),
+    //   ' d6': new FormControl(0),
+    //   ' d8': new FormControl(0),
+    //   'd10': new FormControl(0),
+    //   'd12': new FormControl(0),
+    // }),
     advantage: new FormControl('none'),
     attempts: new FormControl<number>(1, [
       Validators.required,
@@ -52,26 +52,29 @@ export class SkillCheckComponent {
   ];
 
   generateDiceSet(): DiceSetI {
-    var dieBonus = this.skillCheckForm.value['dieBonuses'] ?? {};
-    var diceSet: DiceSetI = new DiceSet({
-      d4: this.dieBonusForm.value[' d4'] ?? 0,
-      d6: this.dieBonusForm.value[' d6'] ?? 0,
-      d8: this.dieBonusForm.value[' d8'] ?? 0,
-      d10: this.dieBonusForm.value.d10 ?? 0,
-      d12: this.dieBonusForm.value.d12 ?? 0,
-      d20: 1,
-      modifier: this.skillCheckForm.value.skillModifier ?? 0,
-      target: this.skillCheckForm.value.targetDC ?? 0
-    });
-    return diceSet;
+    let dieDict = JSON.parse(JSON.stringify(this.skillCheckForm.value))['dieBonuses'];
+    dieDict['d20'] = 1;
+    dieDict['modifier'] = this.skillCheckForm.value.skillModifier ?? 0;
+    dieDict['target'] = this.skillCheckForm.value.targetDC ?? 0;
+    // let dieBonus = this.skillCheckForm.value['dieBonuses'] ?? {};
+    // let diceSet: DiceSetI = new DiceSet({
+    //   d4: this.dieBonusForm.value[' d4'] ?? 0,
+    //   d6: this.dieBonusForm.value[' d6'] ?? 0,
+    //   d8: this.dieBonusForm.value[' d8'] ?? 0,
+    //   d10: this.dieBonusForm.value.d10 ?? 0,
+    //   d12: this.dieBonusForm.value.d12 ?? 0,
+    //   d20: 1,
+    //   modifier: this.skillCheckForm.value.skillModifier ?? 0,
+    //   target: this.skillCheckForm.value.targetDC ?? 0
+    // });
+    return new DiceSet(dieDict);
   }
   skillCheckSubmit() {
-    var diceSet = this.generateDiceSet();
+    let diceSet = this.generateDiceSet();
     console.log(this.skillCheckForm.value);
-    console.log('strigify', JSON.stringify(this.skillCheckForm.value));
     console.log(
-      'max possible skill check',
-      this.diceCalcService.diceSetString(diceSet),
+      'max possible skill check', '\n',
+      this.diceCalcService.diceSetString(diceSet), '\n',
       this.diceCalcService.maxRoll(diceSet)
     );
     this.diceCalcService.printDiceSet(diceSet);
