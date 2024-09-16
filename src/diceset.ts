@@ -1,4 +1,4 @@
-export interface DiceSetI extends Iterable<[string, number]> {
+export interface DiceSetI extends Iterable<[number, number]> {
     d4?: number;
     d6?: number;
     d8?: number;
@@ -18,7 +18,7 @@ export class DiceSet implements DiceSetI {
     d20?: number | undefined;
     modifier: number = 0;
     target: number = 0;
-    private keys = ['d4', 'd6', 'd8', 'd10', 'd12', 'd20'];
+    private keys = [4, 6, 8, 10, 12, 20];
     private values = [
         this.d4 ?? 0, this.d6 ?? 0, this.d8 ?? 0, 
         this.d10 ?? 0, this.d12 ?? 0, this.d20 ?? 0
@@ -46,10 +46,14 @@ export class DiceSet implements DiceSetI {
     //     return iterableIterator;
     // }
 
-    [Symbol.iterator](): Iterator<[string, number], any, undefined> {
+    [Symbol.iterator](): Iterator<[number, number], any, undefined> {
         let i = 0;
         let keys = this.keys;
-        let values = this.values;
+        let values = [
+            this.d4 ?? 0, this.d6 ?? 0, this.d8 ?? 0, 
+            this.d10 ?? 0, this.d12 ?? 0, this.d20 ?? 0
+        ];
+
         return {
             next() {
                 if (i < values.length) {
