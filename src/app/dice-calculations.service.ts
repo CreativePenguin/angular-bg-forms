@@ -5,15 +5,11 @@ import { DiceSet, DiceSetI } from '../diceset';
   providedIn: 'root'
 })
 export class DiceCalculationsService {
-  diceSet: DiceSetI = new DiceSet({d20: 1});
   maxRoll(diceset: DiceSetI): number {
     let dicesum = 0;
-    dicesum += diceset.d4 ?? 0 * 4;
-    dicesum += diceset.d6 ?? 0 * 6;
-    dicesum += diceset.d8 ?? 0 * 8;
-    dicesum += diceset.d10 ?? 0 * 10;
-    dicesum += diceset.d12 ?? 0 * 12;
-    dicesum += diceset.d20 ?? 0 * 20;
+    for(let i of diceset) {
+      dicesum += (i[0] * i[1]);
+    }
     dicesum += diceset.modifier;
     return dicesum;
   }

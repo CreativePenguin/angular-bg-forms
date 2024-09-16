@@ -19,10 +19,6 @@ export class DiceSet implements DiceSetI {
     modifier: number = 0;
     target: number = 0;
     private keys = [4, 6, 8, 10, 12, 20];
-    private values = [
-        this.d4 ?? 0, this.d6 ?? 0, this.d8 ?? 0, 
-        this.d10 ?? 0, this.d12 ?? 0, this.d20 ?? 0
-    ];
 
     // [Symbol.iterator](): Iterator<[string, number], any, undefined> {
     //     let iterableIterator = {
