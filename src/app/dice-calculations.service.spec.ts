@@ -8,6 +8,12 @@ fdescribe('DiceCalculationsService', () => {
   let diceSet: DiceSetI = new DiceSet({
     d4: 1, d6: 2, d8: 3, d10: 4, d12: 5, d20: 6
   });
+  let diceSet2: DiceSetI = new DiceSet({
+    d4: 2, target: 8
+  });
+  let diceSet3: DiceSetI = new DiceSet({
+    d4: 1, d12: 2
+  })
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -33,5 +39,26 @@ fdescribe('DiceCalculationsService', () => {
     expect(service.maxRoll(diceSet)).toEqual(
       1 * 4 + 2 * 6 + 3 * 8 + 4 * 10 + 5 * 12 + 6 * 20
     );
+    expect(service.maxRoll(diceSet2)).toEqual(8);
+  });
+
+  it('should have functioning numPossibleDieRolls', () => {
+    let diceset = new DiceSet({d4: 2});
+    expect(service.numPossibleDieRolls(diceset)).toEqual(16);
+  });
+
+  it('should have functioning possibleDieValues', () => {
+    expect(service.possibleDiceValues(diceSet3)).toEqual(
+      [[1, 2, 3, 4],
+       [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+       [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]]
+    );
+    expect(service.possibleDiceValues(diceSet2)).toEqual(
+      [[1, 2, 3, 4], [1, 2, 3, 4]]
+    );
+  });
+
+  it('should have skillCheckCalc Working', () => {
+    expect(service.skillCheckCalc(diceSet2)).toEqual(1.0 / 8);
   });
 });

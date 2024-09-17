@@ -52,21 +52,13 @@ export class SkillCheckComponent {
   ];
 
   generateDiceSet(): DiceSetI {
-    let dieDict = JSON.parse(JSON.stringify(this.skillCheckForm.value))['dieBonuses'];
+    let dieDict = JSON.parse(
+      JSON.stringify(this.skillCheckForm.value))['dieBonuses'];
+    // previous line converts diebonuses form group into dict,
+    // this allows easy construction of new DiceSet once other parameters are set
     dieDict['d20'] = 1;
     dieDict['modifier'] = this.skillCheckForm.value.skillModifier ?? 0;
     dieDict['target'] = this.skillCheckForm.value.targetDC ?? 0;
-    // let dieBonus = this.skillCheckForm.value['dieBonuses'] ?? {};
-    // let diceSet: DiceSetI = new DiceSet({
-    //   d4: this.dieBonusForm.value[' d4'] ?? 0,
-    //   d6: this.dieBonusForm.value[' d6'] ?? 0,
-    //   d8: this.dieBonusForm.value[' d8'] ?? 0,
-    //   d10: this.dieBonusForm.value.d10 ?? 0,
-    //   d12: this.dieBonusForm.value.d12 ?? 0,
-    //   d20: 1,
-    //   modifier: this.skillCheckForm.value.skillModifier ?? 0,
-    //   target: this.skillCheckForm.value.targetDC ?? 0
-    // });
     return new DiceSet(dieDict);
   }
   skillCheckSubmit() {
