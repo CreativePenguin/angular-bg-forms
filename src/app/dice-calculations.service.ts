@@ -60,10 +60,10 @@ export class DiceCalculationsService {
         for(let currentSum of sums1) {
           sums2.push(currentSum + i);
         }
-        sums1 = sums2.slice();
       }
+      sums1 = sums2.slice();
     }
-    return sums1.filter((x) => x > target).length / this.numPossibleDieRolls(diceset);
+    return sums1.filter((x) => x >= target).length / this.numPossibleDieRolls(diceset);
   }
 
   possibleDiceValues(diceset: DiceSetI): number[][] {

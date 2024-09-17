@@ -13,7 +13,10 @@ fdescribe('DiceCalculationsService', () => {
   });
   let diceSet3: DiceSetI = new DiceSet({
     d4: 1, d12: 2
-  })
+  });
+  let diceSet4: DiceSetI = new DiceSet({
+    d6: 2, target: 7
+  });
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -59,6 +62,7 @@ fdescribe('DiceCalculationsService', () => {
   });
 
   it('should have skillCheckCalc Working', () => {
-    expect(service.skillCheckCalc(diceSet2)).toEqual(1.0 / 8);
+    expect(service.skillCheckCalc(diceSet2)).toEqual(1.0 / 16);
+    expect(service.skillCheckCalc(diceSet4)).toEqual(21 / 36);
   });
 });
