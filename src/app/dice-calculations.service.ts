@@ -62,8 +62,29 @@ export class DiceCalculationsService {
         }
       }
       sums1 = sums2.slice();
+      sums2 = [];
     }
     return sums1.filter((x) => x >= target).length / this.numPossibleDieRolls(diceset);
+  }
+
+  diceValuePercentages(diceset: DiceSetI): Map<number, number> {
+    let finalSums = new Map<number, number>();
+    let possibleValues = this.possibleDiceValues(diceset);
+    let sums1: number[] = [0];
+    let sums2: number[] = [];
+    for(let diceFaces of possibleValues) {
+      for(let i of diceFaces) {
+        for(let currentSum of sums1) {
+          sums2.push(currentSum + i);
+        }
+      }
+      sums1 = sums2.slice();
+      sums2 = [];
+    }
+    for(let i of sums1) {
+      finalSums.set(i, (finalSums.get(i) ?? 0) + 1);
+    }
+    return finalSums;
   }
 
   possibleDiceValues(diceset: DiceSetI): number[][] {

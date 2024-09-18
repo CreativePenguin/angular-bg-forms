@@ -12,7 +12,7 @@ fdescribe('DiceCalculationsService', () => {
     d4: 2, target: 8
   });
   let diceSet3: DiceSetI = new DiceSet({
-    d4: 1, d12: 2
+    d4: 1, d12: 2, target: 24
   });
   let diceSet4: DiceSetI = new DiceSet({
     d6: 2, target: 7
@@ -64,5 +64,13 @@ fdescribe('DiceCalculationsService', () => {
   it('should have skillCheckCalc Working', () => {
     expect(service.skillCheckCalc(diceSet2)).toEqual(1.0 / 16);
     expect(service.skillCheckCalc(diceSet4)).toEqual(21 / 36);
+  });
+
+  it('should have diceValuePercentages working', () => {
+    let expectedValue1 = new Map(
+      [[2, 1], [3, 2], [4, 3], [5, 4], [6, 5], [7, 6],
+      [8, 5], [9, 4], [10, 3], [11, 2], [12, 1]]
+    );
+    expect(service.diceValuePercentages(diceSet4)).toEqual(expectedValue1);
   });
 });
