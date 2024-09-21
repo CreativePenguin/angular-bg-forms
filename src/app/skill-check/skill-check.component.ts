@@ -2,16 +2,19 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { StepperComponent } from "../stepper/stepper.component";
-import { DiceSet, DiceSetI } from '../../diceset';
+import { DiceSet, DiceSetI, Advantage } from '../../diceset';
 import { DiceCalculationsService } from '../dice-calculations.service';
 import { DiceBonusFormComponent } from '../dice-bonus-form/dice-bonus-form.component';
+import { DragDropModule } from '@angular/cdk/drag-drop'
+import { MatButtonToggleModule } from '@angular/material/button-toggle'
 
 @Component({
   selector: 'app-skill-check',
   standalone: true,
   imports: [
     ReactiveFormsModule, CommonModule, 
-    StepperComponent, DiceBonusFormComponent
+    StepperComponent, DiceBonusFormComponent,
+    MatButtonToggleModule
   ],
   templateUrl: './skill-check.component.html',
   styleUrl: './skill-check.component.css'
@@ -23,7 +26,7 @@ export class SkillCheckComponent {
       Validators.required,
       Validators.min(0)
     ]),
-    skillModifier: new FormControl(),
+    skillModifier: new FormControl(0),
     // dieBonuses: new FormGroup({
     //   ' d4': new FormControl(0),
     //   ' d6': new FormControl(0),
@@ -31,7 +34,7 @@ export class SkillCheckComponent {
     //   'd10': new FormControl(0),
     //   'd12': new FormControl(0),
     // }),
-    advantage: new FormControl('none'),
+    advantage: new FormControl(Advantage.none),
     attempts: new FormControl<number>(1, [
       Validators.required,
       Validators.min(0)
@@ -46,9 +49,9 @@ export class SkillCheckComponent {
   });
   // diceSet!: DiceSet;
   advantageOptions = [
-    {id: 1, name: 'None', value: 'none'},
-    {id: 2, name: 'Advantage', value: 'advantage'},
-    {id: 3, name: 'Disadvantage', value: 'disadvantage'},
+    {id: 1, name: 'None', value: Advantage.none},
+    {id: 2, name: 'Advantage', value: Advantage.advantage},
+    {id: 3, name: 'Disadvantage', value: Advantage.disadvantage},
   ];
 
   generateDiceSet(): DiceSetI {
@@ -62,14 +65,17 @@ export class SkillCheckComponent {
     return new DiceSet(dieDict);
   }
   skillCheckSubmit() {
-    let diceSet = this.generateDiceSet();
+    let diceset = this.generateDiceSet();
+    let skillCheckSuccessChance = this.diceCalcService.skillCheckCalc(diceset);
+    let successElement = document.getElementById('success-chance');
+    let targetDCElement = document.getElementById('target-dc-value');
     console.log(this.skillCheckForm.value);
-    console.log(
-      'max possible skill check', '\n',
-      this.diceCalcService.diceSetString(diceSet), '\n',
-      this.diceCalcService.maxRoll(diceSet)
-    );
-    this.diceCalcService.printDiceSet(diceSet);
+    if(successElement !== null) {
+      successElement.innerHTML = (skillCheckSuccessChance).toString();
+    }
+    if(targetDCElement !== null) {
+      targetDCElement.innerHTML = diceset.target.toString();
+    }
   }
   constructor() {}
 }

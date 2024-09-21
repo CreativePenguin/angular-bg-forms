@@ -1,3 +1,43 @@
-label, input {
+label, input :not(input[type="radio"] + label) {
+    position: relative;
     display: block;
 }
+
+input[type="number"] {
+    background-color: var(--primary-color);
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: solid .3px;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"] + label {
+    padding: 5px;
+    margin: 2px;
+    display: inline-block;
+    font-weight: normal;
+}
+
+input[type="radio"]:checked + label {
+    padding: 5px;
+    background-color: var(--primary-color);
+    font-weight: bold;
+}
+
+.advantage-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: stretch;
+    border-radius: 25px;
+    /* background-color: var(--secondary-color); */
+    border-style: solid;
+}
+
+/* .advantage-div {
+    width: 33%;
+} */

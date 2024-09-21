@@ -25,7 +25,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "@angular/material/prebuilt-themes/rose-red.css",
+              "src/styles.css",
+              "src/theme.scss"
             ],
             "scripts": []
           },
@@ -84,7 +86,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "@angular/material/prebuilt-themes/rose-red.css",
+              "src/styles.css",
+              "src/theme.scss"
             ],
             "scripts": [],
             "karmaConfig": "karma.conf.js"

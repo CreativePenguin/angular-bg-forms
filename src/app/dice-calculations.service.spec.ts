@@ -64,13 +64,25 @@ fdescribe('DiceCalculationsService', () => {
   it('should have skillCheckCalc Working', () => {
     expect(service.skillCheckCalc(diceSet2)).toEqual(1.0 / 16);
     expect(service.skillCheckCalc(diceSet4)).toEqual(21 / 36);
+    expect(service.skillCheckCalc(diceSet3)).toEqual(34 / 576);
   });
 
   it('should have diceValuePercentages working', () => {
-    let expectedValue1 = new Map(
+    let expectedValue4 = new Map(
       [[2, 1], [3, 2], [4, 3], [5, 4], [6, 5], [7, 6],
       [8, 5], [9, 4], [10, 3], [11, 2], [12, 1]]
     );
-    expect(service.diceValuePercentages(diceSet4)).toEqual(expectedValue1);
+    expect(service.diceValuePercentages(diceSet4)).toEqual(expectedValue4);
+    let expectedValue2 = new Map(
+      [[2, 1], [3, 2], [4, 3], [5, 4], [6, 3], [7, 2], [8, 1]]
+    );
+    expect(service.diceValuePercentages(diceSet2)).toEqual(expectedValue2);
+    let expectedValue3 = new Map(
+      [[3, 1], [4, 3], [5, 6], [6, 10], [7, 14], [8, 18], [9, 22],
+      [10, 26], [11, 30], [12, 34], [13, 38], [14, 42], [15, 44],
+      [16, 44], [17, 42], [18, 38], [19, 34], [20, 30], [21, 26],
+      [22, 22], [23, 18], [24, 14], [25, 10], [26, 6], [27, 3], [28, 1]]
+    );
+    expect(service.diceValuePercentages(diceSet3)).toEqual(expectedValue3);
   });
 });

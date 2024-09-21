@@ -1,30 +1,51 @@
-<section>
-    100% chance of Success
+<section class="center">
+    <span id="success-chance">100</span>% chance to succeed with target DC <span id="target-dc-value">0</span>
 </section>
-<section>
+<section class="center">
     <form [formGroup]="skillCheckForm" (submit)="skillCheckSubmit()">
-        <label for="target-dc">Target DC</label>
-        <input formControlName="targetDC" id="target-dc" type="number" inputmode="decimal" />
+        <label for="target-dc-input">Target DC</label>
+        <input formControlName="targetDC" id="target-dc-input" type="number" inputmode="decimal" />
         <label for="skill-modifier">Skill Modifier</label>
         <input formControlName="skillModifier" id="skill-modifier" type="number" [defaultValue]="0" inputmode="decimal" />
-        Die Bonus:
-        <!-- <div *ngFor="let option of dieBonusOptions">
-            <input type="checkbox" value="{{option}}" id="{{option}}" 
-                name="dieBonus" formControlName="dieBonus"
-            >
-            <label for="{{option}}">{{option}}</label>
-        </div> -->
-        <!-- <div *ngfor="let formcontrol of diebonusform.controls | keyvalue">
-            {{formcontrol.key}}:
-            <app-stepper [formcontrol]="formcontrol.value"></app-stepper>
-        </div> -->
         <app-dice-bonus-form label="Die Bonus" controlKey="dieBonuses"></app-dice-bonus-form>
-        <div *ngFor="let option of advantageOptions">
-            <input type="radio" value="{{option.value}}"
-                id="advantage-{{option.id}}" formControlName="advantage"
+        <mat-button-toggle-group formControlName="advantage">
+            <mat-button-toggle 
+                *ngFor="let option of advantageOptions"
+                value="{{option.value}}"
+                id="{{option.id}}"
             >
-            <label for="advantage-{{option.id}}">{{option.name}}</label>
-        </div>
+                {{option.name}}
+            </mat-button-toggle>
+                <!-- <mat-button-toggle 
+                    value="{{option.value}}"
+                    *ngIf="option.value === 'none'; else elseblock"
+                    id="advantage-{{option.id}}"
+                    formControlName="advantage"
+                    checked
+                >
+                    {{option.name}}
+                </mat-button-toggle>
+                <ng-template #elseblock>
+                    <mat-button-toggle 
+                        value="{{option.value}}"
+                        formControlName="advantage"
+                        id="advantage-{{option.id}}"
+                    >
+                        {{option.name}}
+                    </mat-button-toggle>
+                </ng-template> -->
+        </mat-button-toggle-group>
+        <!-- <div class="advantage-container">
+            <div class="advantage-div" *ngFor="let option of advantageOptions">
+                <input type="radio" value="{{option.value}}"
+                    id="advantage-{{option.id}}" formControlName="advantage"
+                    class="checkbox-tools"
+                >
+                <label for="advantage-{{option.id}}">
+                    {{option.name}}
+                </label>
+            </div>
+        </div> -->
         <label for="attempts">Attempts</label>
         <input formControlName="attempts" id="attempts" type="number" 
             min="1" inputmode="decimal"
@@ -32,3 +53,4 @@
         <button type="submit">Calc!</button>
     </form>
 </section>
+<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div><div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div><div>Icons made by <a href="https://www.flaticon.com/authors/nadiinko" title="Nadiinko">Nadiinko</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div><div>Icons made by <a href="https://www.flaticon.com/authors/flowicon" title="Flowicon">Flowicon</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>

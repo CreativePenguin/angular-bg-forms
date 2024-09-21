@@ -72,3 +72,9 @@ export class DiceSet implements DiceSetI {
         this.target = target;
     }
 }
+
+export enum Advantage {
+    none,
+    advantage,
+    disadvantage,
+}

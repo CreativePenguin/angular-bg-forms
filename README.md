@@ -3,8 +3,8 @@
 ## Feature Goals
 
 ### Core Features
-- [ ] User has option to set target DC
-- [ ] User has option to denote advantage / savage attacker
+- [X] User has option to set target DC
+- [X] User has option to denote advantage / savage attacker
 - [ ] Visually show the possible dice roll options
 
 ### Additional Features

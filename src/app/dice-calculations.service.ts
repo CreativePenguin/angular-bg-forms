@@ -52,7 +52,6 @@ export class DiceCalculationsService {
     }
     let target = diceset.target - diceset.modifier;
     let possibleValues = this.possibleDiceValues(diceset);
-    let finalSums = {};
     let sums1: number[] = [0];
     let sums2: number[] = [];
     for(let diceFaces of possibleValues) {
