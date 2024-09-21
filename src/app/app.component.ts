@@ -10,7 +10,7 @@ import { OverlayComponent } from './overlay/overlay.component';
   imports: [RouterOutlet, SkillCheckComponent, NavbarComponent, OverlayComponent],
   // template: ``,
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'angular-bg3-cheats';

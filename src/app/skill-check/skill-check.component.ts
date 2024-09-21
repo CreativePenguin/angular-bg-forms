@@ -17,7 +17,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle'
     MatButtonToggleModule
   ],
   templateUrl: './skill-check.component.html',
-  styleUrl: './skill-check.component.css'
+  styleUrl: './skill-check.component.scss'
 })
 export class SkillCheckComponent {
   diceCalcService: DiceCalculationsService = inject(DiceCalculationsService);

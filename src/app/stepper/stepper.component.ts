@@ -13,7 +13,7 @@ import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR } fro
     }
   ],
   templateUrl: './stepper.component.html',
-  styleUrl: './stepper.component.css'
+  styleUrl: './stepper.component.scss'
 })
 export class StepperComponent implements ControlValueAccessor {
   value: number | null = 0;

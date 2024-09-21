@@ -13,7 +13,7 @@ import { StepperComponent } from '../stepper/stepper.component';
   ],
   imports: [ReactiveFormsModule, StepperComponent],
   templateUrl: './dice-bonus-form.component.html',
-  styleUrl: './dice-bonus-form.component.css'
+  styleUrl: './dice-bonus-form.component.scss'
 })
 export class DiceBonusFormComponent {
   parentContainer = inject(ControlContainer);
