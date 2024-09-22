@@ -1,8 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
-:root {
-    --primary-color: #d4af37;
-    --secondary-color: #808080;
-}
+// /* You can add global styles to this file, and also import other style files */
+// :root {
+//     --primary-color: #d4af37;
+//     --secondary-color: #808080;
+// }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+// src/styles.scss
+
+@use '@angular/material' as mat;
+
+$angular-material-theming-css-vars-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    density: (
+      scale: 0,
+    ),
+  )
+);
