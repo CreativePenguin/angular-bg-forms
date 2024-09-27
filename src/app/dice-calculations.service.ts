@@ -96,17 +96,6 @@ export class DiceCalculationsService {
     return possibleValues;
   }
 
-  /**
-   * helper function for skillcheckcalc -- takes in all possible
-   * dice values previous derived from a diceset, and returns the number of
-   * dice roll results that passed the check
-   * @param possibleValues array of possible dice roll values
-   * @param target target of dice value rolls
-   */
-  private skillCheckCalcH(usedValues: number[], possibleValues: number[][], target: number): number {
-    return 0;
-  }
-
   diceSetString(diceSet: DiceSetI): string {
     return `d4: ${diceSet.d4}\t
       d6: ${diceSet.d6}\t

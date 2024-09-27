@@ -1,0 +1,8 @@
+<p>attack-rolls works!</p>
+@if (rawSpellList$ | async; as rawSpellList) {
+    @for (spell of rawSpellList.results; track spell.name) {
+        <div>{{spell.name}}</div>
+    }
+} @else {
+    <div>Loading...</div>
+}

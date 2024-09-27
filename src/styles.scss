@@ -7,16 +7,27 @@
 // src/styles.scss
 
 @use '@angular/material' as mat;
+@use '../m3-theme.scss';
 
-$angular-material-theming-css-vars-theme: mat.define-theme(
+$my-theme: mat.define-theme(
   (
     color: (
       theme-type: light,
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
+      primary: mat.$yellow-palette,
+      tertiary: mat.$yellow-palette,
+    ),
+    typography: (
+
     ),
     density: (
       scale: 0,
     ),
   )
 );
+
+html {
+    // @include mat.all-component-themes(m3-theme.$light-theme);
+    @include mat.all-component-themes($my-theme);
+    // @include mat.core-theme($my-theme);
+    // @include mat.button-theme($my-theme);
+}

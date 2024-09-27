@@ -34,7 +34,7 @@ export class SkillCheckComponent {
     //   'd10': new FormControl(0),
     //   'd12': new FormControl(0),
     // }),
-    advantage: new FormControl(Advantage.none),
+    advantage: new FormControl(Advantage.None),
     attempts: new FormControl<number>(1, [
       Validators.required,
       Validators.min(0)
@@ -49,9 +49,9 @@ export class SkillCheckComponent {
   });
   // diceSet!: DiceSet;
   advantageOptions = [
-    {id: 1, name: 'None', value: Advantage.none},
-    {id: 2, name: 'Advantage', value: Advantage.advantage},
-    {id: 3, name: 'Disadvantage', value: Advantage.disadvantage},
+    {id: 1, name: 'None', value: Advantage.None},
+    {id: 2, name: 'Advantage', value: Advantage.Advantage},
+    {id: 3, name: 'Disadvantage', value: Advantage.Disadvantage},
   ];
 
   generateDiceSet(): DiceSetI {

@@ -85,4 +85,11 @@ fdescribe('DiceCalculationsService', () => {
     );
     expect(service.diceValuePercentages(diceSet3)).toEqual(expectedValue3);
   });
+
+  it('should create new dice object from string', () => {
+    let sDiceSet = new DiceSet({}, '4d4');
+    let sDiceSet2 = new DiceSet({}, '4d6 + 5d6');
+    expect(sDiceSet).toEqual(new DiceSet({d4: 4}));
+    expect(sDiceSet2).toEqual(new DiceSet({d6: 9}));
+  })
 });
