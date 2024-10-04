@@ -24,15 +24,26 @@ export class SpellsService {
       );
   }
 
-  getSpell(url: string): Observable<SpellI> {
+  getSpell(url: string, modifier=0): Observable<SpellI> {
     return this.http.
       get<{[damage: string]: {[damage_at_slot: string]: 
           {[spell_level: string]: string}}}>(
         `${this.url.origin}${url}`
       ).pipe(map((response) => {
         console.log('pipe response', response)
-        let spell = new Spell(response['name'] as unknown as string, url);
-        spell.setDamageFromAPI(response['damage']['damage_at_slot_level']);
+        let spellName: string = response['name'] as unknown as string;
+        let spellLevel: number = response['level'] as unknown as number;
+        let spell = new Spell(spellName, url, spellLevel);
+        try {
+          spell.setDamageFromAPI(
+            response['damage']['damage_at_slot_level'], 
+            modifier
+          );
+        } catch(e) {
+          spell.setDamageFromAPI(
+            response['heal_at_slot_level'] as unknown as {[level: string]: string}, modifier
+          )
+        }
         return spell;
     }));
   }

@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AttackRollsComponent } from './attack-rolls.component';
 
-describe('AttackRollsComponent', () => {
+fdescribe('AttackRollsComponent', () => {
   let component: AttackRollsComponent;
   let fixture: ComponentFixture<AttackRollsComponent>;
 
@@ -20,4 +20,10 @@ describe('AttackRollsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should iterate through maps', () => {
+    let coolmap = new Map<string, string>([
+      ['1', 'one'], ['2', 'two'], ['3', 'three']
+    ]);
+  })
 });

@@ -2,9 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { SpellsService } from '../spells.service';
 import { Observable } from 'rxjs';
-import { SpellResponse } from '../spell';
+import { Spell, SpellResponse, SpellResponseResults } from '../spell';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatSelectSearchModule } from 'mat-select-search';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
@@ -12,7 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
   selector: 'app-attack-rolls',
   standalone: true,
   imports: [
-    CommonModule, MatSelectSearchModule, MatInputModule, ReactiveFormsModule,
+    CommonModule, MatInputModule, ReactiveFormsModule,
     MatSelectModule
   ],
   templateUrl: './attack-rolls.component.html',
@@ -22,9 +21,13 @@ export class AttackRollsComponent implements OnInit{
   spellsService: SpellsService = inject(SpellsService);
   rawSpellList$!: Observable<SpellResponse>;
   attackRollsForm = new FormGroup({
-    spell: new FormControl()
+    spell: new FormControl(''),
+    spellLevel: new FormControl(1)
   })
-  spellsOfEachLevel$!: {[ spellLevel: string]: Observable<SpellResponse>};
+  currentSpellRange: number[] = new Array(6);
+  spellsOfEachLevel$: {[ spellLevel: string]: Observable<SpellResponse>} = {};
+  // spellsOfEachLevel$!: Map<string,Observable<SpellResponse>>;
+
 
   constructor() { }
 
@@ -34,7 +37,19 @@ export class AttackRollsComponent implements OnInit{
       '/api/spells/flame-strike').subscribe((resp) => console.log(resp));
     for(let i = 0; i <= 6; i++) {
       this.spellsOfEachLevel$[`level ${i}`] = this.spellsService.getAllSpellsOfLevel(i);
+      // this.spellsOfEachLevel$.set(`level ${i}`, this.spellsService.getAllSpellsOfLevel(i));
     }
+    this.attackRollsForm.get('spell')?.valueChanges.subscribe(
+      (selectedValue) => {
+        console.log('found change to spell', selectedValue);
+        this.spellsService.getSpell(selectedValue || '').subscribe(
+          (spell) => {
+            if(spell.level == 0) this.currentSpellRange = [0];
+            else this.currentSpellRange = [...Array(7).keys()].slice(spell.level);
+          }
+        )
+      }
+    )
   }
 
 }

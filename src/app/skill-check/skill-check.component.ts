@@ -69,7 +69,7 @@ export class SkillCheckComponent {
     let skillCheckSuccessChance = this.diceCalcService.skillCheckCalc(diceset);
     let successElement = document.getElementById('success-chance');
     let targetDCElement = document.getElementById('target-dc-value');
-    console.log(this.skillCheckForm.value);
+    console.log('skill check submit', this.skillCheckForm.value);
     if(successElement !== null) {
       successElement.innerHTML = (skillCheckSuccessChance).toString();
     }
