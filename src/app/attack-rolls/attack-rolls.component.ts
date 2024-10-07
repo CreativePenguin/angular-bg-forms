@@ -6,14 +6,17 @@ import { Spell, SpellResponse, SpellResponseResults } from '../spell';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { DropdownSearchComponent } from "../dropdown-search/dropdown-search.component";
+import { DropdownItem } from '../dropdown';
 
 @Component({
   selector: 'app-attack-rolls',
   standalone: true,
   imports: [
     CommonModule, MatInputModule, ReactiveFormsModule,
-    MatSelectModule
-  ],
+    MatSelectModule,
+    DropdownSearchComponent
+],
   templateUrl: './attack-rolls.component.html',
   styleUrl: './attack-rolls.component.scss'
 })
@@ -27,6 +30,23 @@ export class AttackRollsComponent implements OnInit{
   currentSpellRange: number[] = new Array(6);
   spellsOfEachLevel$: {[ spellLevel: string]: Observable<SpellResponse>} = {};
   // spellsOfEachLevel$!: Map<string,Observable<SpellResponse>>;
+  demoDropdownList: {[groupName: string]: DropdownItem[]} = {
+    'Grass': [
+      {label: 'Bulbasaur', value: 'bulbasaur'},
+      {label: 'Ivysaur', value: 'ivysaur'},
+      {label: 'Venusaur', value: 'venusaur'}
+    ],
+    'Fire': [
+      {label: 'Bulbasaur', value: 'bulbasaur'},
+      {label: 'Ivysaur', value: 'ivysaur'},
+      {label: 'Venusaur', value: 'venusaur'}
+    ],
+    'Water': [
+      {label: 'Squirtle', value: 'squirtle'},
+      {label: 'Wartortle', value: 'wartortle'},
+      {label: 'Blastoise', value: 'blastoise'},
+    ]
+  };
 
 
   constructor() { }

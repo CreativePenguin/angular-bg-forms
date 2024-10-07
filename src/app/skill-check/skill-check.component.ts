@@ -54,6 +54,10 @@ export class SkillCheckComponent {
     {id: 3, name: 'Disadvantage', value: Advantage.Disadvantage},
   ];
 
+  isAdvantageNone(currentAdvantageValue: Advantage) {
+    return currentAdvantageValue === Advantage.None;
+  }
+
   generateDiceSet(): DiceSetI {
     let dieDict = JSON.parse(
       JSON.stringify(this.skillCheckForm.value))['dieBonuses'];
