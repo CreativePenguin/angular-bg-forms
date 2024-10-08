@@ -1,5 +1,5 @@
 <form [formGroup]="attackRollsForm">
-  <mat-form-field>
+  <!-- <mat-form-field>
     <mat-label>Spell</mat-label>
     <mat-select formControlName="spell">
       @for (spellListPerLevel$ of spellsOfEachLevel$ | keyvalue;
@@ -15,7 +15,7 @@
         }
       }
     </mat-select>
-  </mat-form-field>
+  </mat-form-field> -->
   <mat-form-field style="width: 100px">
     <mat-label>Level</mat-label>
     <mat-select formControlName="spellLevel" panelClass="level-dropdown">
@@ -25,4 +25,22 @@
     </mat-select>
   </mat-form-field>
   <app-dropdown-search [selectValues]="demoDropdownList"></app-dropdown-search>
+  <mat-form-field>
+    <mat-label>Spell</mat-label>
+    <input type="text" matInput formControlName="spell" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" requireSelection 
+      [displayWith]="displaySpellAutocompleteValue"
+    >
+      @for (spellListPerLevel$ of spellsOfEachLevel$ | keyvalue; 
+        track spellListPerLevel$.key
+      ) {
+        @if (spellListPerLevel$.value | async; as spellListPerLevel) {
+          <mat-optgroup [label]="spellListPerLevel$.key"></mat-optgroup>
+          @for (spell of spellListPerLevel.results; track spell.index) {
+            <mat-option [value]="spell">{{spell.name}}</mat-option>
+          }
+        }
+      }
+    </mat-autocomplete>
+  </mat-form-field>
 </form>
