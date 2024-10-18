@@ -27,7 +27,7 @@
   <mat-form-field>
     <mat-label>Spell</mat-label>
     <input type="text" matInput formControlName="spell" [matAutocomplete]="auto" data-testid="autocomplete-input">
-    <mat-autocomplete #auto="matAutocomplete" requireSelection 
+    <mat-autocomplete #auto="matAutocomplete"
       [displayWith]="displaySpellAutocompleteValue"
       data-testid="autocomplete-mat-autocomplete"
     >
