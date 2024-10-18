@@ -37,14 +37,6 @@ export class AttackRollsComponent implements OnInit{
    * initialize spellsOfEachLevel variable
    */
   getSpellList() {
-    // for(let i = 0; i <= 6; i++) {
-    //   this.spellsService.getAllSpellsOfLevel(i).subscribe(
-    //     (spellResponseForLevel) => {
-    //       this.spellsOfEachLevel$[`level ${i}`] = spellResponseForLevel
-    //       console.log('subscribed, and adding value', spellResponseForLevel, this.spellsOfEachLevel$)
-    //     }
-    //   );
-    // }
     for(let i = 0; i <= 6; i++) {
       this.spellsOfEachLevel$[`level ${i}`] = this.spellsService.getAllSpellsOfLevel(i);
     }
@@ -55,20 +47,24 @@ export class AttackRollsComponent implements OnInit{
    * spell chosen from dropdown
    */
   addObservableToLevelDropdown() {
-    // this.attackRollsForm.get('spell')!.valueChanges.subscribe(
-    //   (selectedValue) => {
-    //     console.log('found change to spell', selectedValue);
-    //     const selectedValueAsString = typeof selectedValue === 'string' ? '' : selectedValue?.url;
-    //     this.spellsService.getSpell(selectedValueAsString || '').subscribe(
-    //       (spell) => {
-    //         if(spell.level == 0) this.currentSpellRange = [0];
-    //         else this.currentSpellRange = [...Array(7).keys()].slice(spell.level);
-    //       }
-    //     )
-    //   }
-    // )
+    this.attackRollsForm.get('spell')!.valueChanges.subscribe(
+      (selectedValue) => {
+        console.log('found change to spell', selectedValue);
+        const selectedValueAsString = typeof selectedValue === 'string' ? '' : selectedValue?.url;
+        this.spellsService.getSpell(selectedValueAsString || '').subscribe(
+          (spell) => {
+            if(spell.level == 0) this.currentSpellRange = [0];
+            else this.currentSpellRange = [...Array(7).keys()].slice(spell.level);
+          }
+        )
+      }
+    )
   }
 
+  /**
+   * Maps the form spell control to the filtering function
+   * @returns Observable that sends changes whenever there is a change on the frontend
+   */
   filterSpellAutocomplete(): Observable<{[level: string]: Observable<SpellResponse>}> {
     return this.attackRollsForm.get('spell')!.valueChanges.pipe(
       startWith(''),
@@ -79,31 +75,16 @@ export class AttackRollsComponent implements OnInit{
     )
   }
 
+  /**
+   * This function gets the frontend input of the current spell that they're
+   * searching, and uses that to filter the spell list.
+   * @param input string value is the frontend input for the autocomplete
+   * @returns filtered spell -- each spell level now only shows spell names
+   * will text included in the user input
+   */
   _filterSpellAutocomplete(input: string): {[level: string]: Observable<SpellResponse>} {
     input = input.toLowerCase();
     console.log('_filterSpellAutocomplete called', input);
-    // let filteredSpellList: {[level: string]: SpellResponse} = {}
-    // for(let spellLevel in this.spellsOfEachLevel$) {
-    //   let filteredSpellResponseResults: SpellResponseResults[];  
-    //   this.spellsOfEachLevel$[spellLevel].subscribe(
-    //     (v) => {
-    //       if (input) {
-    //         filteredSpellResponseResults = v.results.filter(
-    //           (spell) => spell.name.toLowerCase().includes(input)
-    //         );
-    //         if(filteredSpellResponseResults.length > 0) {
-    //           filteredSpellList[spellLevel] = { 
-    //             count: filteredSpellResponseResults.length, 
-    //             results: filteredSpellResponseResults
-    //           }
-    //         }
-    //         console.log(input);
-    //       } else {
-    //         filteredSpellList[spellLevel] = v;
-    //       }
-    //     }
-    //   );
-    // }
     let filteredSpellResponseObservable: {[level: string]: Observable<SpellResponse>} = {}
     for(let spellLevel in this.spellsOfEachLevel$) {
       filteredSpellResponseObservable[`${spellLevel}`] = this.spellsOfEachLevel$[spellLevel].pipe(
@@ -123,6 +104,12 @@ export class AttackRollsComponent implements OnInit{
     return filteredSpellResponseObservable;
   }
 
+  /**
+   * Converts the SpellResponseResults type that the autocomplete values
+   * are stored as into the spell names that they show up as
+   * @param selectedValue current selected spell value
+   * @returns spell name or empty string
+   */
   displaySpellAutocompleteValue(selectedValue: SpellResponseResults): string {
     return selectedValue && selectedValue.name ? selectedValue.name : '';
   }
@@ -132,9 +119,6 @@ export class AttackRollsComponent implements OnInit{
   ngOnInit(): void {
     this.rawSpellList$ = this.spellsService.getAllSpells();
     this.getSpellList();
-    // this.spellsOfEachLevel$ = this.getSpellList();
-    // this.spellsService.getSpell(
-    //   '/api/spells/flame-strike').subscribe((resp) => console.log(resp));
     this.addObservableToLevelDropdown();
     this.filteredSpellsOfEachLevel = this.filterSpellAutocomplete();
     this.filteredSpellsOfEachLevel.subscribe(
