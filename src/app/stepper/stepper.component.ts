@@ -18,6 +18,10 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './stepper.component.html',
   styleUrl: './stepper.component.scss'
 })
+/**
+ * https://v5.material.angular.io/guide/creating-a-custom-form-field-control
+ * guide here in case I want to change my mind and just make one using angular
+ */
 export class StepperComponent implements ControlValueAccessor {
   value: number | null = 0;
   onChange(value: number | null) {
