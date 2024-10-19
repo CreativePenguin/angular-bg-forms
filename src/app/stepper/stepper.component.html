@@ -1,5 +1,9 @@
 <div>
-    <button (click)="decrement()">-</button>
-    <input [(ngModel)]="value" type="number" (input)="onChange(value)" />
-    <button (click)="increment()">+</button>
+    <button mat-fab (click)="decrement()">
+        <mat-icon>remove</mat-icon>
+    </button>
+    <input matInput [(ngModel)]="value" type="number" (input)="onChange(value)" />
+    <button mat-fab (click)="increment()">
+        <mat-icon>add</mat-icon>
+    </button>
 </div>

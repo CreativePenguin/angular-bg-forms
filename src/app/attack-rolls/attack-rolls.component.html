@@ -1,5 +1,5 @@
 <form [formGroup]="attackRollsForm">
-  <mat-form-field>
+  <mat-form-field style="padding: 5px">
     <mat-label>Spell</mat-label>
     <input type="text" matInput formControlName="spell" [matAutocomplete]="auto" data-testid="autocomplete-input">
     <mat-autocomplete #auto="matAutocomplete"
@@ -19,7 +19,7 @@
       }
     </mat-autocomplete>
   </mat-form-field>
-  <mat-form-field style="width: 100px">
+  <mat-form-field style="width: 100px; padding: 5px">
     <mat-label>Level</mat-label>
     <mat-select formControlName="spellLevel" panelClass="level-dropdown">
       @for (level of currentSpellRange; track $index) {
