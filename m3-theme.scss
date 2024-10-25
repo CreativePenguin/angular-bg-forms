@@ -143,8 +143,13 @@ $light-theme: mat.define-theme((
     use-system-variables: true,
   ),
   typography: (
-    use-system-variables: true,
+    brand-family: 'Comic Sans',
+    bold-weight: 900
+    // use-system-variables: true,
   ),
+  density: (
+    scale: 0,
+  )
 ));
 $dark-theme: mat.define-theme((
   color: (

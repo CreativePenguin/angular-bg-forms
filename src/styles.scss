@@ -8,16 +8,24 @@
 
 @use '@angular/material' as mat;
 @use '../m3-theme.scss';
+@include mat.core();
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// $accent: mat.define-palette(mat.$yellow-palette, A200, A100, A400);
+//yellow palette generated
 $my-theme: mat.define-theme(
   (
     color: (
       theme-type: light,
-      primary: mat.$yellow-palette,
-      tertiary: mat.$yellow-palette,
+      primary: mat.$violet-palette,
+      tertiary: mat.$yellow-palette
     ),
     typography: (
-
+      // brand-family: 'Comic Sans',
+      // bold-weight: 900
     ),
     density: (
       scale: 0,
@@ -25,9 +33,24 @@ $my-theme: mat.define-theme(
   )
 );
 
-html {
-    // @include mat.all-component-themes(m3-theme.$light-theme);
-    @include mat.all-component-themes($my-theme);
-    // @include mat.core-theme($my-theme);
-    // @include mat.button-theme($my-theme);
+:root {
+  @include mat.all-component-themes($my-theme);
+  // @include mat.all-component-themes(mat.$purple-green);
 }
+
+.tertiary-button {
+  @include mat.button-color($my-theme, $color-variant: tertiary);
+}
+
+// :root {
+//     // @include mat.all-component-themes(m3-theme.$light-theme);
+//     @include mat.all-component-themes($my-theme);
+//     // @include mat.core-theme($my-theme);
+//     // @include mat.button-theme($my-theme);
+// }
+
+// theme generated with https://themes.angular-material.dev/
+// :root,:host{--sys-background:#141218;--sys-on-background:#e6e0e9;--sys-surface:#141218;--sys-surface-dim:#141218;--sys-surface-bright:#3b383e;--sys-surface-container-lowest:#0f0d13;--sys-surface-container-low:#1d1b20;--sys-surface-container:#211f24;--sys-surface-container-high:#2b292f;--sys-surface-container-highest:#36343a;--sys-on-surface:#e6e0e9;--sys-surface-variant:#49454e;--sys-on-surface-variant:#cac4cf;--sys-inverse-surface:#e6e0e9;--sys-inverse-on-surface:#322f35;--sys-outline:#948f99;--sys-outline-variant:#49454e;--sys-shadow:#000000;--sys-scrim:#000000;--sys-surface-tint:#cfbdfe;--sys-primary:#cfbdfe;--sys-on-primary:#36275d;--sys-primary-container:#4d3d75;--sys-on-primary-container:#e9ddff;--sys-inverse-primary:#65558f;--sys-secondary:#cbc2db;--sys-on-secondary:#332d41;--sys-secondary-container:#4a4458;--sys-on-secondary-container:#e8def8;--sys-tertiary:#ffb0c9;--sys-on-tertiary:#541d33;--sys-tertiary-container:#6f3349;--sys-on-tertiary-container:#ffd9e3;--sys-error:#ffb4ab;--sys-on-error:#690005;--sys-error-container:#93000a;--sys-on-error-container:#ffdad6;--sys-neutral:#7a767d;--sys-neutral-variant:#7a757f;--sys-primary-fixed:#e9ddff;--sys-primary-fixed-dim:#cfbdfe;--sys-on-primary-fixed:#201047;--sys-on-primary-fixed-variant:#4d3d75;--sys-secondary-fixed:#e8def8;--sys-secondary-fixed-dim:#cbc2db;--sys-on-secondary-fixed:#1e192b;--sys-on-secondary-fixed-variant:#4a4458;--sys-tertiary-fixed:#ffd9e3;--sys-tertiary-fixed-dim:#ffb0c9;--sys-on-tertiary-fixed:#3a071e;--sys-on-tertiary-fixed-variant:#6f3349;--sys-inverse-tertiary:#8b4a61;}
+
+// textbox color: #626200
+// button background color: rgb(231, 228, 191)

@@ -1,16 +1,45 @@
-<div>
-    <button (click)="decrement()">-</button>
-    <input [(ngModel)]="value" type="number" (input)="onChange(value)" />
-    <button (click)="increment()">+</button>
-</div>
+<!-- original version with no styles -->
+<!-- <div>
+  <button (click)="decrement()">-</button>
+  <input [(ngModel)]="value" type="number" (input)="onChange(value)" />
+  <button (click)="increment()">+</button>
+</div> -->
 
 <!-- version of button using material icons (doesn't work bc matInput is weird) -->
 <!-- <div>
-    <button mat-fab (click)="decrement()">
-        <mat-icon>remove</mat-icon>
-    </button>
-    <input matInput [(ngModel)]="value" type="number" (input)="onChange(value)" />
-    <button mat-fab (click)="increment()">
-        <mat-icon>add</mat-icon>
-    </button>
+  <button mat-fab (click)="decrement()">
+    <mat-icon>remove</mat-icon>
+  </button>
+  <input matInput [(ngModel)]="value" type="number" (input)="onChange(value)" />
+  <button mat-fab (click)="increment()">
+    <mat-icon>add</mat-icon>
+  </button>
 </div> -->
+
+<div class="relative flex items-center max-w-[8rem]">
+  <!-- <button type="button" id="decrement-button"
+    (click)="decrement()"
+    class="rounded-s-lg p-3 h-11 border bg-material-100 hover:bg-material-300"
+  >
+    -
+  </button> -->
+  <button (click)="decrement()" 
+    class="rounded-s-lg px-3 h-11 border increment-button align-baseline"
+  >
+    -
+    <!-- <mat-icon fontIcon="remove"></mat-icon> -->
+  </button>
+  <input [(ngModel)]="value" (input)="onChange(value)"
+    type="text" id="quantity-input" 
+    class="h-11 text-center text-white text-sm
+           focus:ring-gray-700 focus:border-gray-700 
+           block w-full increment-button border-y"
+  >
+  <button type="button" id="decrement-button"
+    (click)="increment()"
+    class="rounded-e-lg px-3 h-11 border increment-button"
+  >
+    +
+    <!-- <mat-icon fontIcon="add"></mat-icon> -->
+  </button>
+</div>

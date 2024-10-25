@@ -1,6 +1,7 @@
 import { Component, inject, Input } from '@angular/core';
 import { ControlContainer, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { StepperComponent } from '../stepper/stepper.component';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-dice-bonus-form',
@@ -11,7 +12,7 @@ import { StepperComponent } from '../stepper/stepper.component';
       useFactory: () => inject(ControlContainer, {skipSelf: true})
     }
   ],
-  imports: [ReactiveFormsModule, StepperComponent],
+  imports: [ReactiveFormsModule, StepperComponent, MatCardModule],
   templateUrl: './dice-bonus-form.component.html',
   styleUrl: './dice-bonus-form.component.scss'
 })

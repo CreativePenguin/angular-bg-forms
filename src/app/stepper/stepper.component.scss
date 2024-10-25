@@ -1,0 +1,20 @@
+@use '@angular/material' as mat;
+@use '../../styles.scss';
+@use 'sass:map';
+
+// .primary-button {
+//     @include mat.button-theme($theme, $color-variant: primary)
+// }
+
+// @mixin color($theme) {
+//     .increment-button {
+//         // color: mat.get-theme-color($theme, primary, 50);
+//         background-color: mat.get-theme-color(styles.$my-theme, primary, 50);
+//     }
+// }
+.increment-button {
+    background-color: mat.get-theme-color(styles.$my-theme, primary, 95);
+}
+.increment-button:hover {
+    background-color: mat.get-theme-color(styles.$my-theme, primary, 90);
+}
