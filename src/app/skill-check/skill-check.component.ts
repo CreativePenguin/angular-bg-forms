@@ -8,13 +8,14 @@ import { DiceBonusFormComponent } from '../dice-bonus-form/dice-bonus-form.compo
 import { MatButtonToggleModule } from '@angular/material/button-toggle'
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-skill-check',
   standalone: true,
   imports: [
     ReactiveFormsModule, CommonModule, MatCardModule,
-    StepperComponent, DiceBonusFormComponent,
+    StepperComponent, DiceBonusFormComponent, MatButtonModule,
     MatButtonToggleModule, MatInputModule
   ],
   templateUrl: './skill-check.component.html',
