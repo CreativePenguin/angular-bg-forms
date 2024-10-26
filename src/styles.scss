@@ -33,6 +33,14 @@ $my-theme: mat.define-theme(
   )
 );
 
+$yellow-theme: mat.define-theme(
+  (
+    color: (
+      primary: mat.$yellow-palette
+    )
+  )
+);
+
 :root {
   @include mat.all-component-themes($my-theme);
   // @include mat.all-component-themes(mat.$purple-green);
@@ -40,6 +48,11 @@ $my-theme: mat.define-theme(
 
 .tertiary-button {
   @include mat.button-color($my-theme, $color-variant: tertiary);
+}
+
+.tertiary-input {
+  // @include mat.form-field-color($my-theme, $color-variant: tertiary);
+  @include mat.form-field-theme($yellow-theme);
 }
 
 // :root {

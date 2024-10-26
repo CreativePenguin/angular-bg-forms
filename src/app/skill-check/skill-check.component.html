@@ -1,31 +1,43 @@
-<section class="center">
-  <span id="success-chance">100</span>% chance to succeed with target DC <span id="target-dc-value">0</span>
-</section>
-<section class="center">
+<mat-card class="m-2 p-3">
+  <mat-card-header>
+    <mat-card-title>
+      <span id="success-chance">100</span>% chance to succeed with target DC <span id="target-dc-value">0</span>
+    </mat-card-title>
+  </mat-card-header>
   <form [formGroup]="skillCheckForm" (submit)="skillCheckSubmit()">
-    <label for="target-dc-input">Target DC</label>
-    <input formControlName="targetDC" id="target-dc-input" type="number" inputmode="decimal" />
-    <label for="skill-modifier">Skill Modifier</label>
-    <input formControlName="skillModifier" id="skill-modifier" type="number" [defaultValue]="0" inputmode="decimal" />
+    <div class="flex flex-wrap flex-row">
+      <div class="grow-[2] content-center m-2">
+        <mat-form-field class="tertiary-input w-full">
+          <mat-label>Target DC</mat-label>
+          <input matInput formControlName="targetDC" type="number" />
+        </mat-form-field>
+      </div>
+      <div class="content-center m-2">
+        <mat-button-toggle-group formControlName="advantage">
+        @for (option of advantageOptions; track option.id) {
+          @if (option.value == 0) {
+            <mat-button-toggle value="{{option.value}}" id="{{option.id}}" checked>
+              {{option.name}}
+            </mat-button-toggle>
+          } @else {
+            <mat-button-toggle value="{{option.value}}" id="{{option.id}}">
+              {{option.name}}
+            </mat-button-toggle>
+          }
+        }
+        </mat-button-toggle-group>
+      </div>
+      <div class="flex-1 content-center m-2">
+        <mat-form-field class="w-full">
+          <mat-label>Attempts</mat-label>
+          <input matInput formControlName="attempts" type="number" min="1">
+        </mat-form-field>
+      </div>
+    </div>
     <app-dice-bonus-form label="Die Bonus" controlKey="dieBonuses"></app-dice-bonus-form>
-    <mat-button-toggle-group formControlName="advantage">
-    @for (option of advantageOptions; track option.id) {
-      @if (option.value == 0) {
-        <mat-button-toggle value="{{option.value}}" id="{{option.id}}" checked>
-          {{option.name}}
-        </mat-button-toggle>
-      } @else {
-        <mat-button-toggle value="{{option.value}}" id="{{option.id}}">
-          {{option.name}}
-        </mat-button-toggle>
-      }
-    }
-    </mat-button-toggle-group>
-    <label for="attempts">Attempts</label>
-    <input formControlName="attempts" id="attempts" type="number" min="1" inputmode="decimal" />
     <button type="submit">Calc!</button>
   </form>
-</section>
+</mat-card>
 <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a
     href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from

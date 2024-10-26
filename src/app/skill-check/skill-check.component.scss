@@ -3,12 +3,23 @@ label, input :not(input[type="radio"] + label) {
     display: block;
 }
 
-input[type="number"] {
-    background-color: var(--primary-color);
-    border-top: none;
-    border-right: none;
-    border-left: none;
-    border-bottom: solid .3px;
+// input[type="number"] {
+//     background-color: var(--primary-color);
+//     border-top: none;
+//     border-right: none;
+//     border-left: none;
+//     border-bottom: solid .3px;
+// }
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 input[type="radio"] {
@@ -37,6 +48,7 @@ input[type="radio"]:checked + label {
     /* background-color: var(--secondary-color); */
     border-style: solid;
 }
+
 /* .advantage-div {
     width: 33%;
 } */

@@ -5,16 +5,17 @@ import { StepperComponent } from "../stepper/stepper.component";
 import { DiceSet, DiceSetI, Advantage } from '../../diceset';
 import { DiceCalculationsService } from '../dice-calculations.service';
 import { DiceBonusFormComponent } from '../dice-bonus-form/dice-bonus-form.component';
-import { DragDropModule } from '@angular/cdk/drag-drop'
 import { MatButtonToggleModule } from '@angular/material/button-toggle'
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-skill-check',
   standalone: true,
   imports: [
-    ReactiveFormsModule, CommonModule, 
+    ReactiveFormsModule, CommonModule, MatCardModule,
     StepperComponent, DiceBonusFormComponent,
-    MatButtonToggleModule
+    MatButtonToggleModule, MatInputModule
   ],
   templateUrl: './skill-check.component.html',
   styleUrl: './skill-check.component.scss'
