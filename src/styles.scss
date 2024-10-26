@@ -52,7 +52,8 @@ $yellow-theme: mat.define-theme(
 
 .tertiary-input {
   // @include mat.form-field-color($my-theme, $color-variant: tertiary);
-  @include mat.form-field-theme($yellow-theme);
+  // @include mat.form-field-theme($yellow-theme);
+  @include mat.all-component-colors($yellow-theme);
 }
 
 // :root {

@@ -1,14 +1,18 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
 import { SkillCheckComponent } from "./skill-check/skill-check.component";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { OverlayComponent } from './overlay/overlay.component';
 import { AttackRollsComponent } from './attack-rolls/attack-rolls.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, SkillCheckComponent, NavbarComponent, OverlayComponent, AttackRollsComponent],
+  imports: [
+    RouterOutlet, NavbarComponent, CommonModule, RouterLink, RouterLinkActive,
+    SkillCheckComponent, RouterModule, OverlayComponent
+  ],
   // template: ``,
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
