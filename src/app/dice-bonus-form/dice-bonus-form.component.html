@@ -1,4 +1,4 @@
-<fieldset [formGroupName]="controlKey">
+<!-- <fieldset [formGroupName]="controlKey">
   <legend>{{label}}</legend>
   <img width=16px src="../../assets/001-d4.png">
   <label for="d4">d4:</label>
@@ -15,25 +15,41 @@
   <img width="16px" src="../../assets/005-d12.png">
   <label for="d12">d12:</label>
   <app-stepper id="d12" formControlName="d12"></app-stepper>
-</fieldset>
+</fieldset> -->
 
 <form [formGroupName]="controlKey">
   <mat-card>
     <mat-card-header>{{label}}</mat-card-header>
     <div class="inline-flex flex-wrap">
-      <div class="rounded-lg border px-3 py-2 flex vert-align-center">
+      <div class="rounded-lg border px-3 py-2 flex vert-align-center m-3">
       <!-- <div class="flex items-center rounded-s-lg border p-3"> -->
-        <span>d4:</span>
-        <img class="h-11" src="../../assets/001-d4.png">
-        <app-stepper>
-          <!-- <div class="absolute bottom-1">
-            <img src="../../assets/001-d4.png">
-          </div> -->
-        </app-stepper>
+        <span>&nbsp;d4:</span>
+        <img class="h-10 m-1" src="../../assets/001-d4.png">
+        <app-stepper formControlName="d4"></app-stepper>
       </div>
-      <div class="rounded-lg border px-3 py-2 align-bottom flex">
-        <img class="h-11" src="../../assets/002-d6.png">
-        <app-stepper></app-stepper>
+      <div class="rounded-lg border px-3 py-2 flex vert-align-center m-3">
+        <span>&nbsp;d6:</span>
+        <img class="h-10 m-1" src="../../assets/002-d6.png">
+        <app-stepper formControlName="d6"></app-stepper>
+      </div>
+      <div class="rounded-lg border px-3 py-2 flex vert-align-center m-3">
+        <span>&nbsp;d8:</span>
+        <img class="h-12 m-1" src="../../assets/003-d8.png">
+        <app-stepper formControlName="d8"></app-stepper>
+      </div>
+      <div class="rounded-lg border px-3 py-2 flex vert-align-center m-3">
+        <span>d10:</span>
+        <img class="h-10 m-1" src="../../assets/004-d10.png">
+        <app-stepper formControlName="d10"></app-stepper>
+      </div>
+      <div class="rounded-lg border px-3 py-2 flex vert-align-center m-3">
+        <span>d12:</span>
+        <img class="h-10 m-1" src="../../assets/005-d12.png">
+        <app-stepper formControlName="d12"></app-stepper>
+      </div>
+      <div class="rounded-lg border px-3 py-2 flex vert-align-center m-3">
+        <span class="min-w-15 p-2">modifier:</span>
+        <app-stepper formControlName="modifier"></app-stepper>
       </div>
     </div>
   </mat-card>

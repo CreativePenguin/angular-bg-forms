@@ -1,3 +1,5 @@
 .vert-align-center {
     align-items: center;
+    min-width: calc(100% * 1.0 / 3 - 12px * 2);
+    justify-content: center;
 }

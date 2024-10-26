@@ -33,6 +33,7 @@ export class DiceBonusFormComponent {
         d8: new FormControl(0),
         d10: new FormControl(0),
         d12: new FormControl(0),
+        modifier: new FormControl(0),
       })
     );
   }
