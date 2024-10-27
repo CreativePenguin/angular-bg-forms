@@ -1,5 +1,19 @@
-<h1>Die Calculator</h1>
 <!-- <app-navbar></app-navbar> -->
-<main>
+<mat-toolbar>
+  <button mat-icon-button (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-drawer-container>
+  <mat-drawer #drawer mode="side">
+    <p>
+      <a routerLink="skill-check">Skill Check</a>
+    </p>
+    <p>
+      <a routerLink="attack-roll">Attack Rolls</a>
+    </p>
+  </mat-drawer>
+  <mat-drawer-content>
     <router-outlet></router-outlet>
-</main>
+  </mat-drawer-content>
+</mat-drawer-container>
