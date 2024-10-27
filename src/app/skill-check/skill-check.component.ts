@@ -9,12 +9,13 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle'
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-skill-check',
   standalone: true,
   imports: [
-    ReactiveFormsModule, CommonModule, MatCardModule,
+    ReactiveFormsModule, CommonModule, MatCardModule, MatSelectModule,
     StepperComponent, DiceBonusFormComponent, MatButtonModule,
     MatButtonToggleModule, MatInputModule
   ],
@@ -39,7 +40,7 @@ export class SkillCheckComponent {
     advantage: new FormControl(Advantage.None),
     attempts: new FormControl<number>(1, [
       Validators.required,
-      Validators.min(0)
+      Validators.min(1)
     ])
   });
   dieBonusForm = new FormGroup({
@@ -55,6 +56,7 @@ export class SkillCheckComponent {
     {id: 2, name: 'Advantage', value: Advantage.Advantage},
     {id: 3, name: 'Disadvantage', value: Advantage.Disadvantage},
   ];
+  attemptsOptions = [1, 2, 3, 4];
 
   isAdvantageNone(currentAdvantageValue: Advantage) {
     return currentAdvantageValue === Advantage.None;

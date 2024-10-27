@@ -30,21 +30,27 @@
       <div class="flex-1 content-center m-2">
         <mat-form-field class="w-full">
           <mat-label>Attempts</mat-label>
-          <input matInput formControlName="attempts" type="number" min="1">
+          <mat-select>
+            @for(item of attemptsOptions; track $index) {
+              <mat-option [value]="item">{{item}}</mat-option>
+            }
+          </mat-select>
         </mat-form-field>
       </div>
     </div>
     <app-dice-bonus-form label="Die Bonus" controlKey="dieBonuses"></app-dice-bonus-form>
     <div class="m-2">
-      <button mat-raised-button type="submit">Calc!</button>
+      <button mat-stroked-button type="submit">Calc!</button>
     </div>
   </form>
 </mat-card>
-<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a
-    href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-<div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from
-  <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-<div>Icons made by <a href="https://www.flaticon.com/authors/nadiinko" title="Nadiinko">Nadiinko</a> from <a
-    href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-<div>Icons made by <a href="https://www.flaticon.com/authors/flowicon" title="Flowicon">Flowicon</a> from <a
-    href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+<div class="m-3">
+  <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a
+      href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+  <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from
+    <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+  <div>Icons made by <a href="https://www.flaticon.com/authors/nadiinko" title="Nadiinko">Nadiinko</a> from <a
+      href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+  <div>Icons made by <a href="https://www.flaticon.com/authors/flowicon" title="Flowicon">Flowicon</a> from <a
+      href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+</div>

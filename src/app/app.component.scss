@@ -1,6 +1,23 @@
+@use '@angular/material' as mat;
+@use '../styles.scss';
+
 main {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--secondary-color);
+}
+
+$rose-theme: mat.define-theme(
+    (
+        color: (
+            primary: mat.$violet-palette
+        )
+    )
+);
+
+.nav-toolbar {
+    background-color: mat.get-theme-color(styles.$my-theme, primary, 90);
+    // background-color: #626000;
+    // @include mat.all-component-colors($rose-theme);
 }
