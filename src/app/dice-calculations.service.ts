@@ -5,6 +5,11 @@ import { DiceResults, DiceSet, DiceSetI } from '../diceset';
   providedIn: 'root'
 })
 export class DiceCalculationsService {
+  /**
+   * Generate max possible roll from diceset
+   * @param diceset input of dice being rolled
+   * @returns The roll total generated if each die has its highest number
+   */
   maxRoll(diceset: DiceSetI): number {
     let dicesum = 0;
     for(let i of diceset) {
@@ -14,6 +19,11 @@ export class DiceCalculationsService {
     return dicesum;
   }
 
+  /**
+   * Generate min possible roll from diceset
+   * @param diceset input of dice being rolled
+   * @returns The roll total generated if each die has its lowest number
+   */
   minRoll(diceset: DiceSetI): number {
     let dicesum = 0;
     for(let i of diceset) {
@@ -40,24 +50,59 @@ export class DiceCalculationsService {
 
   /**
    * This function calculates the percent chance of a skill check succeeding
-   * Explanation of Algorithm:
+   * Explanation of Algorithm: O(n^3)
+   * The algorithm will iterate through the dice roll possibilities one die at a time, and add each of the possible die options on the current die to the list of sums.
    * 1. possibleDiceValues() is used to convert dice set into 2d array
    * 2. two arrays are created, sums1 and sums2.
-   * 2a. sums1 is initiated to [0]. This array will be used to store the dice sums as they are being added up.
-   * 2b. sums2 is initiated to []. This array
+   * 2a. sums1 is initiated to [0]. This array is used to store the sums generated from the dice already itereated through. This array will stay constant while the new die values are iterated through
+   * 2b. sums2 is initiated to []. This array has the new sums from the dice value currently being iterated through pushed to it.
+   * 3. Assume [[1, 2], [1, 2, 3], [1, 2, 3]]
+   * The algorithm first itereates through the die values of the first die, and adds them to the values of the empty sums1 array. Sums are pushed to sums2.
+   * sums1 = [0];
+   * sums2 = [1, 2];
+   * 4. Sums2 is then copied to sums1.
+   * 5. Then, the next group of die results starts being iterated through, and gets added to values in sums1 array
+   * first loop of sums1:
+   * sums1 = [1, 2];
+   * sums2 = [1 + 1, 2 + 1];
+   * second loop of sums1:
+   * sums1 = [1, 2];
+   * sums2 = [1 + 1, 2 + 1, 1 + 2, 2 + 2];
+   * third loop of sums1:
+   * sums2 = [1 + 1, 2 + 1, 1 + 2, 2 + 2, 1 + 3, 2 + 3];
+   * After loop of dieFaces:
+   * sums1 = [1, 2];
+   * sums2 = [1 + 1, 2 + 1, 1 + 2, 2 + 2, 1 + 3, 2 + 3];
+   * Second loop of dieFaces:
+   * sums1 = [2, 3, 3, 4, 4, 5]; // Copy of sums2, except I simplified the sums
+   * sums2 = [1 + 1, 2 + 1, 1 + 2, 2 + 2, 1 + 3, 2 + 3];
+   * first iteration of sums1:
+   * sums2 = [2 + 1, 3 + 1, 3 + 1, 4 + 1, 4 + 1, 5 + 1];
+   * second iteration of sums1:
+   * sums2 = [2 + 1, 3 + 1, 3 + 1, 4 + 1, 4 + 1, 5 + 1, 
+   *          2 + 2, 3 + 2, 3 + 2, 4 + 2, 4 + 2, 5 + 2];
+   * third iteration of sums1:
+   * sums2 = [2 + 1, 3 + 1, 3 + 1, 4 + 1, 4 + 1, 5 + 1, 
+   *          2 + 2, 3 + 2, 3 + 2, 4 + 2, 4 + 2, 5 + 2,
+   *          2 + 3, 3 + 3, 3 + 3, 4 + 3, 4 + 3, 5 + 3];
+   * Final value of sums1 after loop: [3, 4, 4, 5, 5, 6, 4, 5, 5, 6, 6, 7, 5, 6, 6, 7, 7, 8]
+   * 6. The algorithm filters the array for the sum values over the target
+   * 7. Divide number of die rolls over the target over total number of die roll possibilities, and convert it to a percentage
    * @param diceset diceset object that represents the dice being rolled,
    * and represents the target DC for the skillcheck
-   * @returns the decimal chance of the skill check succeeding (between 0 and 1)
+   * @returns percentage chance of success rounded to two decimal points
    */
   skillCheckCalc(diceset: DiceSetI): number {
-    if(this.minRoll(diceset) > diceset.target) {
+    if(this.minRoll(diceset) >= diceset.target) {
       return .95;  // .95 accounts for nat 20
-    } else if(this.maxRoll(diceset) < diceset.target) {
+    } else if(this.maxRoll(diceset) <= diceset.target) {
       return .05;  // .05 accounts for nat one
     }
     let target = diceset.target - diceset.modifier;
     let possibleValues = this.possibleDiceValues(diceset);
+    // This array holds the sums of the already iterated through dice.
     let sums1: number[] = [0];
+    // This array will get the new dice sums pushed to it
     let sums2: number[] = [];
     for(let diceFaces of possibleValues) {
       for(let currentDieValue of diceFaces) {
@@ -68,13 +113,16 @@ export class DiceCalculationsService {
       sums1 = sums2.slice(); // create deep copy of array
       sums2 = [];
     }
-    return sums1.filter((x) => x >= target).length / this.numPossibleDieRolls(diceset);
+    return this.twoDecimalPercentage(
+      sums1.filter((x) => x >= target).length / this.numPossibleDieRolls(diceset)
+    );
   }
 
   /**
-   * This algorithm is a variation of skillCheckCalc that shows the percentage of success
-   * @param diceset 
-   * @returns 
+   * This algorithm is a variation of skillCheckCalc that generates a full map of results.
+   * This variation does not look at the target of the roll
+   * @param diceset input dice set
+   * @returns Map[roll result : number of rolls with roll result]
    */
   diceCalcMap(diceset: DiceSetI): Map<number, number> {
     let finalSums = new Map<number, number>();
@@ -92,11 +140,17 @@ export class DiceCalculationsService {
     }
     // create map
     for(let i of sums1) {
-      finalSums.set(i, (finalSums.get(i) ?? 0) + 1);
+      let modI = i + diceset.modifier;
+      finalSums.set(modI, (finalSums.get(modI) ?? 0) + 1);
     }
     return finalSums;
   }
 
+  /**
+   * Variation of diceCalcMap that returns the dice roll results as a DiceResults[]
+   * @param diceset input dice set, and modifier to dice rolls
+   * @returns DiceResults array that holds the number of rolls, and the percentage of those rols to the whole
+   */
   diceCalcResults(diceset: DiceSetI): DiceResults[] {
     let map: Map<number, number> = this.diceCalcMap(diceset);
     let numPossibleRolls = this.numPossibleDieRolls(diceset);
@@ -111,6 +165,11 @@ export class DiceCalculationsService {
     return dieResults;
   }
 
+  /**
+   * 
+   * @param decimal number between 0 and 1
+   * @returns The decimal number converted into a percentage rounded to two decimals
+   */
   twoDecimalPercentage(decimal: number): number {
     return Math.round(decimal * 10000) / 100;
   }
