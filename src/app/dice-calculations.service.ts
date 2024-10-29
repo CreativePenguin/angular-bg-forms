@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DiceSet, DiceSetI } from '../diceset';
+import { DiceResults, DiceSet, DiceSetI } from '../diceset';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +40,11 @@ export class DiceCalculationsService {
 
   /**
    * This function calculates the percent chance of a skill check succeeding
+   * Explanation of Algorithm:
+   * 1. possibleDiceValues() is used to convert dice set into 2d array
+   * 2. two arrays are created, sums1 and sums2.
+   * 2a. sums1 is initiated to [0]. This array will be used to store the dice sums as they are being added up.
+   * 2b. sums2 is initiated to []. This array
    * @param diceset diceset object that represents the dice being rolled,
    * and represents the target DC for the skillcheck
    * @returns the decimal chance of the skill check succeeding (between 0 and 1)
@@ -55,40 +60,75 @@ export class DiceCalculationsService {
     let sums1: number[] = [0];
     let sums2: number[] = [];
     for(let diceFaces of possibleValues) {
-      for(let i of diceFaces) {
+      for(let currentDieValue of diceFaces) {
         for(let currentSum of sums1) {
-          sums2.push(currentSum + i);
+          sums2.push(currentSum + currentDieValue);
         }
       }
-      sums1 = sums2.slice();
+      sums1 = sums2.slice(); // create deep copy of array
       sums2 = [];
     }
     return sums1.filter((x) => x >= target).length / this.numPossibleDieRolls(diceset);
   }
 
-  diceValuePercentages(diceset: DiceSetI): Map<number, number> {
+  /**
+   * This algorithm is a variation of skillCheckCalc that shows the percentage of success
+   * @param diceset 
+   * @returns 
+   */
+  diceCalcMap(diceset: DiceSetI): Map<number, number> {
     let finalSums = new Map<number, number>();
     let possibleValues = this.possibleDiceValues(diceset);
     let sums1: number[] = [0];
     let sums2: number[] = [];
     for(let diceFaces of possibleValues) {
-      for(let i of diceFaces) {
+      for(let currentDieValue of diceFaces) {
         for(let currentSum of sums1) {
-          sums2.push(currentSum + i);
+          sums2.push(currentSum + currentDieValue);
         }
       }
       sums1 = sums2.slice();
       sums2 = [];
     }
+    // create map
     for(let i of sums1) {
       finalSums.set(i, (finalSums.get(i) ?? 0) + 1);
     }
     return finalSums;
   }
 
+  diceCalcResults(diceset: DiceSetI): DiceResults[] {
+    let map: Map<number, number> = this.diceCalcMap(diceset);
+    let numPossibleRolls = this.numPossibleDieRolls(diceset);
+    let dieResults: DiceResults[] = [];
+    map.forEach((numRolls, roll) => {
+      dieResults.push({
+        rollResult: roll,
+        numResults: numRolls,
+        percentageResults: this.twoDecimalPercentage(numRolls / numPossibleRolls),
+      })
+    })
+    return dieResults;
+  }
+
+  twoDecimalPercentage(decimal: number): number {
+    return Math.round(decimal * 10000) / 100;
+  }
+
+  /**
+   * Covnerts die set into array of array of numbers that represents the
+   * possible rolls created from the diceset
+   * eg. diceset { d4: 1, d12: 2 } results in:
+   * ```
+   * [[1, 2, 3, 4], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]]
+   * ```
+   * @param diceset dice set that represents the number of dice being rolled, and the 
+   * @returns converted
+   */
   possibleDiceValues(diceset: DiceSetI): number[][] {
     let possibleValues: number[][] = [];
     for(let i of diceset) {
+      // i[1] = the number of the sides of the die
       for(let j = 0; j < i[1]; j++) {
         possibleValues.push([...Array(i[0] + 1).keys()].slice(1));
       }

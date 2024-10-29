@@ -1,3 +1,8 @@
+/**
+ * This interface holds how many dice are rolled for each type of die
+ * Iterable: returns arrays of all the dice values:
+ * [4, d4num], [6, d6num], [8, d8num], [10, d10num], [12, d12num], [20, d20num]
+ */
 export interface DiceSetI extends Iterable<[number, number]> {
     d4?: number;
     d6?: number;
@@ -8,6 +13,12 @@ export interface DiceSetI extends Iterable<[number, number]> {
     modifier: number;
     target: number;
     advantage: Advantage;
+}
+
+export interface DiceResults {
+    rollResult: number;
+    numResults: number;
+    percentageResults: number;
 }
 
 export class DiceSet implements DiceSetI {

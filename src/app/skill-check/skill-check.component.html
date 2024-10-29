@@ -3,6 +3,9 @@
     <mat-card-title>
       <span id="success-chance">100</span>% chance to succeed with target DC <span id="target-dc-value">0</span>
     </mat-card-title>
+    <mat-card-subtitle>
+      Note: 100% and 0% are impossible since a natural 20 is an automatic success, and a natural 1 is an automatic fail
+    </mat-card-subtitle>
   </mat-card-header>
   <form [formGroup]="skillCheckForm" (submit)="skillCheckSubmit()">
     <div class="flex flex-wrap flex-row">

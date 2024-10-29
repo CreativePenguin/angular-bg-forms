@@ -40,6 +40,7 @@
     "postcss": "^8.4.47",
     "schematics-scss-migrate": "^2.3.17",
     "tailwindcss": "^3.4.14",
+    "typedoc": "^0.26.10",
     "typescript": "~5.4.2"
   }
 }

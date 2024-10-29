@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { StepperComponent } from "../stepper/stepper.component";
 import { DiceSet, DiceSetI, Advantage } from '../../diceset';
@@ -22,7 +22,7 @@ import { MatSelectModule } from '@angular/material/select';
   templateUrl: './skill-check.component.html',
   styleUrl: './skill-check.component.scss'
 })
-export class SkillCheckComponent {
+export class SkillCheckComponent implements OnInit {
   diceCalcService: DiceCalculationsService = inject(DiceCalculationsService);
   skillCheckForm = new FormGroup({
     targetDC: new FormControl<number>(0, [
@@ -72,6 +72,7 @@ export class SkillCheckComponent {
     dieDict['target'] = this.skillCheckForm.value.targetDC ?? 0;
     return new DiceSet(dieDict);
   }
+
   skillCheckSubmit() {
     let diceset = this.generateDiceSet();
     let skillCheckSuccessChance = this.diceCalcService.skillCheckCalc(diceset);
@@ -85,5 +86,10 @@ export class SkillCheckComponent {
       targetDCElement.innerHTML = diceset.target.toString();
     }
   }
+
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
+
   constructor() {}
 }
