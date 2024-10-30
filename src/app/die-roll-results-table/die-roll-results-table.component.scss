@@ -1,0 +1,17 @@
+@use '@angular/material' as mat;
+@use '../../styles.scss';
+@use 'sass:map';
+
+// .mat-column-percentage-result,
+.mat-column-roll-result,
+.mat-column-num-result {
+    width: 32px;
+}
+
+.percentage-bar-background {
+    background-color: mat.get-theme-color(styles.$my-theme, primary, 90);
+}
+
+.percentage-bar-amount {
+    background-color: mat.get-theme-color(styles.$my-theme, primary, 80);
+}

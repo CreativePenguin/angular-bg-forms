@@ -14,5 +14,10 @@ import { DiceCalculationsService } from '../dice-calculations.service';
 export class DieRollResultsTableComponent {
   diceCalculations = inject(DiceCalculationsService);
   @Input() diceResults: DiceResults[] = this.diceCalculations.defaultD20RollResults();
-  displayedColumns = ['roll-result', 'num-result', 'percentage-result'];
+  // displayedColumns = [
+  //   'roll-result', 'num-result', 'percentage-result', 'percentage-block'
+  // ];
+  displayedColumns = [
+    'roll-result', 'num-result', 'percentage-result'
+  ];
 }
