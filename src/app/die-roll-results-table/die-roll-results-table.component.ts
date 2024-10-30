@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { DiceResults } from '../../diceset';
 import { CommonModule } from '@angular/common';
+import { DiceCalculationsService } from '../dice-calculations.service';
 
 @Component({
   selector: 'app-die-roll-results-table',
@@ -11,6 +12,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './die-roll-results-table.component.scss'
 })
 export class DieRollResultsTableComponent {
-  @Input() rollResults!: DiceResults[];
+  diceCalculations = inject(DiceCalculationsService);
+  @Input() diceResults: DiceResults[] = this.diceCalculations.defaultD20RollResults();
   displayedColumns = ['roll-result', 'num-result', 'percentage-result'];
 }

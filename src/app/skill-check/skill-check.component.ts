@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, viewChild, ViewContainerRef } from '@angular/core';
 import { FormControl, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { StepperComponent } from "../stepper/stepper.component";
 import { DiceSet, DiceSetI, Advantage } from '../../diceset';
@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import { DieRollResultsTableComponent } from '../die-roll-results-table/die-roll-results-table.component';
 
 @Component({
   selector: 'app-skill-check',
@@ -24,6 +25,7 @@ import { MatSelectModule } from '@angular/material/select';
 })
 export class SkillCheckComponent implements OnInit {
   diceCalcService: DiceCalculationsService = inject(DiceCalculationsService);
+  vcr = viewChild('tableContainer', {read: ViewContainerRef});
   skillCheckForm = new FormGroup({
     targetDC: new FormControl<number>(0, [
       Validators.required,
@@ -73,6 +75,11 @@ export class SkillCheckComponent implements OnInit {
     return new DiceSet(dieDict);
   }
 
+  createTableComponent() {
+    this.vcr()?.clear();
+    this.vcr()?.createComponent(DieRollResultsTableComponent);
+  }
+
   skillCheckSubmit() {
     let diceset = this.generateDiceSet();
     let skillCheckSuccessChance = this.diceCalcService.skillCheckCalc(diceset);
@@ -88,7 +95,7 @@ export class SkillCheckComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.createTableComponent();
   }
 
   constructor() {}

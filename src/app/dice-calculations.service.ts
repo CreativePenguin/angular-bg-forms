@@ -165,6 +165,14 @@ export class DiceCalculationsService {
     return dieResults;
   }
 
+  defaultD20RollResults(): DiceResults[] {
+    let dieResults: DiceResults[] = [];
+    for(let i = 1; i <= 20; i++) {
+      dieResults.push({rollResult: i, numResults: 1, percentageResults: 5})
+    }
+    return dieResults;
+  }
+
   /**
    * 
    * @param decimal number between 0 and 1
