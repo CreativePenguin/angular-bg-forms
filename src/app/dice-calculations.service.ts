@@ -94,9 +94,9 @@ export class DiceCalculationsService {
    */
   skillCheckCalc(diceset: DiceSetI): number {
     if(this.minRoll(diceset) >= diceset.target) {
-      return .95;  // .95 accounts for nat 20
+      return 95;  // 95 accounts for nat 20
     } else if(this.maxRoll(diceset) <= diceset.target) {
-      return .05;  // .05 accounts for nat one
+      return 5;  // 5 accounts for nat one
     }
     let target = diceset.target - diceset.modifier;
     let possibleValues = this.possibleDiceValues(diceset);
@@ -113,6 +113,7 @@ export class DiceCalculationsService {
       sums1 = sums2.slice(); // create deep copy of array
       sums2 = [];
     }
+    // return sums1.filter((x) => x >= target).length / this.numPossibleDieRolls(diceset);
     return this.twoDecimalPercentage(
       sums1.filter((x) => x >= target).length / this.numPossibleDieRolls(diceset)
     );

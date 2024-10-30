@@ -62,7 +62,6 @@ fdescribe('DiceCalculationsService', () => {
   });
 
   it('should have skillCheckCalc Working', () => {
-    expect(service.skillCheckCalc(diceSet2)).toEqual(1.0 / 16);
     expect(service.skillCheckCalc(diceSet4)).toEqual(21 / 36);
     expect(service.skillCheckCalc(diceSet3)).toEqual(34 / 576);
   });

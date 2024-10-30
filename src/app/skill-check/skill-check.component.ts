@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, viewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentRef, inject, OnInit, viewChild, ViewContainerRef } from '@angular/core';
 import { FormControl, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { StepperComponent } from "../stepper/stepper.component";
-import { DiceSet, DiceSetI, Advantage } from '../../diceset';
+import { DiceSet, DiceSetI, Advantage, DiceResults } from '../../diceset';
 import { DiceCalculationsService } from '../dice-calculations.service';
 import { DiceBonusFormComponent } from '../dice-bonus-form/dice-bonus-form.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle'
@@ -26,6 +26,7 @@ import { DieRollResultsTableComponent } from '../die-roll-results-table/die-roll
 export class SkillCheckComponent implements OnInit {
   diceCalcService: DiceCalculationsService = inject(DiceCalculationsService);
   vcr = viewChild('tableContainer', {read: ViewContainerRef});
+  #tableRef!: ComponentRef<DieRollResultsTableComponent> | undefined;
   skillCheckForm = new FormGroup({
     targetDC: new FormControl<number>(0, [
       Validators.required,
@@ -75,9 +76,13 @@ export class SkillCheckComponent implements OnInit {
     return new DiceSet(dieDict);
   }
 
-  createTableComponent() {
+  createTableComponent(tableInput: DiceResults[] | undefined=undefined) {
     this.vcr()?.clear();
-    this.vcr()?.createComponent(DieRollResultsTableComponent);
+    this.#tableRef = this.vcr()?.createComponent(DieRollResultsTableComponent);
+    if(tableInput) {
+      console.log('table recreated');
+      this.#tableRef?.setInput('diceResults', tableInput);
+    }
   }
 
   skillCheckSubmit() {
@@ -85,6 +90,7 @@ export class SkillCheckComponent implements OnInit {
     let skillCheckSuccessChance = this.diceCalcService.skillCheckCalc(diceset);
     let successElement = document.getElementById('success-chance');
     let targetDCElement = document.getElementById('target-dc-value');
+    let diceRollResults = this.diceCalcService.diceCalcResults(diceset);
     console.log('skill check submit', this.skillCheckForm.value);
     if(successElement !== null) {
       successElement.innerHTML = (skillCheckSuccessChance).toString();
@@ -92,6 +98,7 @@ export class SkillCheckComponent implements OnInit {
     if(targetDCElement !== null) {
       targetDCElement.innerHTML = diceset.target.toString();
     }
+    this.createTableComponent(diceRollResults);
   }
 
   ngOnInit(): void {
