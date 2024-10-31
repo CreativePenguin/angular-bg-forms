@@ -123,7 +123,7 @@ export class DiceSet implements DiceSetI {
 }
 
 export enum Advantage {
-    None,
-    Advantage,
-    Disadvantage,
+    None='0',
+    Advantage='1',
+    Disadvantage='2',
 }

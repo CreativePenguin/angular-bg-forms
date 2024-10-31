@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { DiceCalculationsService } from './dice-calculations.service';
-import { DiceSetI, DiceSet } from '../diceset';
+import { DiceSetI, DiceSet, Advantage } from '../diceset';
 
 fdescribe('DiceCalculationsService', () => {
   let service: DiceCalculationsService;
@@ -62,8 +62,24 @@ fdescribe('DiceCalculationsService', () => {
   });
 
   it('should have skillCheckCalc Working', () => {
-    expect(service.skillCheckCalc(diceSet4)).toEqual(21 / 36);
-    expect(service.skillCheckCalc(diceSet3)).toEqual(34 / 576);
+    expect(service.skillCheckCalc(diceSet4)).toEqual(
+      service.twoDecimalPercentage(21 / 36)
+    );
+    expect(service.skillCheckCalc(diceSet3)).toEqual(
+      service.twoDecimalPercentage(34 / 576)
+    );
+  });
+  
+  it('should have working skillCheckCalcAdvantage', () => {
+    expect(service.calcSkillCheckAdvantage(5)).toEqual(
+      9.75
+    );
+  });
+  
+  it('should have working advantagedisadvantage hybrid function', () => {
+    expect(service.calcSkillCheckAdvantageDisadvantage(
+      Advantage.Advantage, 5)
+    ).toEqual(9.75);
   });
 
   it('should have dice calc map working', () => {

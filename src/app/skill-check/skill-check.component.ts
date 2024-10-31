@@ -40,7 +40,7 @@ export class SkillCheckComponent implements OnInit {
     //   'd10': new FormControl(0),
     //   'd12': new FormControl(0),
     // }),
-    advantage: new FormControl(Advantage.None),
+    advantage: new FormControl<Advantage>(Advantage.None),
     attempts: new FormControl<number>(1, [
       Validators.required,
       Validators.min(1)
@@ -54,6 +54,10 @@ export class SkillCheckComponent implements OnInit {
     'd12': new FormControl(0),
   });
   // diceSet!: DiceSet;
+  advantageEnum: typeof Advantage = Advantage;
+  advantageNone = Advantage.None;
+  advantageAdvantage = Advantage.Advantage
+  advantageDisadvantage = Advantage.Disadvantage;
   advantageOptions = [
     {id: 1, name: 'None', value: Advantage.None},
     {id: 2, name: 'Advantage', value: Advantage.Advantage},
@@ -73,6 +77,7 @@ export class SkillCheckComponent implements OnInit {
     dieDict['d20'] = 1;
     dieDict['modifier'] = this.skillCheckForm.value.skillModifier ?? 0;
     dieDict['target'] = this.skillCheckForm.value.targetDC ?? 0;
+    dieDict['advantage'] = this.skillCheckForm.value.advantage ?? Advantage.None;
     return new DiceSet(dieDict);
   }
 

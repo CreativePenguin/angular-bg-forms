@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DiceResults, DiceSet, DiceSetI } from '../diceset';
+import { Advantage, DiceResults, DiceSet, DiceSetI } from '../diceset';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +48,60 @@ export class DiceCalculationsService {
     return dierolls;
   }
 
+
+  /**
+   * Converts raw skillCheckCalc value to chance of target being reached when d20 is rolled with advantage
+   * @param targetChance Can accept either percentage or fraction calc of chance
+   * @returns two decimal percentage of chance to hit target in skill check with advantage
+   */
+  calcSkillCheckAdvantage(targetChance: number): number {
+    if(targetChance > 1) {
+      targetChance /= 100;
+    }
+    return this.twoDecimalPercentage(1 - (1 - targetChance) ** 2);
+  }
+
+  /**
+   * Converts raw skillCheckCalc value to chance of target being reached when d20 is rolled with disadvantage
+   * @param targetChance Can accept either percentage or fraction calc of chance
+   * @returns two decimal percentage of chance to hit target in skill check with disadvantage
+   */
+  calcSkillCheckDisadvantage(targetChance: number): number {
+    if(targetChance > 1) {
+      targetChance /= 100;
+    }
+    return this.twoDecimalPercentage(targetChance ** 2);
+  }
+
+  calcSkillCheckAdvantageDisadvantage(
+    advantage: Advantage, targetChance: number
+  ): number {
+    switch(advantage) {
+      case Advantage.Advantage:
+        return this.calcSkillCheckAdvantage(targetChance);
+      case Advantage.Disadvantage:
+        return this.calcSkillCheckDisadvantage(targetChance);
+      default:
+        return targetChance;
+    }
+  }
+
+  checkAdvantageValue(advantage: Advantage) {
+    switch(advantage) {
+      case Advantage.None:
+        console.log('excecuting checkAdvantageValue -- Advantage.None');
+        break;
+      case Advantage.Advantage:
+        console.log('excecuting checkAdvantageValue -- Advantage.Advantage');
+        break;
+      case Advantage.Disadvantage:
+        console.log('excecuting checkAdvantageValue -- Advantage.Disadvantage');
+        break;
+      default:
+        console.log('excecuting checkAdvantageValue -- default');
+    }
+  }
+
   /**
    * This function calculates the percent chance of a skill check succeeding
    * Explanation of Algorithm: O(n^3)
@@ -93,10 +147,13 @@ export class DiceCalculationsService {
    * @returns percentage chance of success rounded to two decimal points
    */
   skillCheckCalc(diceset: DiceSetI): number {
+    this.checkAdvantageValue(diceset.advantage);
     if(this.minRoll(diceset) >= diceset.target) {
-      return 95;  // 95 accounts for nat 20
+      // calculates chance of natural 20 (is 95)
+      return this.calcSkillCheckAdvantageDisadvantage(diceset.advantage, 95);
     } else if(this.maxRoll(diceset) <= diceset.target) {
-      return 5;  // 5 accounts for nat one
+      // calculates chance of natural 1 (is 5)
+      return this.calcSkillCheckAdvantageDisadvantage(diceset.advantage, 5);
     }
     let target = diceset.target - diceset.modifier;
     let possibleValues = this.possibleDiceValues(diceset);
@@ -114,8 +171,11 @@ export class DiceCalculationsService {
       sums2 = [];
     }
     // return sums1.filter((x) => x >= target).length / this.numPossibleDieRolls(diceset);
+    let numRollsAboveTarget = sums1.filter((x) => x >= target).length;
+    let numPossibleRolls = this.numPossibleDieRolls(diceset);
+    let fractionAboveTarget = numRollsAboveTarget / numPossibleRolls;
     return this.twoDecimalPercentage(
-      sums1.filter((x) => x >= target).length / this.numPossibleDieRolls(diceset)
+      this.calcSkillCheckAdvantageDisadvantage(diceset.advantage, fractionAboveTarget)
     );
   }
 
