@@ -45,6 +45,18 @@ export class DiceCalculationsService {
     for(let i of diceset) {
       dierolls *= i[0] ** i[1];
     }
+    // switch(diceset.advantage) {
+    //   case Advantage.Advantage:
+    //   case Advantage.Disadvantage:
+    //     return dierolls * 20;
+    //   case Advantage.SavageAttacker:
+    //     for(let i of diceset) {
+    //       dierolls *= i[0] ** i[1]
+    //     }
+    //     return dierolls;
+    //   case Advantage.None:
+    //     return dierolls;
+    // }
     return dierolls;
   }
 
@@ -299,14 +311,17 @@ export class DiceCalculationsService {
    * @returns DiceResults array that holds the number of rolls, and the percentage of those rols to the whole
    */
   diceCalcResults(diceset: DiceSetI): DiceResults[] {
-    let map: Map<number, number> = this.diceCalcMap(diceset);
+    // let map: Map<number, number> = this.diceCalcMap(diceset);
+    let map: Map<number, number> = this.diceCalcMapAdvantage(diceset);
     let numPossibleRolls = this.numPossibleDieRolls(diceset);
+    let totalRolls = 0;
+    map.forEach((numRolls) => totalRolls += numRolls)
     let dieResults: DiceResults[] = [];
     map.forEach((numRolls, roll) => {
       dieResults.push({
         rollResult: roll,
         numResults: numRolls,
-        percentageResults: this.twoDecimalPercentage(numRolls / numPossibleRolls),
+        percentageResults: this.twoDecimalPercentage(numRolls / totalRolls),
       })
     })
     return dieResults;
