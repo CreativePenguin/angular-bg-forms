@@ -52,25 +52,25 @@ export class DiceCalculationsService {
   /**
    * Converts raw skillCheckCalc value to chance of target being reached when d20 is rolled with advantage
    * @param targetChance Can accept either percentage or fraction calc of chance
-   * @returns two decimal percentage of chance to hit target in skill check with advantage
+   * @returns fraction chance to hit target in skill check with advantage
    */
   calcSkillCheckAdvantage(targetChance: number): number {
     if(targetChance > 1) {
       targetChance /= 100;
     }
-    return this.twoDecimalPercentage(1 - (1 - targetChance) ** 2);
+    return 1 - (1 - targetChance) ** 2;
   }
 
   /**
    * Converts raw skillCheckCalc value to chance of target being reached when d20 is rolled with disadvantage
    * @param targetChance Can accept either percentage or fraction calc of chance
-   * @returns two decimal percentage of chance to hit target in skill check with disadvantage
+   * @returns fraction chance to hit target in skill check with disadvantage
    */
   calcSkillCheckDisadvantage(targetChance: number): number {
     if(targetChance > 1) {
       targetChance /= 100;
     }
-    return this.twoDecimalPercentage(targetChance ** 2);
+    return targetChance ** 2;
   }
 
   calcSkillCheckAdvantageDisadvantage(
@@ -154,10 +154,14 @@ export class DiceCalculationsService {
   skillCheckCalc(diceset: DiceSetI): number {
     if(this.minRoll(diceset) >= diceset.target) {
       // calculates chance of natural 20 (is 95)
-      return this.calcSkillCheckAdvantageDisadvantage(diceset.advantage, 95);
+      return this.twoDecimalPercentage(
+        this.calcSkillCheckAdvantageDisadvantage(diceset.advantage, 95)
+      );
     } else if(this.maxRoll(diceset) <= diceset.target) {
       // calculates chance of natural 1 (is 5)
-      return this.calcSkillCheckAdvantageDisadvantage(diceset.advantage, 5);
+      return this.twoDecimalPercentage(
+        this.calcSkillCheckAdvantageDisadvantage(diceset.advantage, 5)
+      );
     }
     let target = diceset.target - diceset.modifier;
     let possibleValues = this.possibleDiceValues(diceset);
@@ -277,10 +281,10 @@ export class DiceCalculationsService {
     switch(advantage) {
       case Advantage.Advantage:
       case Advantage.SavageAttacker:
-        console.log(`advantage calced for ${diceValue1}, ${diceValue2}`)
+        // console.log(`advantage calced for ${diceValue1}, ${diceValue2}`)
         return Math.max(diceValue1, diceValue2);
       case Advantage.Disadvantage:
-        console.log(`disadvantage calced for ${diceValue1}, ${diceValue2}`)
+        // console.log(`disadvantage calced for ${diceValue1}, ${diceValue2}`)
         return Math.min(diceValue1, diceValue2);
       default:
         console.log('dice calc choose advantage dice improperly invoked');

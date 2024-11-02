@@ -9,10 +9,10 @@ fdescribe('DiceCalculationsService', () => {
     d4: 1, d6: 2, d8: 3, d10: 4, d12: 5, d20: 6
   });
   let diceSet0A: DiceSetI = new DiceSet({
-    d20: 1, advantage: Advantage.Advantage
+    d20: 1, advantage: Advantage.Advantage, target: 10
   });
-  let diceSet0B: DiceSetI = new DiceSet({
-    d20: 1, advantage: Advantage.Disadvantage
+  let diceSet0D: DiceSetI = new DiceSet({
+    d20: 1, advantage: Advantage.Disadvantage, target: 10
   })
   let diceSet2: DiceSetI = new DiceSet({
     d4: 2, target: 8
@@ -85,8 +85,14 @@ fdescribe('DiceCalculationsService', () => {
     for(let i = 1; i <= 20; i++) {
       expectedValues2.set(21 - i, i * 2 - 1);
     }
-    expect(service.diceCalcMapAdvantage(diceSet0B)).toEqual(expectedValues2)
+    expect(service.diceCalcMapAdvantage(diceSet0D)).toEqual(expectedValues2)
   })
+
+  it('should have working two decimal percentage', () => {
+    expect(service.twoDecimalPercentage(.3213)).toEqual(32.13);
+    expect(service.twoDecimalPercentage(.12344)).toEqual(12.34);
+    expect(service.twoDecimalPercentage(.12345)).toEqual(12.35);
+  });
 
   it('should have skillCheckCalc Working', () => {
     expect(service.skillCheckCalc(diceSet4)).toEqual(
@@ -96,17 +102,26 @@ fdescribe('DiceCalculationsService', () => {
       service.twoDecimalPercentage(34 / 576)
     );
   });
+
+  it('should have skillCheckCalc working when advantage is set', () => {
+    expect(service.skillCheckCalc(diceSet0A)).toEqual(
+      79.75
+    );
+    expect(service.skillCheckCalc(diceSet0D)).toEqual(
+      30.25
+    );
+  })
   
   it('should have working skillCheckCalcAdvantage', () => {
-    expect(service.calcSkillCheckAdvantage(5)).toEqual(
-      9.75
+    expect(service.calcSkillCheckAdvantage(5)).toBeCloseTo(
+      .0975
     );
   });
   
   it('should have working advantagedisadvantage hybrid function', () => {
     expect(service.calcSkillCheckAdvantageDisadvantage(
       Advantage.Advantage, 5)
-    ).toEqual(9.75);
+    ).toBeCloseTo(.0975);
   });
 
   it('should have dice calc map working', () => {

@@ -98,6 +98,7 @@ export class SkillCheckComponent implements OnInit {
     let diceRollResults = this.diceCalcService.diceCalcResults(diceset);
     console.log('skill check submit', this.skillCheckForm.value);
     if(successElement !== null) {
+      console.log(skillCheckSuccessChance);
       successElement.innerHTML = (skillCheckSuccessChance).toString();
     }
     if(targetDCElement !== null) {
