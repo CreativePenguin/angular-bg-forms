@@ -4,7 +4,7 @@
       <span id="success-chance">95</span>% chance to succeed with target DC <span id="target-dc-value">0</span>
     </mat-card-title>
     <mat-card-subtitle>
-      Note: 100% and 0% are impossible since a natural 20 is an automatic success, and a natural 1 is an automatic fail
+      Note: 100% and 0% are impossible since regardless of DC, a natural 20 is an automatic success, and a natural 1 is an automatic fail. Percentages are rounded to two decimals.
     </mat-card-subtitle>
   </mat-card-header>
   <form [formGroup]="skillCheckForm" (submit)="skillCheckSubmit()">
@@ -44,7 +44,7 @@
       <div class="flex-1 content-center m-2">
         <mat-form-field class="w-full">
           <mat-label>Attempts</mat-label>
-          <mat-select>
+          <mat-select formControlName="attempts">
             @for(item of attemptsOptions; track $index) {
               <mat-option [value]="item">{{item}}</mat-option>
             }

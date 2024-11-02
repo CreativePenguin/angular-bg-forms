@@ -78,6 +78,7 @@ export class SkillCheckComponent implements OnInit {
     dieDict['modifier'] = this.skillCheckForm.value.skillModifier ?? 0;
     dieDict['target'] = this.skillCheckForm.value.targetDC ?? 0;
     dieDict['advantage'] = this.skillCheckForm.value.advantage ?? Advantage.None;
+    dieDict['attempts'] = this.skillCheckForm.value.attempts ?? 1;
     return new DiceSet(dieDict);
   }
 

@@ -12,6 +12,7 @@ export interface DiceSetI extends Iterable<[number, number]> {
     d20?: number;
     modifier: number;
     target: number;
+    attempts: number;
     advantage: Advantage;
 }
 
@@ -30,30 +31,9 @@ export class DiceSet implements DiceSetI {
     d20!: number;
     modifier: number = 0;
     target: number = 0;
+    attempts: number = 1;
     advantage: Advantage = Advantage.None;
     private keys = [4, 6, 8, 10, 12, 20];
-
-    // [Symbol.iterator](): Iterator<[string, number], any, undefined> {
-    //     let iterableIterator = {
-    //         keys: this.keys,
-    //         values: this.values,
-    //         current: 0,
-    //         [Symbol.iterator]: null,
-    //         next: function(): IteratorResult<[string, number]> {
-    //             if (this.current < this.values.length) {
-    //                 return {
-    //                     value: [this.keys[this.current++], this.values[this.current++]], 
-    //                     done: false
-    //                 };
-    //             } else {
-    //                 return {value: null, done: true };
-    //             }
-    //         }
-    //     }
-
-    //     iterableIterator[Symbol.iterator] = () => iterableIterator;
-    //     return iterableIterator;
-    // }
 
     [Symbol.iterator](): Iterator<[number, number], any, undefined> {
         let i = 0;
@@ -75,7 +55,7 @@ export class DiceSet implements DiceSetI {
     }
 
     constructor({d4=0, d6=0, d8=0, d10=0, d12=0, d20=0,
-                 modifier=0, target=0, advantage=Advantage.None},
+                 modifier=0, target=0, advantage=Advantage.None, attempts=1},
                 dicestring?: string) {
         let dicestringsplit = dicestring?.split(' + ');
         for(let dice of dicestringsplit || '') {
@@ -110,6 +90,7 @@ export class DiceSet implements DiceSetI {
         this.d20 = d20;
         this.modifier = modifier;
         this.target = target;
+        this.attempts = attempts;
         this.advantage = advantage;
     }
 

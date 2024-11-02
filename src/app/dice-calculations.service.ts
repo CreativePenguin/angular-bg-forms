@@ -121,42 +121,67 @@ export class DiceCalculationsService {
 
   /**
    * This function calculates the percent chance of a skill check succeeding
+   * 
    * Explanation of Algorithm: O(n^3)
+   * 
    * The algorithm will iterate through the dice roll possibilities one die at a time, and add each of the possible die options on the current die to the list of sums.
+   * 
    * 1. possibleDiceValues() is used to convert dice set into 2d array
    * 2. two arrays are created, sums1 and sums2.
-   * 2a. sums1 is initiated to [0]. This array is used to store the sums generated from the dice already itereated through. This array will stay constant while the new die values are iterated through
-   * 2b. sums2 is initiated to []. This array has the new sums from the dice value currently being iterated through pushed to it.
+   * - sums1 is initiated to [0]. This array is used to store the sums generated from the dice already itereated through. This array will stay constant while the new die values are iterated through
+   * - sums2 is initiated to []. This array has the new sums from the dice value currently being iterated through pushed to it.
    * 3. Assume [[1, 2], [1, 2, 3], [1, 2, 3]]
    * The algorithm first itereates through the die values of the first die, and adds them to the values of the empty sums1 array. Sums are pushed to sums2.
    * sums1 = [0];
    * sums2 = [1, 2];
    * 4. Sums2 is then copied to sums1.
    * 5. Then, the next group of die results starts being iterated through, and gets added to values in sums1 array
+   * 
    * first loop of sums1:
+   * 
    * sums1 = [1, 2];
+   * 
    * sums2 = [1 + 1, 2 + 1];
+   * 
    * second loop of sums1:
+   * 
    * sums1 = [1, 2];
+   * 
    * sums2 = [1 + 1, 2 + 1, 1 + 2, 2 + 2];
+   * 
    * third loop of sums1:
+   * 
    * sums2 = [1 + 1, 2 + 1, 1 + 2, 2 + 2, 1 + 3, 2 + 3];
+   * 
    * After loop of dieFaces:
+   * 
    * sums1 = [1, 2];
+   * 
    * sums2 = [1 + 1, 2 + 1, 1 + 2, 2 + 2, 1 + 3, 2 + 3];
+   * 
    * Second loop of dieFaces:
+   * 
    * sums1 = [2, 3, 3, 4, 4, 5]; // Copy of sums2, except I simplified the sums
+   * 
    * sums2 = [1 + 1, 2 + 1, 1 + 2, 2 + 2, 1 + 3, 2 + 3];
+   * 
    * first iteration of sums1:
+   * 
    * sums2 = [2 + 1, 3 + 1, 3 + 1, 4 + 1, 4 + 1, 5 + 1];
+   * 
    * second iteration of sums1:
+   * 
    * sums2 = [2 + 1, 3 + 1, 3 + 1, 4 + 1, 4 + 1, 5 + 1, 
    *          2 + 2, 3 + 2, 3 + 2, 4 + 2, 4 + 2, 5 + 2];
+   * 
    * third iteration of sums1:
+   * 
    * sums2 = [2 + 1, 3 + 1, 3 + 1, 4 + 1, 4 + 1, 5 + 1, 
    *          2 + 2, 3 + 2, 3 + 2, 4 + 2, 4 + 2, 5 + 2,
    *          2 + 3, 3 + 3, 3 + 3, 4 + 3, 4 + 3, 5 + 3];
+   * 
    * Final value of sums1 after loop: [3, 4, 4, 5, 5, 6, 4, 5, 5, 6, 6, 7, 5, 6, 6, 7, 7, 8]
+   * 
    * 6. The algorithm filters the array for the sum values over the target
    * 7. Divide number of die rolls over the target over total number of die roll possibilities, and convert it to a percentage
    * @param diceset diceset object that represents the dice being rolled,
@@ -165,15 +190,11 @@ export class DiceCalculationsService {
    */
   skillCheckCalc(diceset: DiceSetI): number {
     if(this.minRoll(diceset) >= diceset.target) {
-      // calculates chance of natural 20 (is 95)
-      return this.twoDecimalPercentage(
-        this.calcSkillCheckAdvantageDisadvantage(diceset.advantage, 95)
-      );
+      // calculates chance of natural 20 (is .95)
+      return this.skillCheckCalcModifiers(diceset, .95)
     } else if(this.maxRoll(diceset) <= diceset.target) {
-      // calculates chance of natural 1 (is 5)
-      return this.twoDecimalPercentage(
-        this.calcSkillCheckAdvantageDisadvantage(diceset.advantage, 5)
-      );
+      // calculates chance of natural 1 (is .5)
+      return this.skillCheckCalcModifiers(diceset, .5)
     }
     let target = diceset.target - diceset.modifier;
     let possibleValues = this.possibleDiceValues(diceset);
@@ -190,13 +211,44 @@ export class DiceCalculationsService {
       sums1 = sums2.slice(); // create deep copy of array
       sums2 = [];
     }
-    // return sums1.filter((x) => x >= target).length / this.numPossibleDieRolls(diceset);
     let numRollsAboveTarget = sums1.filter((x) => x >= target).length;
     let numPossibleRolls = this.numPossibleDieRolls(diceset);
     let fractionAboveTarget = numRollsAboveTarget / numPossibleRolls;
+    return this.skillCheckCalcModifiers(diceset, fractionAboveTarget);
+  }
+
+  /**
+   * This function modifies the fraction probability calculated from skill check calc to the number used by the user interface
+   * Performs modifications like transforming the fraction into a percentage.
+   * This is called before the number is returned in skillcheckcalc
+   * @param diceset input diceset from user
+   * @param probability the raw number from skillcheckcalc
+   * @returns Modified number that is used by the code
+   */
+  skillCheckCalcModifiers(diceset: DiceSetI, probability: number): number {
     return this.twoDecimalPercentage(
-      this.calcSkillCheckAdvantageDisadvantage(diceset.advantage, fractionAboveTarget)
+      this.adjustProbabilityForAttempts(
+        this.calcSkillCheckAdvantageDisadvantage(
+          diceset.advantage, probability
+        ),
+        diceset.attempts
+      )
     );
+  }
+
+  /**
+   * This algorithm multiplies the probability of success by the amount of attempts.
+   * 
+   * This algorithm is used in the end of skillCheckCalc to account for multiple attempts
+   * @param likelihoodTarget The probability value of something
+   * @param attempts Number of times that the probability chance is performed
+   * @returns The chance of the probability succeeding at least once in the multiple attempts
+   */
+  adjustProbabilityForAttempts(
+    likelihoodTarget: number, attempts: number
+  ): number {
+    console.log(`adjust probability for attempts ${likelihoodTarget} ${attempts}`);
+    return 1 - (1 - likelihoodTarget) ** attempts;
   }
 
   /**
@@ -227,6 +279,13 @@ export class DiceCalculationsService {
     return finalSums;
   }
 
+  /**
+   * This algorithm is a variation of skillCheckCalc that generates a full map of results.
+   * This variation does not look at the target of the roll
+   * To account for Advantage/Disadvantage, it adds an additional d20, and adds additional rolls taking the min/max with the additional d20
+   * @param diceset input dice set
+   * @returns Map[roll result : number of rolls with roll result]
+   */
   diceCalcMapAdvantage(diceset: DiceSetI): Map<number, number> {
     let finalSums = new Map<number, number>();
     let possibleValues: number[][] = this.possibleDiceValues(diceset);
@@ -264,6 +323,12 @@ export class DiceCalculationsService {
     return finalSums;
   }
 
+  /**
+   * Takes the value from possibleValues, and modifies the number generated to account for advantage and savage attacker
+   * @param possibleValues number[][] type of possible die values created from possibleDiceValues() function
+   * @param advantage enum set by the diceset that determines if the dice are rolled with advantage or disadvantage
+   * @returns possibleValues with additional dice added to account for advantage roll or savage attacker roll
+   */
   diceCalcMapSetupPossibleValues(
     possibleValues: number[][], advantage: Advantage
   ): number[][] {
@@ -284,6 +349,13 @@ export class DiceCalculationsService {
     }
   }
 
+  /**
+   * Called in the iterator for generating skillCheckCalc and diceCalc
+   * @param diceValue1 dice value in sums1
+   * @param diceValue2 dice value in sums2
+   * @param advantage determines what case dice are rolled with
+   * @returns 
+   */
   diceCalcMapSetupChooseDice(
     diceValue1: number, diceValue2: number, advantage: Advantage
   ): number | null {
@@ -320,7 +392,7 @@ export class DiceCalculationsService {
     map.forEach((numRolls, roll) => {
       dieResults.push({
         rollResult: roll,
-        numResults: numRolls,
+        numResults: numRolls * diceset.attempts,
         percentageResults: this.twoDecimalPercentage(numRolls / totalRolls),
       })
     })
