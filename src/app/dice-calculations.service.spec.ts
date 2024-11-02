@@ -8,6 +8,12 @@ fdescribe('DiceCalculationsService', () => {
   let diceSet: DiceSetI = new DiceSet({
     d4: 1, d6: 2, d8: 3, d10: 4, d12: 5, d20: 6
   });
+  let diceSet0A: DiceSetI = new DiceSet({
+    d20: 1, advantage: Advantage.Advantage
+  });
+  let diceSet0B: DiceSetI = new DiceSet({
+    d20: 1, advantage: Advantage.Disadvantage
+  })
   let diceSet2: DiceSetI = new DiceSet({
     d4: 2, target: 8
   });
@@ -56,10 +62,31 @@ fdescribe('DiceCalculationsService', () => {
        [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
        [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]]
     );
+    expect(service.possibleDiceValues(diceSet3).reverse()).toEqual(
+      [
+        [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        [1, 2, 3, 4]
+      ]
+    );
     expect(service.possibleDiceValues(diceSet2)).toEqual(
       [[1, 2, 3, 4], [1, 2, 3, 4]]
     );
   });
+
+  it('should have working diceCalcMapAdvantage', () => {
+    // should look something like [[1, 1], [2, 3], [3, 5], [4, 7]]
+    let expectedValues = new Map<number, number>();
+    for(let i = 1; i <= 20; i++) {
+      expectedValues.set(i, i * 2 - 1)
+    }
+    expect(service.diceCalcMapAdvantage(diceSet0A)).toEqual(expectedValues);
+    let expectedValues2 = new Map<number, number>();
+    for(let i = 1; i <= 20; i++) {
+      expectedValues2.set(21 - i, i * 2 - 1);
+    }
+    expect(service.diceCalcMapAdvantage(diceSet0B)).toEqual(expectedValues2)
+  })
 
   it('should have skillCheckCalc Working', () => {
     expect(service.skillCheckCalc(diceSet4)).toEqual(

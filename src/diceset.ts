@@ -61,7 +61,7 @@ export class DiceSet implements DiceSetI {
         let values = [
             this.d4 ?? 0, this.d6 ?? 0, this.d8 ?? 0, 
             this.d10 ?? 0, this.d12 ?? 0, this.d20 ?? 0
-        ];
+        ]
 
         return {
             next() {
@@ -126,4 +126,5 @@ export enum Advantage {
     None='0',
     Advantage='1',
     Disadvantage='2',
+    SavageAttacker='3',
 }

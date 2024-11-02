@@ -86,6 +86,11 @@ export class DiceCalculationsService {
     }
   }
 
+  /**
+   * This function just has a console.log to check for advantage.
+   * It's a testing function to make sure that advantage is being set properly
+   * @param advantage diceset.advantage value
+   */
   checkAdvantageValue(advantage: Advantage) {
     switch(advantage) {
       case Advantage.None:
@@ -147,7 +152,6 @@ export class DiceCalculationsService {
    * @returns percentage chance of success rounded to two decimal points
    */
   skillCheckCalc(diceset: DiceSetI): number {
-    this.checkAdvantageValue(diceset.advantage);
     if(this.minRoll(diceset) >= diceset.target) {
       // calculates chance of natural 20 (is 95)
       return this.calcSkillCheckAdvantageDisadvantage(diceset.advantage, 95);
@@ -207,8 +211,86 @@ export class DiceCalculationsService {
     return finalSums;
   }
 
+  diceCalcMapAdvantage(diceset: DiceSetI): Map<number, number> {
+    let finalSums = new Map<number, number>();
+    let possibleValues: number[][] = this.possibleDiceValues(diceset);
+    possibleValues = this.diceCalcMapSetupPossibleValues(
+      possibleValues, diceset.advantage
+    );
+    let sums1: number[] = [0];
+    let sums2: number[] = [];
+    for(let [dieIndex, diceFaces] of possibleValues.entries()) {
+      for(let currentDieValue of diceFaces) {
+        for(let currentSum of sums1) {
+          if(
+            (diceset.advantage === Advantage.Advantage ||
+            diceset.advantage === Advantage.Disadvantage) &&
+            dieIndex == 1
+          ) {
+            let nextDiceVal: number | null = this.diceCalcMapSetupChooseDice(
+              currentSum, currentDieValue, diceset.advantage
+            );
+            if(nextDiceVal) {
+              sums2.push(nextDiceVal);
+            }
+          } else {
+            sums2.push(currentDieValue + currentSum);
+          }
+        }
+      }
+      sums1 = sums2.slice();
+      sums2 = [];
+    }
+    for(let i of sums1) {
+      let modI = i + diceset.modifier;
+      finalSums.set(modI, (finalSums.get(modI) ?? 0) + 1);
+    }
+    return finalSums;
+  }
+
+  diceCalcMapSetupPossibleValues(
+    possibleValues: number[][], advantage: Advantage
+  ): number[][] {
+    switch(advantage) {
+      case Advantage.Advantage:
+      case Advantage.Disadvantage:
+        // Advantage requires a second D20
+        possibleValues.push(
+          [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+        );
+        return possibleValues.reverse();
+      case Advantage.SavageAttacker:
+        return possibleValues.flatMap(
+          (dieValue) => [dieValue, dieValue]
+        );
+      default:
+        return possibleValues
+    }
+  }
+
+  diceCalcMapSetupChooseDice(
+    diceValue1: number, diceValue2: number, advantage: Advantage
+  ): number | null {
+    // if(diceValue1 == diceValue2) {
+    //   return null;
+    // }
+    switch(advantage) {
+      case Advantage.Advantage:
+      case Advantage.SavageAttacker:
+        console.log(`advantage calced for ${diceValue1}, ${diceValue2}`)
+        return Math.max(diceValue1, diceValue2);
+      case Advantage.Disadvantage:
+        console.log(`disadvantage calced for ${diceValue1}, ${diceValue2}`)
+        return Math.min(diceValue1, diceValue2);
+      default:
+        console.log('dice calc choose advantage dice improperly invoked');
+        return null;
+    }
+  }
+
   /**
-   * Variation of diceCalcMap that returns the dice roll results as a DiceResults[]
+   * Calls diceCalcMap to create map from diceset, and uses the map created to convert into DiceResults array
+   * DiceResults array is the data type used to make the roll results table
    * @param diceset input dice set, and modifier to dice rolls
    * @returns DiceResults array that holds the number of rolls, and the percentage of those rols to the whole
    */
