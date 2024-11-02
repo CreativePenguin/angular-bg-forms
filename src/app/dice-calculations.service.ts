@@ -193,8 +193,8 @@ export class DiceCalculationsService {
       // calculates chance of natural 20 (is .95)
       return this.skillCheckCalcModifiers(diceset, .95)
     } else if(this.maxRoll(diceset) <= diceset.target) {
-      // calculates chance of natural 1 (is .5)
-      return this.skillCheckCalcModifiers(diceset, .5)
+      // calculates chance of natural 1 (is .05)
+      return this.skillCheckCalcModifiers(diceset, .05)
     }
     let target = diceset.target - diceset.modifier;
     let possibleValues = this.possibleDiceValues(diceset);

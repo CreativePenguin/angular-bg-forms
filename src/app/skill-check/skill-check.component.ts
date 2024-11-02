@@ -110,6 +110,9 @@ export class SkillCheckComponent implements OnInit {
 
   ngOnInit(): void {
     this.createTableComponent();
+    this.skillCheckForm.valueChanges.subscribe(
+      () => this.skillCheckSubmit()
+    );
   }
 
   constructor() {}

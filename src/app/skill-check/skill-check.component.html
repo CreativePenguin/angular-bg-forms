@@ -7,7 +7,7 @@
       Note: 100% and 0% are impossible since regardless of DC, a natural 20 is an automatic success, and a natural 1 is an automatic fail. Percentages are rounded to two decimals.
     </mat-card-subtitle>
   </mat-card-header>
-  <form [formGroup]="skillCheckForm" (submit)="skillCheckSubmit()">
+  <form [formGroup]="skillCheckForm" (ngSubmit)="skillCheckSubmit()">
     <div class="flex flex-wrap flex-row">
       <div class="grow-[2] content-center m-2">
         <mat-form-field class="tertiary-input w-full">
@@ -16,17 +16,6 @@
         </mat-form-field>
       </div>
       <div class="content-center m-2">
-        <!-- <mat-button-toggle-group formControlName="advantage">
-          <mat-button-toggle value={{0}} id="1" checked>
-            None
-          </mat-button-toggle>
-          <mat-button-toggle value={{1}} id="2">
-            Advantage
-          </mat-button-toggle>
-          <mat-button-toggle value={{2}} id="3">
-            Disadvantage
-          </mat-button-toggle>
-        </mat-button-toggle-group> -->
         <mat-button-toggle-group formControlName="advantage">
         @for (option of advantageOptions; track option.id) {
           @if (option.value == '0') {
