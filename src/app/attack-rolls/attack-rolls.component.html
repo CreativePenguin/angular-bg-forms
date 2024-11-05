@@ -20,24 +20,38 @@
     </mat-autocomplete>
   </mat-form-field>
   <mat-form-field class="w-full">
-    <mat-label>Test Autocomplete</mat-label>
+    <mat-label>Spell</mat-label>
     <input type="text" matInput [matAutocomplete]="auto2" formControlName="testAutocomplete">
+    <!-- <mat-autocomplete #auto2="matAutocomplete"> -->
     <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displaySpellAutocompleteValue">
       @for(spellGroup of filteredGroupSpellList | async; track $index) {
         <mat-optgroup label="level {{$index}}">
           @for(spell of spellGroup; track $index) {
-            <mat-option [value]="spell.name">{{spell.url}}</mat-option>
+            <mat-option [value]="spell">{{spell.name}}</mat-option>
           }
         </mat-optgroup>
       }
     </mat-autocomplete>
   </mat-form-field>
-    <mat-form-field style="padding: 5px" class="grow-[1]">
-      <mat-label>Level</mat-label>
-      <mat-select formControlName="spellLevel" panelClass="level-dropdown">
-        @for (level of currentSpellRange; track $index) {
-          <mat-option [value]="level">{{level}}</mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
+  <mat-form-field>
+    <mat-label>Hardcoded Autocomplete</mat-label>
+    <input matInput [matAutocomplete]="auto3" formControlName="hardCodedAutocomplete">
+    <mat-autocomplete #auto3="matAutocomplete">
+      @for(spellGroup of demoOptions | async; track $index) {
+        <mat-optgroup label="level {{$index}}">
+          @for(spell of spellGroup; track $index) {
+            <mat-option [value]="spell.url">{{spell.name}}</mat-option>
+          }
+        </mat-optgroup>
+      }
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-form-field style="padding: 5px" class="grow-[1]">
+    <mat-label>Level</mat-label>
+    <mat-select formControlName="spellLevel" panelClass="level-dropdown">
+      @for (level of currentSpellRange; track $index) {
+        <mat-option [value]="level">{{level}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
 </form>

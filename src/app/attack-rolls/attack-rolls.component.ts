@@ -27,7 +27,8 @@ export class AttackRollsComponent implements OnInit{
   attackRollsForm = new FormGroup({
     spell: new FormControl<string | Spell>(''),
     spellLevel: new FormControl(1),
-    testAutocomplete: new FormControl('')
+    testAutocomplete: new FormControl<string | Spell>(''),
+    hardCodedAutocomplete: new FormControl('')
   });
   currentSpellRange: number[] = new Array(6);
   spellsOfEachLevel$: {[ spellLevel: string]: Observable<SpellResponse>} = {};
@@ -36,53 +37,91 @@ export class AttackRollsComponent implements OnInit{
   filteredGroupSpellList!: Observable<SpellResponseResults[][]>;
   groupedSpellList!: Observable<SpellGroupIResponse[]>;
   // spellsOfEachLevel$!: Map<string,Observable<SpellResponse>>;
-  fakeSpellsOfEachLevel: {[spellLevel: string]: SpellResponse} = {
-    'level 0': {
-      count: 2,
-      results: [
-        {
-          "index": "alarm",
-          "name": "Alarm",
-          "level": 1,
-          "url": "/api/spells/alarm"
-        },
-        {
-          "index": "animal-friendship",
-          "name": "Animal Friendship",
-          "level": 1,
-          "url": "/api/spells/animal-friendship"
-        }        
-      ]
-    },
-    'level 1': {
-      count: 1,
-      results: [
-        {
-          "index": "bane",
-          "name": "Bane",
-          "level": 1,
-          "url": "/api/spells/bane"
-        },
-      ]
-    },
-    'level 2': {
-      count: 2,
-      results: [
-        {
-          "index": "bless",
-          "name": "Bless",
-          "level": 1,
-          "url": "/api/spells/bless"
-        },
-        {
-          "index": "burning-hands",
-          "name": "Burning Hands",
-          "level": 1,
-          "url": "/api/spells/burning-hands"
-        }
-      ]
-    },
-  }
+  fakeSpellsOfEachLevel: SpellResponseResults[][] = [
+    [
+      {
+        "index": "alarm",
+        "name": "Alarm",
+        "level": 1,
+        "url": "/api/spells/alarm"
+      },
+      {
+        "index": "animal-friendship",
+        "name": "Animal Friendship",
+        "level": 1,
+        "url": "/api/spells/animal-friendship"
+      }
+    ],
+    [
+      {
+        "index": "bane",
+        "name": "Bane",
+        "level": 1,
+        "url": "/api/spells/bane"
+      },
+    ],
+    [
+      {
+        "index": "bless",
+        "name": "Bless",
+        "level": 1,
+        "url": "/api/spells/bless"
+      },
+      {
+        "index": "burning-hands",
+        "name": "Burning Hands",
+        "level": 1,
+        "url": "/api/spells/burning-hands"
+      }
+    ]
+  ];
+  // fakeSpellsOfEachLevel: {[spellLevel: string]: SpellResponse} = {
+  //   'level 0': {
+  //     count: 2,
+  //     results: [
+  //       {
+  //         "index": "alarm",
+  //         "name": "Alarm",
+  //         "level": 1,
+  //         "url": "/api/spells/alarm"
+  //       },
+  //       {
+  //         "index": "animal-friendship",
+  //         "name": "Animal Friendship",
+  //         "level": 1,
+  //         "url": "/api/spells/animal-friendship"
+  //       }
+  //     ]
+  //   },
+  //   'level 1': {
+  //     count: 1,
+  //     results: [
+  //       {
+  //         "index": "bane",
+  //         "name": "Bane",
+  //         "level": 1,
+  //         "url": "/api/spells/bane"
+  //       },
+  //     ]
+  //   },
+  //   'level 2': {
+  //     count: 2,
+  //     results: [
+  //       {
+  //         "index": "bless",
+  //         "name": "Bless",
+  //         "level": 1,
+  //         "url": "/api/spells/bless"
+  //       },
+  //       {
+  //         "index": "burning-hands",
+  //         "name": "Burning Hands",
+  //         "level": 1,
+  //         "url": "/api/spells/burning-hands"
+  //       }
+  //     ]
+  //   },
+  // }
   demoDropdownList: DropdownGroup[] = [
     {
       groupName: 'Grass',
@@ -110,7 +149,8 @@ export class AttackRollsComponent implements OnInit{
     }
   ];
   // demoOptions!: Observable<DropdownGroup[]>;
-  demoOptions!: Observable<{[spellLevel: string]: SpellResponse}>;
+  // demoOptions!: Observable<{[spellLevel: string]: SpellResponse}>;
+  demoOptions!: Observable<SpellResponseResults[][]>;
 
   /**
    * initialize spellsOfEachLevel variable
@@ -191,30 +231,17 @@ export class AttackRollsComponent implements OnInit{
   }
 
   setGroupedSpellList() {
-    // this.groupedSpellList = of(0, 1, 2, 3, 4, 5, 6).pipe(
-    //   switchMap((levelNum) => (
-    //     this.spellsService.getAllSpellsOfLevel(levelNum)
-    //   )),
-    //   toArray(),
-    //   map((response) => {
-    //     let spellGroups = []
-    //     for(let i = 0; i <= 6; i++) {
-    //       spellGroups.push(new SpellGroup(`level ${i}`, response[i]))
-    //     }
-    //     return spellGroups
-    //   })
-    // );
     let spellsGroups: Observable<SpellResponseResults[]>[] = [];
     for(let i = 0; i <= 6; i++) {
       spellsGroups.push(this.spellsService.getAllSpellsOfLevel(i).pipe(
         map((response) => response.results)
       ))
     }
-    this.filteredGroupSpellList = this.attackRollsForm.get('testAutocomplete')!.valueChanges.pipe(
+    this.filteredGroupSpellList = this.attackRollsForm.get('spell')!.valueChanges.pipe(
       startWith(''),
       switchMap(spellSearchInput => {
-        // let spellString = typeof spellSearchInput === 'string' ? spellSearchInput : spellSearchInput?;
-        let spellString = spellSearchInput;
+        let spellString = typeof spellSearchInput === 'string' ? spellSearchInput : spellSearchInput?.name;
+        // let spellString = spellSearchInput;
         spellString = spellString?.toLowerCase() || '';
         return forkJoin(spellsGroups).pipe(
           map(spellGroup => 
@@ -246,24 +273,17 @@ export class AttackRollsComponent implements OnInit{
         }
       }
     )
-    // this.demoOptions = this.attackRollsForm.get('testAutocomplete')!.valueChanges.pipe(
-    //   startWith(''),
-    //   map((fakeSpells) => {
-    //     let filteredFakeSpells: {[level: string]: SpellResponse} = {}
-    //     for(let level in this.fakeSpellsOfEachLevel) {
-    //       let filteredSpells = this.fakeSpellsOfEachLevel[level].results.filter(
-    //         (spellResponse) => spellResponse.name.startsWith(fakeSpells ?? '')
-    //       )
-    //       filteredFakeSpells[level] = {
-    //         count: filteredSpells.length,
-    //         results: filteredSpells
-    //       }
-    //     }
-    //     return filteredFakeSpells;
-    //   })
-    // )
+    this.demoOptions = this.attackRollsForm.get('hardCodedAutocomplete')!.valueChanges.pipe(
+      startWith(''),
+      map((fakeSpellInput) => {
+        let spellInput: string = fakeSpellInput?.toLowerCase() ?? ''
+        return this.fakeSpellsOfEachLevel.map(spellGroup =>
+          spellGroup.filter(spell => spell.name.toLowerCase().startsWith(spellInput)))
+        }
+      )
+    )
     this.setGroupedSpellList();
-    
+    this.attackRollsForm.valueChanges.subscribe(value => console.log(value));
     // this.demoOptions = this.attackRollsForm.get('testAutocomplete')!.valueChanges.pipe(
     //   startWith(''),
     //   map((pokemon) =>
