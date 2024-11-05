@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, ComponentRef, inject, OnInit, viewChild, ViewContainerRef } from '@angular/core';
 import { FormControl, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { StepperComponent } from "../stepper/stepper.component";
-import { DiceSet, DiceSetI, Advantage, DiceResults } from '../../diceset';
+import { DiceSet, DiceSetI, Advantage, DiceResults } from '../diceset';
 import { DiceCalculationsService } from '../dice-calculations.service';
 import { DiceBonusFormComponent } from '../dice-bonus-form/dice-bonus-form.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle'

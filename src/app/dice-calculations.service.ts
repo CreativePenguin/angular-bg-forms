@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Advantage, DiceResults, DiceSet, DiceSetI } from '../diceset';
+import { Advantage, DiceResults, DiceSet, DiceSetI } from './diceset';
 
+/**
+ * This service is used to make calculations related to dice rolls.
+ * Most functions require an input of a diceset type which contains information about the number of dice being rolled, the modifiers being applied to the dice roll, and the target of what the dice roll should hit
+ * 
+ * Main functions: skillCheckCalc, diceCalcMap, diceCalcResults
+ */
 @Injectable({
   providedIn: 'root'
 })

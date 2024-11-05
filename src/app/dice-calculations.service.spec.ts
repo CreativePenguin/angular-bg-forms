@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { DiceCalculationsService } from './dice-calculations.service';
-import { DiceSetI, DiceSet, Advantage } from '../diceset';
+import { DiceSetI, DiceSet, Advantage } from './diceset';
 
 fdescribe('DiceCalculationsService', () => {
   let service: DiceCalculationsService;

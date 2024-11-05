@@ -1,6 +1,6 @@
 import { Component, inject, Input } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
-import { DiceResults } from '../../diceset';
+import { DiceResults } from '../diceset';
 import { CommonModule } from '@angular/common';
 import { DiceCalculationsService } from '../dice-calculations.service';
 
