@@ -1,4 +1,4 @@
-import { DiceSetI, DiceSet } from "../diceset";
+import { DiceSetI, DiceSet } from "./diceset";
 
 export interface SpellI {
     name: string
@@ -51,4 +51,23 @@ export interface SpellResponseResults {
     name: string
     level: number
     url: string
+}
+
+export interface SpellGroupIResponse {
+    groupName: string
+    spellGroup: SpellResponse
+}
+
+export interface SpellGroupI {
+    groupName: string
+    spellGroup: SpellResponseResults[]
+}
+
+export class SpellGroup implements SpellGroupIResponse {
+    groupName: string;
+    spellGroup: SpellResponse;
+    constructor(groupName: string, spellGroup: SpellResponse) {
+        this.groupName = groupName;
+        this.spellGroup = spellGroup;
+    }
 }

@@ -1,5 +1,5 @@
 <form [formGroup]="attackRollsForm">
-  <mat-form-field style="padding: 5px">
+  <mat-form-field class="w-96">
     <mat-label>Spell</mat-label>
     <input type="text" matInput formControlName="spell" [matAutocomplete]="auto" data-testid="autocomplete-input">
     <mat-autocomplete #auto="matAutocomplete"
@@ -19,12 +19,25 @@
       }
     </mat-autocomplete>
   </mat-form-field>
-  <mat-form-field style="width: 100px; padding: 5px">
-    <mat-label>Level</mat-label>
-    <mat-select formControlName="spellLevel" panelClass="level-dropdown">
-      @for (level of currentSpellRange; track $index) {
-        <mat-option [value]="level">{{level}}</mat-option>
+  <mat-form-field class="w-full">
+    <mat-label>Test Autocomplete</mat-label>
+    <input type="text" matInput [matAutocomplete]="auto2" formControlName="testAutocomplete">
+    <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displaySpellAutocompleteValue">
+      @for(spellGroup of filteredGroupSpellList | async; track $index) {
+        <mat-optgroup label="level {{$index}}">
+          @for(spell of spellGroup; track $index) {
+            <mat-option [value]="spell.name">{{spell.url}}</mat-option>
+          }
+        </mat-optgroup>
       }
-    </mat-select>
+    </mat-autocomplete>
   </mat-form-field>
+    <mat-form-field style="padding: 5px" class="grow-[1]">
+      <mat-label>Level</mat-label>
+      <mat-select formControlName="spellLevel" panelClass="level-dropdown">
+        @for (level of currentSpellRange; track $index) {
+          <mat-option [value]="level">{{level}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
 </form>

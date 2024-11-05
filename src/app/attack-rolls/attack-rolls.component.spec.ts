@@ -11,11 +11,12 @@ import { SpellsService } from '../spells.service';
 import { firstValueFrom } from 'rxjs';
 import { mockSpellResponse } from '../../mocks/mockSpells';
 
-describe('AttackRollsComponent', () => {
+fdescribe('AttackRollsComponent', () => {
   let component: AttackRollsComponent;
   let fixture: ComponentFixture<AttackRollsComponent>;
   let httpTesting: HttpTestingController;
   let url = new URL('https://www.dnd5eapi.co/api')
+  let service: SpellsService;
   let demoDropdownList: {[groupName: string]: DropdownItem[]} = {
     'Grass': [
       {label: 'Bulbasaur', value: 'bulbasaur'},
@@ -47,6 +48,7 @@ describe('AttackRollsComponent', () => {
     httpTesting = TestBed.inject(HttpTestingController);
     fixture = TestBed.createComponent(AttackRollsComponent);
     component = fixture.componentInstance;
+    service = TestBed.inject(SpellsService);
     fixture.detectChanges();
   });
 
