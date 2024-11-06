@@ -24,7 +24,47 @@ export class DiceBonusFormComponent {
   get parentFormGroup() {
     return this.parentContainer.control as FormGroup;
   }
+
+  public get d4(): FormControl {
+    return this.parentFormGroup.get(this.controlKey)?.get('d4') as FormControl
+  }
+
+  public set d4(diceNum: number) {
+    this.parentFormGroup.get(this.controlKey)?.get('d4')?.setValue(diceNum);
+  }
+
+  public get d6(): FormControl {
+    return this.parentFormGroup.get(this.controlKey)?.get('d6') as FormControl
+  }
+
+  public set d6(diceNum: number) {
+    this.parentFormGroup.get(this.controlKey)?.get('d6')?.setValue(diceNum);
+  }
+
+  public get d8(): FormControl {
+    return this.parentFormGroup.get(this.controlKey)?.get('d8') as FormControl
+  }
+
+  public set d8(diceNum: number) {
+    this.parentFormGroup.get(this.controlKey)?.get('d8')?.setValue(diceNum);
+  }
   
+  public get d10(): FormControl {
+    return this.parentFormGroup.get(this.controlKey)?.get('d10') as FormControl
+  }
+
+  public set d10(diceNum: number) {
+    this.parentFormGroup.get(this.controlKey)?.get('d10')?.setValue(diceNum);
+  }
+  
+  public get d12(): FormControl {
+    return this.parentFormGroup.get(this.controlKey)?.get('d12') as FormControl
+  }
+
+  public set d12(diceNum: number) {
+    this.parentFormGroup.get(this.controlKey)?.get('d12')?.setValue(diceNum);
+  }
+
   ngOnInit() {
     this.parentFormGroup.addControl(this.controlKey,
       new FormGroup({

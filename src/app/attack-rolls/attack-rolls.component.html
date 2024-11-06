@@ -1,24 +1,27 @@
 <form [formGroup]="attackRollsForm">
-  <mat-form-field class="w-full">
-    <mat-label>Spell</mat-label>
-    <input type="text" matInput [matAutocomplete]="auto2" formControlName="spell">
-    <!-- <mat-autocomplete #auto2="matAutocomplete"> -->
-    <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displaySpellAutocompleteValue">
-      @for(spellGroup of filteredGroupSpellList | async; track $index) {
-        <mat-optgroup label="level {{$index}}">
-          @for(spell of spellGroup; track $index) {
-            <mat-option [value]="spell">{{spell.name}}</mat-option>
-          }
-        </mat-optgroup>
-      }
-    </mat-autocomplete>
-  </mat-form-field>
-  <mat-form-field style="padding: 5px" class="grow-[1]">
-    <mat-label>Level</mat-label>
-    <mat-select formControlName="spellLevel" panelClass="level-dropdown">
-      @for (level of currentSpellRange; track $index) {
-        <mat-option [value]="level">{{level}}</mat-option>
-      }
-    </mat-select>
-  </mat-form-field>
+  <div class="flex flex-wrap">
+    <mat-form-field class="w-3/4 p-2">
+      <mat-label>Spell</mat-label>
+      <input type="text" matInput [matAutocomplete]="auto2" formControlName="spell">
+      <!-- <mat-autocomplete #auto2="matAutocomplete"> -->
+      <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displaySpellAutocompleteValue">
+        @for(spellGroup of filteredGroupSpellList | async; track $index) {
+          <mat-optgroup label="level {{$index}}">
+            @for(spell of spellGroup; track $index) {
+              <mat-option [value]="spell">{{spell.name}}</mat-option>
+            }
+          </mat-optgroup>
+        }
+      </mat-autocomplete>
+    </mat-form-field>
+    <mat-form-field class="w-1/4 p-2">
+      <mat-label>Level</mat-label>
+      <mat-select formControlName="spellLevel" panelClass="level-dropdown">
+        @for (level of currentSpellRange; track $index) {
+          <mat-option [value]="level">{{level}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <app-dice-bonus-form #dieForm label="Die Bonus" controlKey="dieBonuses"></app-dice-bonus-form>
 </form>

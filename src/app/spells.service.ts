@@ -51,15 +51,22 @@ export class SpellsService {
         let spellName: string = response['name'] as unknown as string;
         let spellLevel: number = response['level'] as unknown as number;
         let spell = new Spell(spellName, url, spellLevel);
-        try {
+        if(spellLevel == 0) {
           spell.setDamageFromAPI(
-            response['damage']['damage_at_slot_level'], 
+            response['damage']['damage_at_character_level'],
             modifier
-          );
-        } catch(e) {
-          spell.setDamageFromAPI(
-            response['heal_at_slot_level'] as unknown as {[level: string]: string}, modifier
           )
+        } else {
+          try {
+            spell.setDamageFromAPI(
+              response['damage']['damage_at_slot_level'], 
+              modifier
+            );
+          } catch(e) {
+            spell.setDamageFromAPI(
+              response['heal_at_slot_level'] as unknown as {[level: string]: string}, modifier
+            )
+          }
         }
         return spell;
     }));

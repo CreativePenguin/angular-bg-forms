@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, ViewChild, viewChild, viewChildren, ViewContainerRef } from '@angular/core';
 import { SpellsService } from '../spells.service';
 import { filter, forkJoin, map, merge, Observable, of, startWith, switchMap, toArray } from 'rxjs';
 import { Spell, SpellGroup, SpellGroupIResponse, SpellResponse, SpellResponseResults } from '../spell';
@@ -7,8 +7,8 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { DropdownSearchComponent } from "../dropdown-search/dropdown-search.component";
-import { DropdownGroup, DropdownItem } from '../dropdown';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { DiceBonusFormComponent } from '../dice-bonus-form/dice-bonus-form.component';
 
 @Component({
   selector: 'app-attack-rolls',
@@ -16,7 +16,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
   imports: [
     CommonModule, MatInputModule, ReactiveFormsModule,
     MatSelectModule, MatAutocompleteModule,
-    DropdownSearchComponent
+    DropdownSearchComponent, DiceBonusFormComponent
 ],
   templateUrl: './attack-rolls.component.html',
   styleUrl: './attack-rolls.component.scss'
@@ -31,19 +31,9 @@ export class AttackRollsComponent implements OnInit{
     hardCodedAutocomplete: new FormControl('')
   });
   currentSpellRange: number[] = new Array(6);
-  spellsOfEachLevel$: {[ spellLevel: string]: Observable<SpellResponse>} = {};
-  filteredSpellsOfEachLevel!: Observable<{[ spellLevel: string]: Observable<SpellResponse>}>;
   filteredGroupSpellList!: Observable<SpellResponseResults[][]>;
   groupedSpellList!: Observable<SpellGroupIResponse[]>;
-
-  /**
-   * initialize spellsOfEachLevel variable
-   */
-  getSpellList() {
-    for(let i = 0; i <= 6; i++) {
-      this.spellsOfEachLevel$[`level ${i}`] = this.spellsService.getAllSpellsOfLevel(i);
-    }
-  }
+  @ViewChild('dieForm') diceBonusComponent!: DiceBonusFormComponent;
 
   /**
    * initialize obvervable for value of level dropdown -- set based on the
@@ -58,6 +48,12 @@ export class AttackRollsComponent implements OnInit{
           (spell) => {
             if(spell.level == 0) this.currentSpellRange = [0];
             else this.currentSpellRange = [...Array(7).keys()].slice(spell.level);
+            let minLevel = Math.max(this.currentSpellRange[0], 1);
+            this.diceBonusComponent.d4 = spell.damage[minLevel].d4 || 0;
+            this.diceBonusComponent.d6 = spell.damage[minLevel].d6 || 0;
+            this.diceBonusComponent.d8 = spell.damage[minLevel].d8 || 0;
+            this.diceBonusComponent.d10 = spell.damage[minLevel].d10 || 0;
+            this.diceBonusComponent.d12 = spell.damage[minLevel].d12 || 0;
           }
         )
       }
@@ -105,15 +101,7 @@ export class AttackRollsComponent implements OnInit{
 
   ngOnInit(): void {
     this.rawSpellList$ = this.spellsService.getAllSpells();
-    this.getSpellList();
     this.addObservableToLevelDropdown();
-    this.spellsService.getAllSpellsOfLevel(1).subscribe(
-      (spell) => {
-        for(let i = 0; i < 14; i++) {
-          console.log('this the spell used', spell.results[i])
-        }
-      }
-    )
     this.setGroupedSpellList();
     this.attackRollsForm.valueChanges.subscribe(value => console.log(value));
   }

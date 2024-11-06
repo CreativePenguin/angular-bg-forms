@@ -26,7 +26,7 @@ export class Spell implements SpellI {
             this.damage[parseInt(key)] = new DiceSet(
                 {modifier: modifier}, response[key]
             );
-            console.log('damage variable', this.damage[parseInt(key)]);
+            console.log('damage variable', this.damage[1]);
         }
     }
 
