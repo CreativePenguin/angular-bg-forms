@@ -1,27 +1,45 @@
-<form [formGroup]="attackRollsForm">
-  <div class="flex flex-wrap">
-    <mat-form-field class="w-3/4 p-2">
-      <mat-label>Spell</mat-label>
-      <input type="text" matInput [matAutocomplete]="auto2" formControlName="spell">
-      <!-- <mat-autocomplete #auto2="matAutocomplete"> -->
-      <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displaySpellAutocompleteValue">
-        @for(spellGroup of filteredGroupSpellList | async; track $index) {
-          <mat-optgroup label="level {{$index}}">
-            @for(spell of spellGroup; track $index) {
-              <mat-option [value]="spell">{{spell.name}}</mat-option>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      Damage Range:<span id="damage-min">0</span>-<span id="damage-max">0</span>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="attackRollsForm">
+      <div class="flex flex-wrap">
+        <mat-form-field class="w-3/4 p-2">
+          <mat-label>Spell</mat-label>
+          <input type="text" matInput [matAutocomplete]="auto2" formControlName="spell">
+          <!-- <mat-autocomplete #auto2="matAutocomplete"> -->
+          <mat-autocomplete 
+            #auto2="matAutocomplete"
+            [displayWith]="displaySpellAutocompleteValue"
+          >
+            @for(spellGroup of filteredGroupSpellList | async; track $index) {
+              <mat-optgroup label="level {{$index}}">
+                @for(spell of spellGroup; track $index) {
+                  <mat-option [value]="spell">{{spell.name}}</mat-option>
+                }
+              </mat-optgroup>
             }
-          </mat-optgroup>
-        }
-      </mat-autocomplete>
-    </mat-form-field>
-    <mat-form-field class="w-1/4 p-2">
-      <mat-label>Level</mat-label>
-      <mat-select formControlName="spellLevel" panelClass="level-dropdown">
-        @for (level of currentSpellRange; track $index) {
-          <mat-option [value]="level">{{level}}</mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <app-dice-bonus-form #dieForm label="Die Bonus" controlKey="dieBonuses"></app-dice-bonus-form>
-</form>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field class="w-1/4 p-2">
+          <mat-label>Level</mat-label>
+          <mat-select formControlName="spellLevel" panelClass="level-dropdown">
+            @for (level of currentSpellRange; track $index) {
+              <mat-option [value]="level">{{level}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <app-dice-bonus-form #dieForm label="Die Bonus" controlKey="dieBonuses"></app-dice-bonus-form>
+      <div class="m-2">
+        <button mat-stroked-button type="submit">Calc!</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+<ng-container #tableContainer>
+
+</ng-container>

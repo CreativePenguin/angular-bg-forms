@@ -53,7 +53,7 @@ export class SpellsService {
         let spell = new Spell(spellName, url, spellLevel);
         if(spellLevel == 0) {
           spell.setDamageFromAPI(
-            response['damage']['damage_at_character_level'],
+            {'0': response['damage']['damage_at_character_level']['1']},
             modifier
           )
         } else {
