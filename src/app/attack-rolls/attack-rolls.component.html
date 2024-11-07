@@ -16,7 +16,7 @@
             [displayWith]="displaySpellAutocompleteValue"
           >
             @for(spellGroup of filteredGroupSpellList | async; track $index) {
-              <mat-optgroup label="level {{$index}}">
+              <mat-optgroup label="level {{spellGroup[0].level}}">
                 @for(spell of spellGroup; track $index) {
                   <mat-option [value]="spell">{{spell.name}}</mat-option>
                 }
