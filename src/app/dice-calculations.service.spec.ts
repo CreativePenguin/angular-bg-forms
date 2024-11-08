@@ -89,17 +89,17 @@ fdescribe('DiceCalculationsService', () => {
   })
 
   it('should have working two decimal percentage', () => {
-    expect(service.twoDecimalPercentage(.3213)).toEqual(32.13);
-    expect(service.twoDecimalPercentage(.12344)).toEqual(12.34);
-    expect(service.twoDecimalPercentage(.12345)).toEqual(12.35);
+    expect(service.toPercentageDefault(.3213)).toEqual(32.13);
+    expect(service.toPercentageDefault(.12344)).toEqual(12.34);
+    expect(service.toPercentageDefault(.12345)).toEqual(12.35);
   });
 
   it('should have skillCheckCalc Working', () => {
     expect(service.skillCheckCalc(diceSet4)).toEqual(
-      service.twoDecimalPercentage(21 / 36)
+      service.toPercentageDefault(21 / 36)
     );
     expect(service.skillCheckCalc(diceSet3)).toEqual(
-      service.twoDecimalPercentage(34 / 576)
+      service.toPercentageDefault(34 / 576)
     );
   });
 
@@ -113,13 +113,13 @@ fdescribe('DiceCalculationsService', () => {
   })
   
   it('should have working skillCheckCalcAdvantage', () => {
-    expect(service.calcSkillCheckAdvantage(5)).toBeCloseTo(
+    expect(service.skillCheckCalcAdvantage(5)).toBeCloseTo(
       .0975
     );
   });
   
   it('should have working advantagedisadvantage hybrid function', () => {
-    expect(service.calcSkillCheckAdvantageDisadvantage(
+    expect(service.skillCheckCalcAdvantageDisadvantage(
       Advantage.Advantage, 5)
     ).toBeCloseTo(.0975);
   });

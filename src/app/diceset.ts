@@ -20,6 +20,7 @@ export interface DiceResults {
     rollResult: number;
     numResults: number;
     percentageResults: number;
+    cumPercentageResults: number;
 }
 
 export class DiceSet implements DiceSetI {

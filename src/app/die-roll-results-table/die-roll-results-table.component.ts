@@ -18,6 +18,6 @@ export class DieRollResultsTableComponent {
   //   'roll-result', 'num-result', 'percentage-result', 'percentage-block'
   // ];
   displayedColumns = [
-    'roll-result', 'num-result', 'percentage-result'
+    'roll-result', 'num-result', 'percentage-cum-result', 'percentage-result'
   ];
 }

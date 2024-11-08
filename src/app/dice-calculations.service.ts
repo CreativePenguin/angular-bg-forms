@@ -51,18 +51,6 @@ export class DiceCalculationsService {
     for(let i of diceset) {
       dierolls *= i[0] ** i[1];
     }
-    // switch(diceset.advantage) {
-    //   case Advantage.Advantage:
-    //   case Advantage.Disadvantage:
-    //     return dierolls * 20;
-    //   case Advantage.SavageAttacker:
-    //     for(let i of diceset) {
-    //       dierolls *= i[0] ** i[1]
-    //     }
-    //     return dierolls;
-    //   case Advantage.None:
-    //     return dierolls;
-    // }
     return dierolls;
   }
 
@@ -72,7 +60,7 @@ export class DiceCalculationsService {
    * @param targetChance Can accept either percentage or fraction calc of chance
    * @returns fraction chance to hit target in skill check with advantage
    */
-  calcSkillCheckAdvantage(targetChance: number): number {
+  skillCheckCalcAdvantage(targetChance: number): number {
     if(targetChance > 1) {
       targetChance /= 100;
     }
@@ -84,21 +72,21 @@ export class DiceCalculationsService {
    * @param targetChance Can accept either percentage or fraction calc of chance
    * @returns fraction chance to hit target in skill check with disadvantage
    */
-  calcSkillCheckDisadvantage(targetChance: number): number {
+  skillCheckCalcDisadvantage(targetChance: number): number {
     if(targetChance > 1) {
       targetChance /= 100;
     }
     return targetChance ** 2;
   }
 
-  calcSkillCheckAdvantageDisadvantage(
+  skillCheckCalcAdvantageDisadvantage(
     advantage: Advantage, targetChance: number
   ): number {
     switch(advantage) {
       case Advantage.Advantage:
-        return this.calcSkillCheckAdvantage(targetChance);
+        return this.skillCheckCalcAdvantage(targetChance);
       case Advantage.Disadvantage:
-        return this.calcSkillCheckDisadvantage(targetChance);
+        return this.skillCheckCalcDisadvantage(targetChance);
       default:
         return targetChance;
     }
@@ -232,14 +220,14 @@ export class DiceCalculationsService {
    * @returns Modified number that is used by the code
    */
   skillCheckCalcModifiers(diceset: DiceSetI, probability: number): number {
-    return this.twoDecimalPercentage(
+    return this.toPercentageDefault(
       this.adjustProbabilityForAttempts(
-        this.calcSkillCheckAdvantageDisadvantage(
+        this.skillCheckCalcAdvantageDisadvantage(
           diceset.advantage, probability
         ),
         diceset.attempts
       )
-    );
+    )[0];
   }
 
   /**
@@ -395,31 +383,65 @@ export class DiceCalculationsService {
     let totalRolls = 0;
     map.forEach((numRolls) => totalRolls += numRolls)
     let dieResults: DiceResults[] = [];
+    let cumulativePercentageTotal = totalRolls;
     map.forEach((numRolls, roll) => {
+      let numDecimalSpaces = this.toPercentageDefault(numRolls / totalRolls)[1] + 1;
+      if(this.toPercentageDefault(numRolls / totalRolls)[0] > .01) {
+        numDecimalSpaces = 2;
+      }
       dieResults.push({
         rollResult: roll,
         numResults: numRolls * diceset.attempts,
-        percentageResults: this.twoDecimalPercentage(numRolls / totalRolls),
+        percentageResults: this.toPercentage(numRolls / totalRolls, numDecimalSpaces),
+        cumPercentageResults: this.toPercentage(cumulativePercentageTotal / totalRolls, 
+                                                numDecimalSpaces),
       })
+      cumulativePercentageTotal -= numRolls;
     })
     return dieResults;
   }
 
   defaultD20RollResults(): DiceResults[] {
     let dieResults: DiceResults[] = [];
+    let cumulativePercentageTotal = 20
     for(let i = 1; i <= 20; i++) {
-      dieResults.push({rollResult: i, numResults: 1, percentageResults: 5})
+      dieResults.push({
+        rollResult: i,
+        numResults: 1,
+        percentageResults: 5,
+        cumPercentageResults: this.toPercentage(cumulativePercentageTotal / 20, 2)
+      })
+      cumulativePercentageTotal -= 1;
     }
     return dieResults;
   }
 
   /**
+   * toPercentageDefault is different from toPercentage because the numDigitsAfterDot variable gets set automatically,
+   * based on the number of decimals needed to display the number.
+   * Default number of decimal spaces (if percentage is large enough) is two deicmal spaces 
+   * @param decimal number between 0 and 1
+   * @returns 0: The decimal number converted into a percentage
+   * @returns 1: The number of decimal spaces used in percentage
+   */
+  toPercentageDefault(decimal: number): [number, number] {
+    let numDecimalSpaces = 2;
+    while(this.toPercentage(decimal, numDecimalSpaces) == 0) {
+      numDecimalSpaces++;
+    }
+    return [this.toPercentage(decimal, numDecimalSpaces), numDecimalSpaces];
+  }
+
+  /**
    * 
    * @param decimal number between 0 and 1
-   * @returns The decimal number converted into a percentage rounded to two decimals
+   * @param numDigitsAfterDot number of digits after decimal to round first parameter to
+   * @returns The decimal number converted into a percentage rounded to numDigitsAfterDot decimal points
    */
-  twoDecimalPercentage(decimal: number): number {
-    return Math.round(decimal * 10000) / 100;
+  toPercentage(decimal: number, numDigitsAfterDot: number): number {
+    // Two decimal percentage = Math.round(decimal * 10000) / 100;
+    // numDigitsAfterDot has two added to it bc percentages are two decimal spaces removed from decimal
+    return Math.round(decimal * 10 ** (numDigitsAfterDot + 2)) / 10 ** numDigitsAfterDot;
   }
 
   /**
