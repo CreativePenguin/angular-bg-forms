@@ -161,7 +161,7 @@ export class AttackRollsComponent implements OnInit{
     this.addObservableToAutocomplete();
     this.addObservableToLevelDropdown();
     this.setGroupedSpellList();
-    this.generateTable(undefined);
+    // this.generateTable(undefined);
     this.attackRollsForm.valueChanges.subscribe(value => 
       console.log('attack rolls form', value));
   }
