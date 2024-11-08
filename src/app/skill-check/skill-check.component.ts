@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ComponentRef, inject, OnInit, viewChild, ViewContainerRef } from '@angular/core';
 import { FormControl, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
-import { StepperComponent } from "../stepper/stepper.component";
 import { DiceSet, DiceSetI, Advantage, DiceResults } from '../diceset';
 import { DiceCalculationsService } from '../dice-calculations.service';
 import { DiceBonusFormComponent } from '../dice-bonus-form/dice-bonus-form.component';
@@ -17,7 +16,7 @@ import { DieRollResultsTableComponent } from '../die-roll-results-table/die-roll
   standalone: true,
   imports: [
     ReactiveFormsModule, CommonModule, MatCardModule, MatSelectModule,
-    StepperComponent, DiceBonusFormComponent, MatButtonModule,
+    DiceBonusFormComponent, MatButtonModule,
     MatButtonToggleModule, MatInputModule
   ],
   templateUrl: './skill-check.component.html',
@@ -32,7 +31,6 @@ export class SkillCheckComponent implements OnInit {
       Validators.required,
       Validators.min(0)
     ]),
-    skillModifier: new FormControl(0),
     // dieBonuses: new FormGroup({
     //   ' d4': new FormControl(0),
     //   ' d6': new FormControl(0),
@@ -75,7 +73,6 @@ export class SkillCheckComponent implements OnInit {
     // previous line converts diebonuses form group into dict,
     // this allows easy construction of new DiceSet once other parameters are set
     dieDict['d20'] = 1;
-    dieDict['modifier'] = this.skillCheckForm.value.skillModifier ?? 0;
     dieDict['target'] = this.skillCheckForm.value.targetDC ?? 0;
     dieDict['advantage'] = this.skillCheckForm.value.advantage ?? Advantage.None;
     dieDict['attempts'] = this.skillCheckForm.value.attempts ?? 1;

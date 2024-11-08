@@ -5,7 +5,7 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form [formGroup]="attackRollsForm">
+    <form [formGroup]="attackRollsForm" (submit)="attackRollsFormSubmit()">
       <div class="flex flex-wrap">
         <mat-form-field class="w-3/4 p-2">
           <mat-label>Spell</mat-label>

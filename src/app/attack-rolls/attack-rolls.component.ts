@@ -1,16 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, inject, OnInit, ViewChild, viewChild, viewChildren, ViewContainerRef } from '@angular/core';
+import { Component, ComponentRef, inject, OnInit, ViewChild, viewChild, viewChildren, ViewContainerRef } from '@angular/core';
 import { SpellsService } from '../spells.service';
-import { filter, forkJoin, map, merge, Observable, of, startWith, switchMap, toArray } from 'rxjs';
-import { Spell, SpellI, SpellGroup, SpellGroupIResponse, SpellResponse, SpellResponseResults } from '../spell';
+import { forkJoin, map, Observable, startWith, switchMap } from 'rxjs';
+import { Spell, SpellI, SpellGroupIResponse, SpellResponse, SpellResponseResults } from '../spell';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { DropdownSearchComponent } from "../dropdown-search/dropdown-search.component";
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { DiceBonusFormComponent } from '../dice-bonus-form/dice-bonus-form.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { DieRollResultsTableComponent } from '../die-roll-results-table/die-roll-results-table.component';
+import { DiceResults, DiceSet, DiceSetI } from '../diceset';
+import { DiceCalculationsService } from '../dice-calculations.service';
 
 @Component({
   selector: 'app-attack-rolls',
@@ -18,13 +20,14 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [
     CommonModule, MatInputModule, ReactiveFormsModule,
     MatSelectModule, MatAutocompleteModule, MatCardModule,
-    DropdownSearchComponent, DiceBonusFormComponent, MatButtonModule
+    DiceBonusFormComponent, MatButtonModule
 ],
   templateUrl: './attack-rolls.component.html',
   styleUrl: './attack-rolls.component.scss'
 })
 export class AttackRollsComponent implements OnInit{
   spellsService: SpellsService = inject(SpellsService);
+  diceCalcService: DiceCalculationsService = inject(DiceCalculationsService);
   rawSpellList$!: Observable<SpellResponse>;
   currentSpellRange: number[] = new Array(6);
   selectedSpell: SpellI | undefined = undefined;
@@ -37,7 +40,8 @@ export class AttackRollsComponent implements OnInit{
   filteredGroupSpellList!: Observable<SpellResponseResults[][]>;
   groupedSpellList!: Observable<SpellGroupIResponse[]>;
   @ViewChild('dieForm') diceBonusComponent!: DiceBonusFormComponent;
-  vcr = viewChild('tableContainer');
+  vcr = viewChild('tableContainer', {read: ViewContainerRef});
+  #tableRef!: ComponentRef<DieRollResultsTableComponent> | undefined;
 
   /**
    * initialize observable to autocomplete to change form values based on selected spell
@@ -47,7 +51,6 @@ export class AttackRollsComponent implements OnInit{
   addObservableToAutocomplete() {
     this.attackRollsForm.get('spell')!.valueChanges.subscribe(
       (selectedValue) => {
-        console.log('found change to spell', selectedValue);
         const selectedValueAsString = typeof selectedValue === 'string' ? '' : selectedValue?.url;
         this.spellsService.getSpell(selectedValueAsString || '').subscribe(
           (spell) => {
@@ -70,7 +73,6 @@ export class AttackRollsComponent implements OnInit{
   addObservableToLevelDropdown() {
     this.attackRollsForm.get('spellLevel')!.valueChanges.subscribe(
       (levelNum) => {
-        console.log('spell level changed');
         levelNum = levelNum ?? this.currentSpellRange[0];
         this.diceBonusComponent.d4 = this.selectedSpell?.damage[levelNum].d4 || 0;
         this.diceBonusComponent.d6 = this.selectedSpell?.damage[levelNum].d6 || 0;
@@ -78,6 +80,12 @@ export class AttackRollsComponent implements OnInit{
         this.diceBonusComponent.d10 = this.selectedSpell?.damage[levelNum].d10 || 0;
         this.diceBonusComponent.d12 = this.selectedSpell?.damage[levelNum].d12 || 0;
       }
+    )
+  }
+
+  addObservableToGetDiceCalc() {
+    this.attackRollsForm.valueChanges.subscribe(
+      
     )
   }
 
@@ -117,6 +125,35 @@ export class AttackRollsComponent implements OnInit{
     )
   }
 
+  generateTable(tableInput: DiceResults[] | undefined) {
+    this.vcr()?.clear();
+    this.#tableRef = this.vcr()?.createComponent(DieRollResultsTableComponent);
+    if(tableInput) {
+      this.#tableRef?.setInput('diceResults', tableInput);
+    }
+  }
+
+  generateDiceSet(): DiceSetI {
+    let dieDict: DiceSetI = new DiceSet(JSON.parse(
+      JSON.stringify(this.attackRollsForm.value))['dieBonuses']);
+    console.log('submit received (attack-rolls)', dieDict);
+    return dieDict;
+  }
+
+  attackRollsFormSubmit() {
+    let diceSet = this.generateDiceSet();
+    // console.log('submit', diceSet);
+    let minElement = document.getElementById('damage-min');
+    let maxElement = document.getElementById('damage-max');
+    if(minElement && maxElement) {
+      minElement.innerText = this.diceCalcService.minRoll(diceSet).toString();
+      maxElement.innerText = this.diceCalcService.maxRoll(diceSet).toString();
+    }
+
+    let diceCalcResults = this.diceCalcService.diceCalcResults(diceSet);
+    this.generateTable(diceCalcResults);
+  }
+
   constructor() { }
 
   ngOnInit(): void {
@@ -124,7 +161,9 @@ export class AttackRollsComponent implements OnInit{
     this.addObservableToAutocomplete();
     this.addObservableToLevelDropdown();
     this.setGroupedSpellList();
-    this.attackRollsForm.valueChanges.subscribe(value => console.log(value));
+    this.generateTable(undefined);
+    this.attackRollsForm.valueChanges.subscribe(value => 
+      console.log('attack rolls form', value));
   }
 
 }
