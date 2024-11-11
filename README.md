@@ -1,38 +1,21 @@
 # AngularBg3Cheats
 
-## Feature Goals
+## Pages
 
-### Core Features
-- [X] User has option to set target DC
-- [X] User has option to denote advantage / savage attacker
-- [ ] Visually show the possible dice roll options
+### Services
 
-### Additional Features
-- [ ] Give option to save character stats to make calculations easier
-- [ ] Use API https://www.dnd5eapi.co/ to add predefined spells
+- dice-calculations.service.ts -- This holds all the functions used in dice calculations
+- spells.service.ts -- This holds all the functions used to access DnD API to get spell information
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.9.
+### Data Types
 
-## Development server
+- spell.ts -- This holds all the data types used to organize data gotten from API
+- diceset.ts -- This holds all the data types used to organize data related to dice rolls
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Components
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- skill-check.component.ts -- Skill Check Link.
+It contains frontend for calculating likelihood of skill check suceeeding.
+- attack-rolls.component.ts -- Attack Rolls Link.
+It contains frontend for calculating spell damage and likelihood.
+- stepper.component.ts -- Modified form input (type="number", but with + and - buttons on the sides)

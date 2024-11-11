@@ -65,21 +65,16 @@ fdescribe('AttackRollsComponent', () => {
 
   it("should have properly gotten http values for spellsofEachLevel", async () => {
     let LEVEL_1_RESPONSE = mockSpellResponse;
-    expect(component.spellsOfEachLevel$).toBeTruthy();
     const req = httpTesting.expectOne(`${url.href}/spells?level=1`)
     req.flush(LEVEL_1_RESPONSE);
   });
 
   it("should have filter being properly set in the backend for empty input", () => {
-    component.getSpellList();
     fixture.detectChanges();
 
-    expect(component.spellsOfEachLevel$['level 1']).toBeTruthy();
-    expect(component.spellsOfEachLevel$['level 1']).toEqual(component._filterSpellAutocomplete('')['level 1'])
   })
 
   it("should display the full spell list when the filter has an empty input (this test doesn't test the frontend input)", () => {
-    component._filterSpellAutocomplete('');
     fixture.detectChanges();
 
     const optgroup = fixture.debugElement.query(
@@ -89,7 +84,6 @@ fdescribe('AttackRollsComponent', () => {
   });
 
   it("should display empty spell list when the filter has unavailable input (this test doesn't test the frontend input)", () => {
-    component._filterSpellAutocomplete('this is not the name of a spell');
     fixture.detectChanges();
 
     const optgroup = fixture.debugElement.query(

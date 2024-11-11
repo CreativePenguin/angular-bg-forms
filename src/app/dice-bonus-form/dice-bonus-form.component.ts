@@ -3,6 +3,11 @@ import { ControlContainer, FormControl, FormGroup, ReactiveFormsModule } from '@
 import { StepperComponent } from '../stepper/stepper.component';
 import { MatCardModule } from '@angular/material/card';
 
+/**
+ * This component holds all the dice values that the user is able to set and edit.
+ * This component is used on both skill check component and attack rolls component
+ * The dice values are added to the form control automatically
+ */
 @Component({
   selector: 'app-dice-bonus-form',
   standalone: true,

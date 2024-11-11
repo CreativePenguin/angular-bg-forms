@@ -11,6 +11,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { DieRollResultsTableComponent } from '../die-roll-results-table/die-roll-results-table.component';
 
+/**
+ * This component allows for the checking of how likely a skill check is to succeed.
+ * It generates a frontend to display results from dice calculations, and a form for the user to input their dice calc information
+ */
 @Component({
   selector: 'app-skill-check',
   standalone: true,
@@ -31,13 +35,6 @@ export class SkillCheckComponent implements OnInit {
       Validators.required,
       Validators.min(0)
     ]),
-    // dieBonuses: new FormGroup({
-    //   ' d4': new FormControl(0),
-    //   ' d6': new FormControl(0),
-    //   ' d8': new FormControl(0),
-    //   'd10': new FormControl(0),
-    //   'd12': new FormControl(0),
-    // }),
     advantage: new FormControl<Advantage>(Advantage.None),
     attempts: new FormControl<number>(1, [
       Validators.required,

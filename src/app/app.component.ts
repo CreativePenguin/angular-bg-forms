@@ -11,6 +11,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 
+/**
+ * Home page component -- holds side navbar with links to components of other pages, and organizes router-outlet where the other components are shown
+ */
 @Component({
   selector: 'app-root',
   standalone: true,

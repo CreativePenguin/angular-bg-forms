@@ -2,6 +2,7 @@
  * This interface holds how many dice are rolled for each type of die
  * Iterable: returns arrays of all the dice values:
  * [4, d4num], [6, d6num], [8, d8num], [10, d10num], [12, d12num], [20, d20num]
+ * This data type is used in dice-calculations.service.ts where the dice information is used in different calculations.
  */
 export interface DiceSetI extends Iterable<[number, number]> {
     d4?: number;
@@ -11,18 +12,31 @@ export interface DiceSetI extends Iterable<[number, number]> {
     d12?: number;
     d20?: number;
     modifier: number;
+    /** Used in skill check dice calculations for the target value that the diceset is supposed to be equal */
     target: number;
     attempts: number;
     advantage: Advantage;
 }
 
+/**
+ * This interface is a data type to hold the number generated from calculating the dice roll results.
+ */
 export interface DiceResults {
+    /** the number created by adding together all the dice rolled in a DiceSetI */
     rollResult: number;
+    /** the number of times adding the dice together resulted in the rollResult */
     numResults: number;
+    /** number of rolls with rollResult / total number of rolls possible from all the diceRolls. Can also be described as the percentage when rolling a diceset, that you would get rollResult as the roll. */
     percentageResults: number;
+    /** the percent chance when rolling a diceset that you would get a rollResult higher than or equal to the current rollResult */
     cumPercentageResults: number;
 }
 
+/**
+ * DiceSet data type implementation of DiceSetI
+ * DiceSet class is used to set default values for variables in DiceSetI
+ * DiceSet class is also used to implement iterator used in dice-calculations.serivce.ts
+ */
 export class DiceSet implements DiceSetI {
     d4!: number;
     d6!: number;
@@ -104,6 +118,9 @@ export class DiceSet implements DiceSetI {
     }
 }
 
+/**
+ * Enum to track whether to calculate skill check possibility with advantage, disadvantage, or no just a flat roll
+ */
 export enum Advantage {
     None='0',
     Advantage='1',

@@ -7,6 +7,7 @@ import { map, Observable } from 'rxjs';
  * This service is for http calls to get a list of all the dnd spells
  * 
  * api used: https://www.dnd5eapi.co/api
+ * api used to test: https://jsonplaceholder.typicode.com/
  * 
  * Main functions: getAllSpellsOfLevel, getAllSpells, getSpell
  */
@@ -41,6 +42,14 @@ export class SpellsService {
       );
   }
 
+  /**
+   * This function creates a SpellI by making an API request given a specific url.
+   * DnD API returns a specific url with each spell name when searching all spells that contains additional information about the spell.
+   * This function makes a separate API call using that new url, and attempts to create a SpellI data type using the info from the API request
+   * @param url url from SpellResponseResults type
+   * @param modifier In order to properly set spell damage, the spell modifier needs to be set based on what the user had inputted
+   * @returns Observable that when subscribed to will give a Spell data type that holds all necessary information about the spell
+   */
   getSpell(url: string, modifier=0): Observable<SpellI> {
     return this.http.
       get<{[damage: string]: {[damage_at_slot: string]: 
@@ -72,21 +81,10 @@ export class SpellsService {
     }));
   }
 
-  getAllSpellNames(): string[] {
-    let spells: string[] = [];
-    this.http.get(`${this.url.href}/spells`, {responseType: 'text'}).subscribe(
-      response => {
-        console.log(`spell names ${response}`);
-        console.log(`spell one ${JSON.parse(response).count}`)
-        spells = JSON.parse(response).results
-          .filter((spell: {level: number; }) => spell.level <= 6)
-          .map((spell: { name: any; }) => spell.name)
-        console.log(spells);
-      },
-    );
-    return spells;
-  }
-
+  /**
+   * 
+   * @param http injection
+   */
   constructor(http: HttpClient) { 
     this.http = http;
   }

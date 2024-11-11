@@ -79,6 +79,12 @@ export class DiceCalculationsService {
     return targetChance ** 2;
   }
 
+  /**
+   * 
+   * @param advantage accepts Advantage enum to determine whether to modify the target chance to adjust for advantage or disadvantage
+   * @param targetChance Resulting calculation from skillCheckCalc to determine chance of diceset reaching target
+   * @returns targetChance but modified to account for either advantage or disadvantage
+   */
   skillCheckCalcAdvantageDisadvantage(
     advantage: Advantage, targetChance: number
   ): number {
@@ -401,6 +407,10 @@ export class DiceCalculationsService {
     return dieResults;
   }
 
+  /**
+   * This function is used in the skill-check component to generate the default d20 table when no modifiers nor separate dice rolls have been applied
+   * @returns List of DiceResults that can be used to generate the dice-results table for a default roll of a d20 with no modifiers
+   */
   defaultD20RollResults(): DiceResults[] {
     let dieResults: DiceResults[] = [];
     let cumulativePercentageTotal = 20

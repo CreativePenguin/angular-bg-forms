@@ -1,0 +1,10 @@
+{
+  "entryPoints": [
+    "src/main.ts",
+    "src/app/spells.service.ts",
+    "src/app/dice-calculations.service.ts",
+    "src/app/spell.ts",
+    "src/app/diceset.ts"
+  ],
+  "out": "docs"
+}

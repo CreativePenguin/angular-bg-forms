@@ -89,17 +89,17 @@ fdescribe('DiceCalculationsService', () => {
   })
 
   it('should have working two decimal percentage', () => {
-    expect(service.toPercentageDefault(.3213)).toEqual(32.13);
-    expect(service.toPercentageDefault(.12344)).toEqual(12.34);
-    expect(service.toPercentageDefault(.12345)).toEqual(12.35);
+    expect(service.toPercentageDefault(.3213)[0]).toEqual(32.13);
+    expect(service.toPercentageDefault(.12344)[0]).toEqual(12.34);
+    expect(service.toPercentageDefault(.12345)[0]).toEqual(12.35);
   });
 
   it('should have skillCheckCalc Working', () => {
     expect(service.skillCheckCalc(diceSet4)).toEqual(
-      service.toPercentageDefault(21 / 36)
+      service.toPercentageDefault(21 / 36)[0]
     );
     expect(service.skillCheckCalc(diceSet3)).toEqual(
-      service.toPercentageDefault(34 / 576)
+      service.toPercentageDefault(34 / 576)[0]
     );
   });
 

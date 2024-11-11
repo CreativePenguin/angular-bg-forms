@@ -1,5 +1,8 @@
 import { DiceSetI, DiceSet } from "./diceset";
 
+/**
+ * Interface used to hold all necessary information about each spell
+ */
 export interface SpellI {
     name: string
     url: string
@@ -7,6 +10,9 @@ export interface SpellI {
     damage: { [level: number]: DiceSetI }
 }
 
+/**
+ * The data type version of SpellI, which has additional functions to allow easier setting of values from DnD API
+ */
 export class Spell implements SpellI {
     name: string;
     url: string;
@@ -41,33 +47,22 @@ export class Spell implements SpellI {
 
 }
 
+/**
+ * data type generated from: https://transform.tools/json-to-typescript
+ * Based on response from https://www.dnd5eapi.co/api/spells
+ */
 export interface SpellResponse {
     count: number
     results: SpellResponseResults[]
 }
 
+/**
+ * Used to store individual information about each spell returned as a result from https://www.dnd5eapi.co/api/spells
+ * data type generated from: https://transform.tools/json-to-typescript
+ */
 export interface SpellResponseResults {
     index: string
     name: string
     level: number
     url: string
-}
-
-export interface SpellGroupIResponse {
-    groupName: string
-    spellGroup: SpellResponse
-}
-
-export interface SpellGroupI {
-    groupName: string
-    spellGroup: SpellResponseResults[]
-}
-
-export class SpellGroup implements SpellGroupIResponse {
-    groupName: string;
-    spellGroup: SpellResponse;
-    constructor(groupName: string, spellGroup: SpellResponse) {
-        this.groupName = groupName;
-        this.spellGroup = spellGroup;
-    }
 }

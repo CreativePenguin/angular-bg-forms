@@ -4,6 +4,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 
+/**
+ * https://v5.material.angular.io/guide/creating-a-custom-form-field-control
+ * guide here in case I want to change my mind and just make one using angular
+ * https://www.youtube.com/watch?v=xTcJQaWiJ2c&list=PLw5h0DiJ-9PDF6TTr0J7HmKK_7t6XTPuN <- this guide is used to create this form control
+ * This is a custom number input that has plus and minus signs on ths sides to modify the dice value
+ */
 @Component({
   selector: 'app-stepper',
   standalone: true,
@@ -18,10 +24,6 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './stepper.component.html',
   styleUrl: './stepper.component.scss'
 })
-/**
- * https://v5.material.angular.io/guide/creating-a-custom-form-field-control
- * guide here in case I want to change my mind and just make one using angular
- */
 export class StepperComponent implements ControlValueAccessor {
   value: number | null = 0;
   onChange(value: number | null) {

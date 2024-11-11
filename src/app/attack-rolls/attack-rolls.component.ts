@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, ComponentRef, inject, OnInit, ViewChild, viewChild, viewChildren, ViewContainerRef } from '@angular/core';
 import { SpellsService } from '../spells.service';
 import { forkJoin, map, Observable, startWith, switchMap } from 'rxjs';
-import { Spell, SpellI, SpellGroupIResponse, SpellResponse, SpellResponseResults } from '../spell';
+import { Spell, SpellI, SpellResponse, SpellResponseResults } from '../spell';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -14,6 +14,10 @@ import { DieRollResultsTableComponent } from '../die-roll-results-table/die-roll
 import { DiceResults, DiceSet, DiceSetI } from '../diceset';
 import { DiceCalculationsService } from '../dice-calculations.service';
 
+/**
+ * This is the component linked to with attack-rolls link in the navbar
+ * It allows the user to search a spell and calculate the amount of damage that the spell can do
+ */
 @Component({
   selector: 'app-attack-rolls',
   standalone: true,
@@ -38,7 +42,6 @@ export class AttackRollsComponent implements OnInit{
     hardCodedAutocomplete: new FormControl('')
   });
   filteredGroupSpellList!: Observable<SpellResponseResults[][]>;
-  groupedSpellList!: Observable<SpellGroupIResponse[]>;
   @ViewChild('dieForm') diceBonusComponent!: DiceBonusFormComponent;
   vcr = viewChild('tableContainer', {read: ViewContainerRef});
   #tableRef!: ComponentRef<DieRollResultsTableComponent> | undefined;
@@ -70,6 +73,9 @@ export class AttackRollsComponent implements OnInit{
     )
   }
 
+  /**
+   * The level dropdown observable will update the value of the dicerolls based on the spellLevel setting
+   */
   addObservableToLevelDropdown() {
     this.attackRollsForm.get('spellLevel')!.valueChanges.subscribe(
       (levelNum) => {
@@ -83,12 +89,6 @@ export class AttackRollsComponent implements OnInit{
     )
   }
 
-  addObservableToGetDiceCalc() {
-    this.attackRollsForm.valueChanges.subscribe(
-      
-    )
-  }
-
   /**
    * Converts the SpellResponseResults type that the autocomplete values
    * are stored as into the spell names that they show up as
@@ -99,6 +99,9 @@ export class AttackRollsComponent implements OnInit{
     return selectedValue && selectedValue.name ? selectedValue.name : '';
   }
 
+  /**
+   * Gets spell information from API to set filteredGroupSpellList variable that is used in spell autocomplete
+   */
   setGroupedSpellList() {
     let spellsGroups: Observable<SpellResponseResults[]>[] = [];
     for(let i = 0; i <= 6; i++) {
