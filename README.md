@@ -22,7 +22,7 @@ Deployment is handled by firebase.
 
 - spell.ts -- This holds all the data types used to organize data gotten from API
 - diceset.ts -- This holds all the data types used to organize data related to dice rolls
-  - Check skillCheckCalc function on diceset details main algorithm used to calculate dice rolls
+  - Check [skillCheckCalc](https://creativepenguin.github.io/angular-bg-forms/injectables/DiceCalculationsService.html#skillCheckCalc) function on diceset details main algorithm used to calculate dice rolls
 
 ### Components
 
