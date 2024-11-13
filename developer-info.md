@@ -30,4 +30,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 Documentation comments are included in the project, and documentation is developed using <https://compodoc.app/>.
 
-Run compodoc with `compodoc -p tsconfig.doc.json -s`
+### Commands
+
+`compodoc -p tsconfig.doc.json -d docs -s` will compile documentation and serve it at localhost:8080  
+`compodoc -p tsconfig.doc.json -d docs` will compile documentation at ./documentation

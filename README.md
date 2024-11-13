@@ -1,5 +1,16 @@
 # AngularBg3Cheats
 
+This webpage is designed to show all possible values that could result in rolling certain amounts of dice.
+This makes it easier to determine what the likelihood of each decision would be when playing dnd,
+and properly understand how likely an action is to suceed when you try it in dnd.
+
+## Technologies Used
+
+Angular is used to build website. API calls are made to <https://www.dnd5eapi.co/> to get the list of all spells in dnd.
+TailwindCSS and Material are used for styling components, and organizing the layout.
+Documentation is built with compodoc, and deployed to github pages using github actions.
+Deployment is handled by firebase.
+
 ## Pages
 
 ### Services
@@ -11,6 +22,7 @@
 
 - spell.ts -- This holds all the data types used to organize data gotten from API
 - diceset.ts -- This holds all the data types used to organize data related to dice rolls
+  - Check skillCheckCalc function on diceset details main algorithm used to calculate dice rolls
 
 ### Components
 

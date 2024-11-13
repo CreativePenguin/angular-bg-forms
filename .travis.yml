@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+- 22.8.0
+cache: npm
+before_install:
+
+# deploy:
+#   provider: pages
+#   skip_cleanup: true
+#   github_token:
+#   keep_history: true
+#   on:
+#     branch: gh-pages

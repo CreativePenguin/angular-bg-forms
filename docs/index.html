@@ -83,6 +83,14 @@
                    <div class="content-data">
 
 <h1>AngularBg3Cheats</h1>
+<p>This webpage is designed to show all possible values that could result in rolling certain amounts of dice.
+This makes it easier to determine what the likelihood of each decision would be when playing dnd,
+and properly understand how likely an action is to suceed when you try it in dnd.</p>
+<h2>Technologies Used</h2>
+<p>Angular is used to build website. API calls are made to <a href="https://www.dnd5eapi.co/">https://www.dnd5eapi.co/</a> to get the list of all spells in dnd.
+TailwindCSS and Material are used for styling components, and organizing the layout.
+Documentation is built with compodoc, and deployed to github pages using github actions.
+Deployment is handled by firebase.</p>
 <h2>Pages</h2>
 <h3>Services</h3>
 <ul>
@@ -92,7 +100,10 @@
 <h3>Data Types</h3>
 <ul>
 <li>spell.ts -- This holds all the data types used to organize data gotten from API</li>
-<li>diceset.ts -- This holds all the data types used to organize data related to dice rolls</li>
+<li>diceset.ts -- This holds all the data types used to organize data related to dice rolls<ul>
+<li>Check skillCheckCalc function on diceset details main algorithm used to calculate dice rolls</li>
+</ul>
+</li>
 </ul>
 <h3>Components</h3>
 <ul>
@@ -101,11 +112,6 @@ It contains frontend for calculating likelihood of skill check suceeeding.</li>
 <li>attack-rolls.component.ts -- Attack Rolls Link.
 It contains frontend for calculating spell damage and likelihood.</li>
 <li>stepper.component.ts -- Modified form input (type=&quot;number&quot;, but with + and - buttons on the sides)</li>
-</ul>
-<h3>Additional Websites Used as Reference</h3>
-<ul>
-<li><a href="https://anydice.com/">https://anydice.com/</a> -- Used to create</li>
-<li><a href="https://virtualdiceroller.app/">https://virtualdiceroller.app/</a></li>
 </ul>
 
 

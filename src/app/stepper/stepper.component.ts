@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
  * guide here in case I want to change my mind and just make one using angular
  * https://www.youtube.com/watch?v=xTcJQaWiJ2c&list=PLw5h0DiJ-9PDF6TTr0J7HmKK_7t6XTPuN <- this guide is used to create this form control
  * This is a custom number input that has plus and minus signs on ths sides to modify the dice value
+ * The styling for the component is found here: https://flowbite.com/docs/forms/number-input/
  */
 @Component({
   selector: 'app-stepper',
