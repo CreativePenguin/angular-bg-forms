@@ -161,13 +161,8 @@
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
                             <code>RouterOutlet</code>
-                                <code><a href="../components/NavbarComponent.html" target="_self" >NavbarComponent</a></code>
-                            <code>CommonModule</code>
                             <code>RouterLink</code>
-                            <code>RouterLinkActive</code>
-                                <code><a href="../components/SkillCheckComponent.html" target="_self" >SkillCheckComponent</a></code>
                             <code>RouterModule</code>
-                                <code><a href="../components/OverlayComponent.html" target="_self" >OverlayComponent</a></code>
                             <code>MatSidenavModule</code>
                             <code>MatToolbarModule</code>
                             <code>MatButtonModule</code>
@@ -188,7 +183,7 @@
 
             <tr>
                 <td class="col-md-3">styleUrl</td>
-                <td class="col-md-9"><code>./app.component.scss</code></td>
+                <td class="col-md-9"><code>../styles.scss</code></td>
             </tr>
 
 
@@ -262,7 +257,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/app.component.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/app.component.ts:24</a></div>
                         </td>
                     </tr>
 
@@ -276,12 +271,7 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
-import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from &#x27;@angular/router&#x27;;
-import { SkillCheckComponent } from &quot;./skill-check/skill-check.component&quot;;
-import { NavbarComponent } from &quot;./navbar/navbar.component&quot;;
-import { OverlayComponent } from &#x27;./overlay/overlay.component&#x27;;
-import { AttackRollsComponent } from &#x27;./attack-rolls/attack-rolls.component&#x27;;
-import { CommonModule } from &#x27;@angular/common&#x27;;
+import { RouterLink,RouterModule, RouterOutlet } from &#x27;@angular/router&#x27;;
 import { MatSidenavModule } from &#x27;@angular/material/sidenav&#x27;;
 import { MatToolbarModule } from &#x27;@angular/material/toolbar&#x27;;
 import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
@@ -295,12 +285,12 @@ import { MatListModule } from &#x27;@angular/material/list&#x27;;
   selector: &#x27;app-root&#x27;,
   standalone: true,
   imports: [
-    RouterOutlet, NavbarComponent, CommonModule, RouterLink, RouterLinkActive,
-    SkillCheckComponent, RouterModule, OverlayComponent, MatSidenavModule,
+    RouterOutlet, RouterLink,
+    RouterModule, MatSidenavModule,
     MatToolbarModule, MatButtonModule, MatIconModule, MatListModule
   ],
   templateUrl: &#x27;./app.component.html&#x27;,
-  styleUrl: &#x27;./app.component.scss&#x27;
+  styleUrl: &#x27;../styles.scss&#x27;
 })
 export class AppComponent {
   title &#x3D; &#x27;angular-bg3-cheats&#x27;;
@@ -326,7 +316,7 @@ export class AppComponent {
       &lt;a mat-list-item routerLink&#x3D;&quot;attack-roll&quot; (click)&#x3D;&quot;drawer.close()&quot;&gt;
         Attack Rolls
       &lt;/a&gt;
-      &lt;a mat-list-item href&#x3D;&quot;/docs/index.html&quot; (click)&#x3D;&quot;drawer.close()&quot;&gt;
+      &lt;a mat-list-item href&#x3D;&quot;https://creativepenguin.github.io/angular-bg-forms/&quot; (click)&#x3D;&quot;drawer.close()&quot;&gt;
         Documentation
       &lt;/a&gt;
     &lt;/mat-nav-list&gt;
@@ -363,7 +353,7 @@ export class AppComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><!-- <app-navbar></app-navbar> --><!-- <mat-toolbar class="tertiary-input"> --><mat-toolbar class="nav-toolbar">  <button mat-icon-button (click)="drawer.toggle()">    <mat-icon class="pt-0.5">menu</mat-icon>  </button>  <span class="mx-3">Dice Calculator</span></mat-toolbar><mat-drawer-container>  <mat-drawer #drawer mode="side" opened>    <mat-nav-list>      <a mat-list-item routerLink="skill-check" (click)="drawer.close()">        Skill Check      </a>      <a mat-list-item routerLink="attack-roll" (click)="drawer.close()">        Attack Rolls      </a>      <a mat-list-item href="/docs/index.html" (click)="drawer.close()">        Documentation      </a>    </mat-nav-list>  </mat-drawer>  <mat-drawer-content style="height: calc(100vh - var(--mat-toolbar-standard-height))">    <router-outlet></router-outlet>  </mat-drawer-content></mat-drawer-container></div>'
+        var COMPONENT_TEMPLATE = '<div><!-- <app-navbar></app-navbar> --><!-- <mat-toolbar class="tertiary-input"> --><mat-toolbar class="nav-toolbar">  <button mat-icon-button (click)="drawer.toggle()">    <mat-icon class="pt-0.5">menu</mat-icon>  </button>  <span class="mx-3">Dice Calculator</span></mat-toolbar><mat-drawer-container>  <mat-drawer #drawer mode="side" opened>    <mat-nav-list>      <a mat-list-item routerLink="skill-check" (click)="drawer.close()">        Skill Check      </a>      <a mat-list-item routerLink="attack-roll" (click)="drawer.close()">        Attack Rolls      </a>      <a mat-list-item href="https://creativepenguin.github.io/angular-bg-forms/" (click)="drawer.close()">        Documentation      </a>    </mat-nav-list>  </mat-drawer>  <mat-drawer-content style="height: calc(100vh - var(--mat-toolbar-standard-height))">    <router-outlet></router-outlet>  </mat-drawer-content></mat-drawer-container></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AttackRollsComponent', 'selector': 'app-attack-rolls'},{'name': 'CharacterSheetComponent', 'selector': 'app-character-sheet'},{'name': 'DiceBonusFormComponent', 'selector': 'app-dice-bonus-form'},{'name': 'DieRollResultsTableComponent', 'selector': 'app-die-roll-results-table'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'OverlayComponent', 'selector': 'app-overlay'},{'name': 'SkillCheckComponent', 'selector': 'app-skill-check'},{'name': 'StepperComponent', 'selector': 'app-stepper'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AppComponent'};
