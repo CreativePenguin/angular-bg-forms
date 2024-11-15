@@ -8,6 +8,7 @@ and properly understand how likely an action is to suceed when you try it in dnd
 
 Angular is used to build website. API calls are made to <https://www.dnd5eapi.co/> to get the list of all spells in dnd.
 TailwindCSS and Material are used for styling components, and organizing the layout.
+Testing is done with Karma.
 Documentation is built with compodoc, and deployed to github pages using github actions.
 Deployment is handled by firebase.
 
