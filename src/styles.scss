@@ -9,7 +9,7 @@
 // @use '@angular/material' as mat;
 @use 'material-styles-import.scss' as mat;
 // @forward '@angular/material' show get-theme-color;
-@include mat.core();
+// @include mat.core();
 
 @tailwind base;
 @tailwind components;
@@ -47,8 +47,16 @@ $yellow-theme: mat.define-theme(
   // @include mat.all-component-themes(mat.$purple-green);
 }
 
-.tertiary-button {
-  @include mat.button-color($my-theme, $color-variant: tertiary);
+// .tertiary-button {
+//   @include mat.button-color($my-theme, $color-variant: tertiary);
+// }
+
+@mixin primary-theme-90($property) {
+  #{$property}: mat.get-theme-color($my-theme, primary, 90);
+}
+
+.nav-toolbar {
+  background-color: mat.get-theme-color($my-theme, primary, 90);
 }
 
 .tertiary-input {

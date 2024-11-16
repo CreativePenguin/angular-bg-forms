@@ -1,6 +1,6 @@
 // @use '@angular/material' as mat;
-@use '../styles.scss';
-@use '../material-styles-import' as mat;
+// @use '../styles.scss';
+// @use '../material-styles-import' as mat;
 
 main {
     display: flex;
@@ -17,8 +17,9 @@ main {
 //     )
 // );
 
-.nav-toolbar {
-    background-color: mat.get-theme-color(styles.$my-theme, primary, 90);
-    // background-color: #626000;
-    // @include mat.all-component-colors($rose-theme);
-}
+// .nav-toolbar {
+//     // @include styles.primary-theme-90(background-color);
+//     background-color: mat.get-theme-color(styles.$my-theme, primary, 90);
+//     // background-color: #626000;
+//     // @include mat.all-component-colors($rose-theme);
+// }
