@@ -18,7 +18,7 @@ import { MatListModule } from '@angular/material/list';
     MatToolbarModule, MatButtonModule, MatIconModule, MatListModule
   ],
   templateUrl: './app.component.html',
-  styleUrl: '../styles.scss'
+  styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'angular-bg3-cheats';

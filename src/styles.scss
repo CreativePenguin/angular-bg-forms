@@ -6,8 +6,9 @@
 
 // src/styles.scss
 
-@use '@angular/material' as mat;
-@use '../m3-theme.scss';
+// @use '@angular/material' as mat;
+@use 'material-styles-import.scss' as mat;
+// @forward '@angular/material' show get-theme-color;
 @include mat.core();
 
 @tailwind base;
