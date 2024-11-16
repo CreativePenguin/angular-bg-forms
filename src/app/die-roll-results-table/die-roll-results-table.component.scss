@@ -1,6 +1,6 @@
 // @use '@angular/material' as mat;
-@use '../../styles.scss';
-@use '../../material-styles-import.scss' as mat;
+// @use '../../styles.scss';
+// @use '../../material-styles-import.scss' as mat;
 // @use 'sass:map';
 
 // .mat-column-percentage-result,
@@ -10,10 +10,10 @@
     width: 32px;
 }
 
-.percentage-bar-background {
-    background-color: mat.get-theme-color(styles.$my-theme, primary, 90);
-}
+// .percentage-bar-background {
+//     background-color: mat.get-theme-color(styles.$my-theme, primary, 90);
+// }
 
-.percentage-bar-amount {
-    background-color: mat.get-theme-color(styles.$my-theme, primary, 80);
-}
+// .percentage-bar-amount {
+//     background-color: mat.get-theme-color(styles.$my-theme, primary, 80);
+// }

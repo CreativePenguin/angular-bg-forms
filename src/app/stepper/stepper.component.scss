@@ -1,6 +1,6 @@
 // @use '@angular/material' as mat;
-@use '../../styles.scss';
-@use '../../material-styles-import.scss' as mat;
+// @use '../../styles.scss';
+// @use '../../material-styles-import.scss' as mat;
 // @use 'sass:map';
 
 // .primary-button {
@@ -13,9 +13,9 @@
 //         background-color: mat.get-theme-color(styles.$my-theme, primary, 50);
 //     }
 // }
-.increment-button {
-    background-color: mat.get-theme-color(styles.$my-theme, primary, 95);
-}
-.increment-button:hover {
-    background-color: mat.get-theme-color(styles.$my-theme, primary, 90);
-}
+// .increment-button {
+//     background-color: mat.get-theme-color(styles.$my-theme, primary, 95);
+// }
+// .increment-button:hover {
+//     background-color: mat.get-theme-color(styles.$my-theme, primary, 90);
+// }

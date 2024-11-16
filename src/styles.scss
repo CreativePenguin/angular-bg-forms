@@ -6,8 +6,8 @@
 
 // src/styles.scss
 
-// @use '@angular/material' as mat;
-@use 'material-styles-import.scss' as mat;
+@use '@angular/material' as mat;
+// @use 'material-styles-import.scss' as mat;
 // @forward '@angular/material' show get-theme-color;
 // @include mat.core();
 
@@ -51,12 +51,13 @@ $yellow-theme: mat.define-theme(
 //   @include mat.button-color($my-theme, $color-variant: tertiary);
 // }
 
-@mixin primary-theme-90($property) {
-  #{$property}: mat.get-theme-color($my-theme, primary, 90);
+@mixin color-element($number) {
+  background-color: mat.get-theme-color($my-theme, primary, $number);
 }
 
 .nav-toolbar {
-  background-color: mat.get-theme-color($my-theme, primary, 90);
+  // background-color: mat.get-theme-color($my-theme, primary, 90);
+  @include color-element(90);
 }
 
 .tertiary-input {
@@ -64,6 +65,27 @@ $yellow-theme: mat.define-theme(
   // @include mat.form-field-theme($yellow-theme);
   @include mat.all-component-colors($yellow-theme);
 }
+
+.increment-button {
+  // background-color: mat.get-theme-color($my-theme, primary, 95);
+  @include color-element(95);
+}
+
+.increment-button:hover {
+  // background-color: mat.get-theme-color($my-theme, primary, 90);
+  @include color-element(90);
+}
+
+.percentage-bar-background {
+    // background-color: mat.get-theme-color(styles.$my-theme, primary, 90);
+  @include color-element(90);
+}
+
+.percentage-bar-amount {
+    // background-color: mat.get-theme-color(styles.$my-theme, primary, 80);
+  @include color-element(80);
+}
+
 
 // :root {
 //     // @include mat.all-component-themes(m3-theme.$light-theme);
