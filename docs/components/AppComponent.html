@@ -270,7 +270,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, ViewEncapsulation } from &#x27;@angular/core&#x27;;
 import { RouterLink,RouterModule, RouterOutlet } from &#x27;@angular/router&#x27;;
 import { MatSidenavModule } from &#x27;@angular/material/sidenav&#x27;;
 import { MatToolbarModule } from &#x27;@angular/material/toolbar&#x27;;
@@ -301,7 +301,8 @@ export class AppComponent {
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;!-- &lt;app-navbar&gt;&lt;/app-navbar&gt; --&gt;
 &lt;!-- &lt;mat-toolbar class&#x3D;&quot;tertiary-input&quot;&gt; --&gt;
-&lt;mat-toolbar class&#x3D;&quot;nav-toolbar&quot;&gt;
+&lt;mat-toolbar class&#x3D;&quot;theme-primary-90&quot;&gt;
+&lt;!-- &lt;mat-toolbar class&#x3D;&quot;nav-toolbar&quot;&gt; --&gt;
   &lt;button mat-icon-button (click)&#x3D;&quot;drawer.toggle()&quot;&gt;
     &lt;mat-icon class&#x3D;&quot;pt-0.5&quot;&gt;menu&lt;/mat-icon&gt;
   &lt;/button&gt;
@@ -353,7 +354,7 @@ export class AppComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><!-- <app-navbar></app-navbar> --><!-- <mat-toolbar class="tertiary-input"> --><mat-toolbar class="nav-toolbar">  <button mat-icon-button (click)="drawer.toggle()">    <mat-icon class="pt-0.5">menu</mat-icon>  </button>  <span class="mx-3">Dice Calculator</span></mat-toolbar><mat-drawer-container>  <mat-drawer #drawer mode="side" opened>    <mat-nav-list>      <a mat-list-item routerLink="skill-check" (click)="drawer.close()">        Skill Check      </a>      <a mat-list-item routerLink="attack-roll" (click)="drawer.close()">        Attack Rolls      </a>      <a mat-list-item href="https://creativepenguin.github.io/angular-bg-forms/" (click)="drawer.close()">        Documentation      </a>    </mat-nav-list>  </mat-drawer>  <mat-drawer-content style="height: calc(100vh - var(--mat-toolbar-standard-height))">    <router-outlet></router-outlet>  </mat-drawer-content></mat-drawer-container></div>'
+        var COMPONENT_TEMPLATE = '<div><!-- <app-navbar></app-navbar> --><!-- <mat-toolbar class="tertiary-input"> --><mat-toolbar class="theme-primary-90"><!-- <mat-toolbar class="nav-toolbar"> -->  <button mat-icon-button (click)="drawer.toggle()">    <mat-icon class="pt-0.5">menu</mat-icon>  </button>  <span class="mx-3">Dice Calculator</span></mat-toolbar><mat-drawer-container>  <mat-drawer #drawer mode="side" opened>    <mat-nav-list>      <a mat-list-item routerLink="skill-check" (click)="drawer.close()">        Skill Check      </a>      <a mat-list-item routerLink="attack-roll" (click)="drawer.close()">        Attack Rolls      </a>      <a mat-list-item href="https://creativepenguin.github.io/angular-bg-forms/" (click)="drawer.close()">        Documentation      </a>    </mat-nav-list>  </mat-drawer>  <mat-drawer-content style="height: calc(100vh - var(--mat-toolbar-standard-height))">    <router-outlet></router-outlet>  </mat-drawer-content></mat-drawer-container></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AttackRollsComponent', 'selector': 'app-attack-rolls'},{'name': 'CharacterSheetComponent', 'selector': 'app-character-sheet'},{'name': 'DiceBonusFormComponent', 'selector': 'app-dice-bonus-form'},{'name': 'DieRollResultsTableComponent', 'selector': 'app-die-roll-results-table'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'OverlayComponent', 'selector': 'app-overlay'},{'name': 'SkillCheckComponent', 'selector': 'app-skill-check'},{'name': 'StepperComponent', 'selector': 'app-stepper'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AppComponent'};
