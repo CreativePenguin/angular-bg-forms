@@ -2,13 +2,6 @@
 // @use '../styles.scss';
 // @use '../material-styles-import' as mat;
 
-main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--secondary-color);
-}
-
 // $rose-theme: mat.define-theme(
 //     (
 //         color: (

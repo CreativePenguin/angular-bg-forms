@@ -7,9 +7,10 @@
 // src/styles.scss
 
 @use '@angular/material' as mat;
+@use "sass:map";
 // @use 'material-styles-import.scss' as mat;
 // @forward '@angular/material' show get-theme-color;
-// @include mat.core();
+@include mat.core();
 
 @tailwind base;
 @tailwind components;
@@ -55,12 +56,17 @@ $yellow-theme: mat.define-theme(
   background-color: mat.get-theme-color($my-theme, primary, $number);
 }
 
-.nav-toolbar {
-  // background-color: mat.get-theme-color($my-theme, primary, 90);
-  @include color-element(90);
+/**
+  * Generating setting background colors of elements
+  */
+$palette-hues: (0, 10, 20, 25, 30, 35, 40, 50, 60, 70, 80, 90, 95, 98, 99, 100);
+@each $number in $palette-hues {
+  .theme-primary-#{$number} {
+    background-color: mat.get-theme-color($my-theme, primary, $number)!important;
+  }
 }
 
-.tertiary-input {
+.tertiary-element {
   // @include mat.form-field-color($my-theme, $color-variant: tertiary);
   // @include mat.form-field-theme($yellow-theme);
   @include mat.all-component-colors($yellow-theme);
@@ -74,16 +80,6 @@ $yellow-theme: mat.define-theme(
 .increment-button:hover {
   // background-color: mat.get-theme-color($my-theme, primary, 90);
   @include color-element(90);
-}
-
-.percentage-bar-background {
-    // background-color: mat.get-theme-color(styles.$my-theme, primary, 90);
-  @include color-element(90);
-}
-
-.percentage-bar-amount {
-    // background-color: mat.get-theme-color(styles.$my-theme, primary, 80);
-  @include color-element(80);
 }
 
 
