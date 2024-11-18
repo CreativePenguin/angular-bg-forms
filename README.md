@@ -29,8 +29,26 @@ Deployment is handled by firebase.
 
 ### Components
 
-- skill-check.component.ts -- Skill Check Link.
+- skill-check.component.ts -- Skill Check Page  
 It contains frontend for calculating likelihood of skill check suceeeding.
-- attack-rolls.component.ts -- Attack Rolls Link.
+![skill-check-component-pic](documentation_assets/skill-check-component.png)
+- attack-rolls.component.ts -- Attack Rolls Page  
 It contains frontend for calculating spell damage and likelihood.
-- stepper.component.ts -- Modified form input (type="number", but with + and - buttons on the sides)
+![attack-rolls-component-pic](documentation_assets/attack-rolls-component.png)
+- stepper.component.ts -- Dice input  
+Modified form input (type="number", but with + and - buttons on the sides)
+![stepper-component-pic](documentation_assets/stepper-component.png)
+- dice-bonus-form.component.ts -- Dice Form  
+Reusable form subsection that holds dice values that can be added to calculations
+![dice-bonus-form-component-pic](documentation_assets/dice-bonus-form-component.png)
+- die-roll-results-table.component.ts -- Roll Table  
+Reusable form table that is dynamically added to dice calculations pages
+![die-roll-results-component-pic](documentation_assets/die-roll-results-table.png)
+
+### Video Resources Used
+
+- [Deploy to Firebase](https://www.youtube.com/watch?v=UNCggEPZQ0c)
+- [Github Pages Deploy](https://www.youtube.com/watch?v=jBZfo2Mj1mY)
+- [Custom form component (used in stepper.component.ts)](https://www.youtube.com/watch?v=xTcJQaWiJ2c&list=PLw5h0DiJ-9PDF6TTr0J7HmKK_7t6XTPuN)
+- [Reusable angular forms (used in dice-bonus-form.component)](https://www.youtube.com/watch?v=o74WSoJxGPI)
+- [Dynamic components (used to implement die-roll-results-table)](https://www.youtube.com/watch?v=ncbftt3NWVo)
