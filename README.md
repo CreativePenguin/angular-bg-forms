@@ -31,19 +31,19 @@ Deployment is handled by firebase.
 
 - skill-check.component.ts -- Skill Check Page  
 It contains frontend for calculating likelihood of skill check suceeeding.
-![skill-check-component-pic](documentation_assets/skill-check-component.png)
+<img src="documentation_assets/skill-check-component.png" width="100%">
 - attack-rolls.component.ts -- Attack Rolls Page  
 It contains frontend for calculating spell damage and likelihood.
-![attack-rolls-component-pic](documentation_assets/attack-rolls-component.png)
+<img src="documentation_assets/attack-rolls-component.png" width="100%">
 - stepper.component.ts -- Dice input  
 Modified form input (type="number", but with + and - buttons on the sides)
-![stepper-component-pic](documentation_assets/stepper-component.png)
+<img src="documentation_assets/stepper-component.png" width="100%">
 - dice-bonus-form.component.ts -- Dice Form  
 Reusable form subsection that holds dice values that can be added to calculations
-![dice-bonus-form-component-pic](documentation_assets/dice-bonus-form-component.png)
+<img src="documentation_assets/dice-bonus-form-component.png" width="100%">
 - die-roll-results-table.component.ts -- Roll Table  
 Reusable form table that is dynamically added to dice calculations pages
-![die-roll-results-component-pic](documentation_assets/die-roll-results-table.png)
+<img src="documentation_assets/die-roll-results-table.png" width="100%">
 
 ### Video Resources Used
 

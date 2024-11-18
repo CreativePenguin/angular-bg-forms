@@ -32,13 +32,14 @@ jobs:
       - run: |
           npm ci
           npx compodoc -p tsconfig.doc.json  # Compodoc create documentation/ folder
+          cp -r documentation_assets documentation
 
       - name: deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: documentation
           branch: gh-pages
-          access_token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
   # deploy:
   #   environment:
