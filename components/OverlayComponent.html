@@ -36,13 +36,13 @@
                         <a data-type="chapter-link" href="./"><span class="fa fa-home"></span>Getting started</a>
                         <ul class="links">
                                 <li class="link">
-                                    <a href="./"  class="active" ><span class="fa fa-file-text-o"></span>README</a>
+                                    <a href="./" ><span class="fa fa-file-text-o"></span>README</a>
                                 </li>
                                 <li class="link">
-                                    <a  href="./overview.html" 
+                                    <a 
                                         
                                          href="./overview.html" 
-                                        
+                                         href="./overview.html" 
                                         >
                                         <span class="fa fa-th"></span>Overview
                                     </a>
@@ -84,7 +84,7 @@
                                     <a href="components/NotFoundComponent.html" >NotFoundComponent</a>
                                 </li>
                                 <li class="link">
-                                    <a href="components/OverlayComponent.html" >OverlayComponent</a>
+                                    <a href="components/OverlayComponent.html"  class="active" >OverlayComponent</a>
                                 </li>
                                 <li class="link">
                                     <a href="components/SkillCheckComponent.html" >SkillCheckComponent</a>
@@ -217,13 +217,13 @@
                                <a data-type="chapter-link" href="./"><span class="fa fa-home"></span>Getting started</a>
                                <ul class="links">
                                        <li class="link">
-                                           <a href="./"  class="active" ><span class="fa fa-file-text-o"></span>README</a>
+                                           <a href="./" ><span class="fa fa-file-text-o"></span>README</a>
                                        </li>
                                        <li class="link">
-                                           <a  href="./overview.html" 
+                                           <a 
                                                
                                                 href="./overview.html" 
-                                               
+                                                href="./overview.html" 
                                                >
                                                <span class="fa fa-th"></span>Overview
                                            </a>
@@ -265,7 +265,7 @@
                                            <a href="components/NotFoundComponent.html" >NotFoundComponent</a>
                                        </li>
                                        <li class="link">
-                                           <a href="components/OverlayComponent.html" >OverlayComponent</a>
+                                           <a href="components/OverlayComponent.html"  class="active" >OverlayComponent</a>
                                        </li>
                                        <li class="link">
                                            <a href="components/SkillCheckComponent.html" >SkillCheckComponent</a>
@@ -376,45 +376,281 @@
                    
                    </nav>
                </div>
-               <div class="content readme">
+               <div class="content component">
                    <div class="content-data">
-<h1 id="angularbg3cheats">AngularBg3Cheats</h1>
-<p>Webpage found here: <a href="https://test-00-c77de.web.app/">https://test-00-c77de.web.app/</a></p>
-<p>This webpage is designed to show all possible values that could result in rolling certain amounts of dice.<br>This makes it easier to determine what the likelihood of each decision would be when playing dnd,<br>and properly understand how likely an action is to suceed when you try it in dnd.</p>
-<h2 id="technologies-used">Technologies Used</h2>
-<p>Angular is used to build website. API calls are made to <a href="https://www.dnd5eapi.co/">https://www.dnd5eapi.co/</a> to get the list of all spells in dnd.<br>TailwindCSS and Material are used for styling components, and organizing the layout.<br>Testing is done with Karma.<br>Documentation is built with compodoc, and deployed to github pages using github actions. Local testing of github actions was using act by nektos.<br>Deployment is handled by firebase.</p>
-<h2 id="pages">Pages</h2>
-<h3 id="services">Services</h3>
-<ul>
-<li>dice-calculations.service.ts -- This holds all the functions used in dice calculations</li>
-<li>spells.service.ts -- This holds all the functions used to access DnD API to get spell information</li>
-</ul>
-<h3 id="data-types">Data Types</h3>
-<ul>
-<li>spell.ts -- This holds all the data types used to organize data gotten from API</li>
-<li>diceset.ts -- This holds all the data types used to organize data related to dice rolls<ul>
-<li>Check <a href="https://creativepenguin.github.io/angular-bg-forms/injectables/DiceCalculationsService.html#skillCheckCalc">skillCheckCalc</a> function on diceset details main algorithm used to calculate dice rolls</li>
-</ul>
-</li>
-</ul>
-<h3 id="components">Components</h3>
-<ul>
-<li>skill-check.component.ts -- Skill Check Page<br>It contains frontend for calculating likelihood of skill check suceeeding.<br><img src="documentation_assets/skill-check-component.png" alt="skill-check-component-pic" class="img-responsive"></li>
-<li>attack-rolls.component.ts -- Attack Rolls Page<br>It contains frontend for calculating spell damage and likelihood.<br><img src="documentation_assets/attack-rolls-component.png" alt="attack-rolls-component-pic" class="img-responsive"></li>
-<li>stepper.component.ts -- Dice input<br>Modified form input (type=&quot;number&quot;, but with + and - buttons on the sides)<br><img src="documentation_assets/stepper-component.png" alt="stepper-component-pic" class="img-responsive"></li>
-<li>dice-bonus-form.component.ts -- Dice Form<br>Reusable form subsection that holds dice values that can be added to calculations<br><img src="documentation_assets/dice-bonus-form-component.png" alt="dice-bonus-form-component-pic" class="img-responsive"></li>
-<li>die-roll-results-table.component.ts -- Roll Table<br>Reusable form table that is dynamically added to dice calculations pages<br><img src="documentation_assets/die-roll-results-table.png" alt="die-roll-results-component-pic" class="img-responsive"></li>
-</ul>
-<h3 id="video-resources-used">Video Resources Used</h3>
-<ul>
-<li><a href="https://www.youtube.com/watch?v=UNCggEPZQ0c">Deploy to Firebase</a></li>
-<li><a href="https://www.youtube.com/watch?v=jBZfo2Mj1mY">Github Pages Deploy</a></li>
-<li><a href="https://www.youtube.com/watch?v=xTcJQaWiJ2c&amp;list=PLw5h0DiJ-9PDF6TTr0J7HmKK_7t6XTPuN">Custom form component (used in stepper.component.ts)</a></li>
-<li><a href="https://www.youtube.com/watch?v=o74WSoJxGPI">Reusable angular forms (used in dice-bonus-form.component)</a></li>
-<li><a href="https://www.youtube.com/watch?v=ncbftt3NWVo">Dynamic components (used to implement die-roll-results-table)</a></li>
-</ul>
 
 
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>OverlayComponent</li>
+</ol>
+
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#infos" id="infos-tab" role="tab" data-toggle="tab">Infos</a>
+        </li>
+        <li>
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab">Source</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane fade active in" id="infos"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/overlay/overlay.component.ts</code>
+</p>
+
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-overlay</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>overlay.component.html</code></td>
+            </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+
+    <section>
+        <h3 id="methods">Methods</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> onSubmit</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>onSubmit()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
+
+    <section>
+        <h3 id="inputs">Properties</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> addressForm</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>addressForm:     <code>any</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Private</span> fb</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <span class="modifier-icon fa fa-lock"></span><code>fb:     <code><a href="https://angular.io/docs/ts/latest/api/forms/index/FormBuilder-class.html" target="_blank" >FormBuilder</a></code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> hasUnitNumber</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>hasUnitNumber:     <code>boolean</code>
+    </bcode>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Default value: </i><code>false</code>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> states</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>states:     <code>{ name: string; abbreviation: string; }[]</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
+</div>
+        <div class="tab-pane fade tab-source-code" id="source">
+            <pre><code class="hljs javascript">import { Component, inject } from &#x27;@angular/core&#x27;;
+
+import { ReactiveFormsModule, FormBuilder, Validators } from &#x27;@angular/forms&#x27;;
+import { MatInputModule } from &#x27;@angular/material/input&#x27;;
+import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
+import { MatSelectModule } from &#x27;@angular/material/select&#x27;;
+import { MatRadioModule } from &#x27;@angular/material/radio&#x27;;
+import { MatCardModule } from &#x27;@angular/material/card&#x27;;
+
+
+@Component({
+  selector: &#x27;app-overlay&#x27;,
+  templateUrl: &#x27;./overlay.component.html&#x27;,
+  styleUrl: &#x27;./overlay.component.scss&#x27;,
+  standalone: true,
+  imports: [
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCardModule,
+    ReactiveFormsModule
+  ]
+})
+export class OverlayComponent {
+  private fb &#x3D; inject(FormBuilder);
+  addressForm &#x3D; this.fb.group({
+    company: null,
+    firstName: [null, Validators.required],
+    lastName: [null, Validators.required],
+    address: [null, Validators.required],
+    address2: null,
+    city: [null, Validators.required],
+    state: [null, Validators.required],
+    postalCode: [null, Validators.compose([
+      Validators.required, Validators.minLength(5), Validators.maxLength(5)])
+    ],
+    shipping: [&#x27;free&#x27;, Validators.required]
+  });
+
+  hasUnitNumber &#x3D; false;
+
+  states &#x3D; [
+    {name: &#x27;Alabama&#x27;, abbreviation: &#x27;AL&#x27;},
+    {name: &#x27;Alaska&#x27;, abbreviation: &#x27;AK&#x27;},
+    {name: &#x27;American Samoa&#x27;, abbreviation: &#x27;AS&#x27;},
+    {name: &#x27;Arizona&#x27;, abbreviation: &#x27;AZ&#x27;},
+    {name: &#x27;Arkansas&#x27;, abbreviation: &#x27;AR&#x27;},
+    {name: &#x27;California&#x27;, abbreviation: &#x27;CA&#x27;},
+    {name: &#x27;Colorado&#x27;, abbreviation: &#x27;CO&#x27;},
+    {name: &#x27;Connecticut&#x27;, abbreviation: &#x27;CT&#x27;},
+    {name: &#x27;Delaware&#x27;, abbreviation: &#x27;DE&#x27;},
+    {name: &#x27;District Of Columbia&#x27;, abbreviation: &#x27;DC&#x27;},
+    {name: &#x27;Federated States Of Micronesia&#x27;, abbreviation: &#x27;FM&#x27;},
+    {name: &#x27;Florida&#x27;, abbreviation: &#x27;FL&#x27;},
+    {name: &#x27;Georgia&#x27;, abbreviation: &#x27;GA&#x27;},
+    {name: &#x27;Guam&#x27;, abbreviation: &#x27;GU&#x27;},
+    {name: &#x27;Hawaii&#x27;, abbreviation: &#x27;HI&#x27;},
+    {name: &#x27;Idaho&#x27;, abbreviation: &#x27;ID&#x27;},
+    {name: &#x27;Illinois&#x27;, abbreviation: &#x27;IL&#x27;},
+    {name: &#x27;Indiana&#x27;, abbreviation: &#x27;IN&#x27;},
+    {name: &#x27;Iowa&#x27;, abbreviation: &#x27;IA&#x27;},
+    {name: &#x27;Kansas&#x27;, abbreviation: &#x27;KS&#x27;},
+    {name: &#x27;Kentucky&#x27;, abbreviation: &#x27;KY&#x27;},
+    {name: &#x27;Louisiana&#x27;, abbreviation: &#x27;LA&#x27;},
+    {name: &#x27;Maine&#x27;, abbreviation: &#x27;ME&#x27;},
+    {name: &#x27;Marshall Islands&#x27;, abbreviation: &#x27;MH&#x27;},
+    {name: &#x27;Maryland&#x27;, abbreviation: &#x27;MD&#x27;},
+    {name: &#x27;Massachusetts&#x27;, abbreviation: &#x27;MA&#x27;},
+    {name: &#x27;Michigan&#x27;, abbreviation: &#x27;MI&#x27;},
+    {name: &#x27;Minnesota&#x27;, abbreviation: &#x27;MN&#x27;},
+    {name: &#x27;Mississippi&#x27;, abbreviation: &#x27;MS&#x27;},
+    {name: &#x27;Missouri&#x27;, abbreviation: &#x27;MO&#x27;},
+    {name: &#x27;Montana&#x27;, abbreviation: &#x27;MT&#x27;},
+    {name: &#x27;Nebraska&#x27;, abbreviation: &#x27;NE&#x27;},
+    {name: &#x27;Nevada&#x27;, abbreviation: &#x27;NV&#x27;},
+    {name: &#x27;New Hampshire&#x27;, abbreviation: &#x27;NH&#x27;},
+    {name: &#x27;New Jersey&#x27;, abbreviation: &#x27;NJ&#x27;},
+    {name: &#x27;New Mexico&#x27;, abbreviation: &#x27;NM&#x27;},
+    {name: &#x27;New York&#x27;, abbreviation: &#x27;NY&#x27;},
+    {name: &#x27;North Carolina&#x27;, abbreviation: &#x27;NC&#x27;},
+    {name: &#x27;North Dakota&#x27;, abbreviation: &#x27;ND&#x27;},
+    {name: &#x27;Northern Mariana Islands&#x27;, abbreviation: &#x27;MP&#x27;},
+    {name: &#x27;Ohio&#x27;, abbreviation: &#x27;OH&#x27;},
+    {name: &#x27;Oklahoma&#x27;, abbreviation: &#x27;OK&#x27;},
+    {name: &#x27;Oregon&#x27;, abbreviation: &#x27;OR&#x27;},
+    {name: &#x27;Palau&#x27;, abbreviation: &#x27;PW&#x27;},
+    {name: &#x27;Pennsylvania&#x27;, abbreviation: &#x27;PA&#x27;},
+    {name: &#x27;Puerto Rico&#x27;, abbreviation: &#x27;PR&#x27;},
+    {name: &#x27;Rhode Island&#x27;, abbreviation: &#x27;RI&#x27;},
+    {name: &#x27;South Carolina&#x27;, abbreviation: &#x27;SC&#x27;},
+    {name: &#x27;South Dakota&#x27;, abbreviation: &#x27;SD&#x27;},
+    {name: &#x27;Tennessee&#x27;, abbreviation: &#x27;TN&#x27;},
+    {name: &#x27;Texas&#x27;, abbreviation: &#x27;TX&#x27;},
+    {name: &#x27;Utah&#x27;, abbreviation: &#x27;UT&#x27;},
+    {name: &#x27;Vermont&#x27;, abbreviation: &#x27;VT&#x27;},
+    {name: &#x27;Virgin Islands&#x27;, abbreviation: &#x27;VI&#x27;},
+    {name: &#x27;Virginia&#x27;, abbreviation: &#x27;VA&#x27;},
+    {name: &#x27;Washington&#x27;, abbreviation: &#x27;WA&#x27;},
+    {name: &#x27;West Virginia&#x27;, abbreviation: &#x27;WV&#x27;},
+    {name: &#x27;Wisconsin&#x27;, abbreviation: &#x27;WI&#x27;},
+    {name: &#x27;Wyoming&#x27;, abbreviation: &#x27;WY&#x27;}
+  ];
+
+  onSubmit(): void {
+    alert(&#x27;Thanks!&#x27;);
+  }
+}
+</code></pre>
+        </div>
+    </div>
 
 
 

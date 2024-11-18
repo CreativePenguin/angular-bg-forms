@@ -36,13 +36,13 @@
                         <a data-type="chapter-link" href="./"><span class="fa fa-home"></span>Getting started</a>
                         <ul class="links">
                                 <li class="link">
-                                    <a href="./"  class="active" ><span class="fa fa-file-text-o"></span>README</a>
+                                    <a href="./" ><span class="fa fa-file-text-o"></span>README</a>
                                 </li>
                                 <li class="link">
-                                    <a  href="./overview.html" 
+                                    <a 
                                         
                                          href="./overview.html" 
-                                        
+                                         href="./overview.html" 
                                         >
                                         <span class="fa fa-th"></span>Overview
                                     </a>
@@ -66,7 +66,7 @@
                                     <a href="components/AppComponent.html" >AppComponent</a>
                                 </li>
                                 <li class="link">
-                                    <a href="components/AttackRollsComponent.html" >AttackRollsComponent</a>
+                                    <a href="components/AttackRollsComponent.html"  class="active" >AttackRollsComponent</a>
                                 </li>
                                 <li class="link">
                                     <a href="components/CharacterSheetComponent.html" >CharacterSheetComponent</a>
@@ -217,13 +217,13 @@
                                <a data-type="chapter-link" href="./"><span class="fa fa-home"></span>Getting started</a>
                                <ul class="links">
                                        <li class="link">
-                                           <a href="./"  class="active" ><span class="fa fa-file-text-o"></span>README</a>
+                                           <a href="./" ><span class="fa fa-file-text-o"></span>README</a>
                                        </li>
                                        <li class="link">
-                                           <a  href="./overview.html" 
+                                           <a 
                                                
                                                 href="./overview.html" 
-                                               
+                                                href="./overview.html" 
                                                >
                                                <span class="fa fa-th"></span>Overview
                                            </a>
@@ -247,7 +247,7 @@
                                            <a href="components/AppComponent.html" >AppComponent</a>
                                        </li>
                                        <li class="link">
-                                           <a href="components/AttackRollsComponent.html" >AttackRollsComponent</a>
+                                           <a href="components/AttackRollsComponent.html"  class="active" >AttackRollsComponent</a>
                                        </li>
                                        <li class="link">
                                            <a href="components/CharacterSheetComponent.html" >CharacterSheetComponent</a>
@@ -376,45 +376,421 @@
                    
                    </nav>
                </div>
-               <div class="content readme">
+               <div class="content component">
                    <div class="content-data">
-<h1 id="angularbg3cheats">AngularBg3Cheats</h1>
-<p>Webpage found here: <a href="https://test-00-c77de.web.app/">https://test-00-c77de.web.app/</a></p>
-<p>This webpage is designed to show all possible values that could result in rolling certain amounts of dice.<br>This makes it easier to determine what the likelihood of each decision would be when playing dnd,<br>and properly understand how likely an action is to suceed when you try it in dnd.</p>
-<h2 id="technologies-used">Technologies Used</h2>
-<p>Angular is used to build website. API calls are made to <a href="https://www.dnd5eapi.co/">https://www.dnd5eapi.co/</a> to get the list of all spells in dnd.<br>TailwindCSS and Material are used for styling components, and organizing the layout.<br>Testing is done with Karma.<br>Documentation is built with compodoc, and deployed to github pages using github actions. Local testing of github actions was using act by nektos.<br>Deployment is handled by firebase.</p>
-<h2 id="pages">Pages</h2>
-<h3 id="services">Services</h3>
-<ul>
-<li>dice-calculations.service.ts -- This holds all the functions used in dice calculations</li>
-<li>spells.service.ts -- This holds all the functions used to access DnD API to get spell information</li>
-</ul>
-<h3 id="data-types">Data Types</h3>
-<ul>
-<li>spell.ts -- This holds all the data types used to organize data gotten from API</li>
-<li>diceset.ts -- This holds all the data types used to organize data related to dice rolls<ul>
-<li>Check <a href="https://creativepenguin.github.io/angular-bg-forms/injectables/DiceCalculationsService.html#skillCheckCalc">skillCheckCalc</a> function on diceset details main algorithm used to calculate dice rolls</li>
-</ul>
-</li>
-</ul>
-<h3 id="components">Components</h3>
-<ul>
-<li>skill-check.component.ts -- Skill Check Page<br>It contains frontend for calculating likelihood of skill check suceeeding.<br><img src="documentation_assets/skill-check-component.png" alt="skill-check-component-pic" class="img-responsive"></li>
-<li>attack-rolls.component.ts -- Attack Rolls Page<br>It contains frontend for calculating spell damage and likelihood.<br><img src="documentation_assets/attack-rolls-component.png" alt="attack-rolls-component-pic" class="img-responsive"></li>
-<li>stepper.component.ts -- Dice input<br>Modified form input (type=&quot;number&quot;, but with + and - buttons on the sides)<br><img src="documentation_assets/stepper-component.png" alt="stepper-component-pic" class="img-responsive"></li>
-<li>dice-bonus-form.component.ts -- Dice Form<br>Reusable form subsection that holds dice values that can be added to calculations<br><img src="documentation_assets/dice-bonus-form-component.png" alt="dice-bonus-form-component-pic" class="img-responsive"></li>
-<li>die-roll-results-table.component.ts -- Roll Table<br>Reusable form table that is dynamically added to dice calculations pages<br><img src="documentation_assets/die-roll-results-table.png" alt="die-roll-results-component-pic" class="img-responsive"></li>
-</ul>
-<h3 id="video-resources-used">Video Resources Used</h3>
-<ul>
-<li><a href="https://www.youtube.com/watch?v=UNCggEPZQ0c">Deploy to Firebase</a></li>
-<li><a href="https://www.youtube.com/watch?v=jBZfo2Mj1mY">Github Pages Deploy</a></li>
-<li><a href="https://www.youtube.com/watch?v=xTcJQaWiJ2c&amp;list=PLw5h0DiJ-9PDF6TTr0J7HmKK_7t6XTPuN">Custom form component (used in stepper.component.ts)</a></li>
-<li><a href="https://www.youtube.com/watch?v=o74WSoJxGPI">Reusable angular forms (used in dice-bonus-form.component)</a></li>
-<li><a href="https://www.youtube.com/watch?v=ncbftt3NWVo">Dynamic components (used to implement die-roll-results-table)</a></li>
-</ul>
 
 
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>AttackRollsComponent</li>
+</ol>
+
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#infos" id="infos-tab" role="tab" data-toggle="tab">Infos</a>
+        </li>
+        <li>
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab">Source</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane fade active in" id="infos"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/attack-rolls/attack-rolls.component.ts</code>
+</p>
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>This is the component linked to with attack-rolls link in the navbar<br>It allows the user to search a spell and calculate the amount of damage that the spell can do</p>
+
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-attack-rolls</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>attack-rolls.component.html</code></td>
+            </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+
+    <section>
+        <h3 id="methods">Methods</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> Observable</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>Observable()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> Observable</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>Observable()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
+
+    <section>
+        <h3 id="inputs">Properties</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> attackRollsForm</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>attackRollsForm:     <code>FormGroup&lt;{ spell: any; spellLevel: any; testAutocomplete: any; hardCodedAutocomplete: any; }, {}&gt;</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> currentSpellRange</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>currentSpellRange:     <code>number[]</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> diceCalcService</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>diceCalcService:     <code><a href="../injectables/DiceCalculationsService.html" target="_self" >DiceCalculationsService</a></code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> filteredGroupSpellList</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>filteredGroupSpellList:     <code>boolean</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> rawSpellList$</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>rawSpellList$:     <code>boolean</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> selectedSpell</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>selectedSpell:     <code><a href="../classes/Spell.html" target="_self" >SpellI</a></code>
+    </bcode>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Default value: </i><code>undefined</code>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> spellsService</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>spellsService:     <code><a href="../injectables/SpellsService.html" target="_self" >SpellsService</a></code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
+</div>
+        <div class="tab-pane fade tab-source-code" id="source">
+            <pre><code class="hljs javascript">import { CommonModule } from &#x27;@angular/common&#x27;;
+import { Component, ComponentRef, inject, OnInit, ViewChild, viewChild, viewChildren, ViewContainerRef } from &#x27;@angular/core&#x27;;
+import { SpellsService } from &#x27;../spells.service&#x27;;
+import { forkJoin, map, Observable, startWith, switchMap } from &#x27;rxjs&#x27;;
+import { Spell, SpellI, SpellResponse, SpellResponseResults } from &#x27;../spell&#x27;;
+import { FormControl, FormGroup, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
+import { MatInputModule } from &#x27;@angular/material/input&#x27;;
+import { MatSelectModule } from &#x27;@angular/material/select&#x27;;
+import { MatAutocompleteModule } from &#x27;@angular/material/autocomplete&#x27;;
+import { DiceBonusFormComponent } from &#x27;../dice-bonus-form/dice-bonus-form.component&#x27;;
+import { MatCardModule } from &#x27;@angular/material/card&#x27;;
+import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
+import { DieRollResultsTableComponent } from &#x27;../die-roll-results-table/die-roll-results-table.component&#x27;;
+import { DiceResults, DiceSet, DiceSetI } from &#x27;../diceset&#x27;;
+import { DiceCalculationsService } from &#x27;../dice-calculations.service&#x27;;
+
+/**
+ * This is the component linked to with attack-rolls link in the navbar
+ * It allows the user to search a spell and calculate the amount of damage that the spell can do
+ */
+@Component({
+  selector: &#x27;app-attack-rolls&#x27;,
+  standalone: true,
+  imports: [
+    CommonModule, MatInputModule, ReactiveFormsModule,
+    MatSelectModule, MatAutocompleteModule, MatCardModule,
+    DiceBonusFormComponent, MatButtonModule
+],
+  templateUrl: &#x27;./attack-rolls.component.html&#x27;,
+  styleUrl: &#x27;./attack-rolls.component.scss&#x27;
+})
+export class AttackRollsComponent implements OnInit{
+  spellsService: SpellsService &#x3D; inject(SpellsService);
+  diceCalcService: DiceCalculationsService &#x3D; inject(DiceCalculationsService);
+  rawSpellList$!: Observable&lt;SpellResponse&gt;;
+  currentSpellRange: number[] &#x3D; new Array(6);
+  selectedSpell: SpellI | undefined &#x3D; undefined;
+  attackRollsForm &#x3D; new FormGroup({
+    spell: new FormControl&lt;string | Spell&gt;(&#x27;&#x27;),
+    spellLevel: new FormControl&lt;number&gt;(this.selectedSpell?.level || 1),
+    testAutocomplete: new FormControl&lt;string | Spell&gt;(&#x27;&#x27;),
+    hardCodedAutocomplete: new FormControl(&#x27;&#x27;)
+  });
+  filteredGroupSpellList!: Observable&lt;SpellResponseResults[][]&gt;;
+  @ViewChild(&#x27;dieForm&#x27;) diceBonusComponent!: DiceBonusFormComponent;
+  vcr &#x3D; viewChild(&#x27;tableContainer&#x27;, {read: ViewContainerRef});
+  #tableRef!: ComponentRef&lt;DieRollResultsTableComponent&gt; | undefined;
+
+  /**
+   * initialize observable to autocomplete to change form values based on selected spell
+   * 1. use spell value to change currentSpellRange array (this changes values shown in level selector)
+   * 2. use spell value to change diceBonusComponent dice values
+   */
+  addObservableToAutocomplete() {
+    this.attackRollsForm.get(&#x27;spell&#x27;)!.valueChanges.subscribe(
+      (selectedValue) &#x3D;&gt; {
+        const selectedValueAsString &#x3D; typeof selectedValue &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? &#x27;&#x27; : selectedValue?.url;
+        this.spellsService.getSpell(selectedValueAsString || &#x27;&#x27;).subscribe(
+          (spell) &#x3D;&gt; {
+            if(spell.level &#x3D;&#x3D; 0) this.currentSpellRange &#x3D; [0];
+            else this.currentSpellRange &#x3D; [...Array(7).keys()].slice(spell.level);
+            this.selectedSpell &#x3D; spell;
+
+            let minLevel &#x3D; this.currentSpellRange[0];
+            this.diceBonusComponent.d4 &#x3D; spell.damage[minLevel].d4 || 0;
+            this.diceBonusComponent.d6 &#x3D; spell.damage[minLevel].d6 || 0;
+            this.diceBonusComponent.d8 &#x3D; spell.damage[minLevel].d8 || 0;
+            this.diceBonusComponent.d10 &#x3D; spell.damage[minLevel].d10 || 0;
+            this.diceBonusComponent.d12 &#x3D; spell.damage[minLevel].d12 || 0;
+          }
+        )
+      }
+    )
+  }
+
+  /**
+   * The level dropdown observable will update the value of the dicerolls based on the spellLevel setting
+   */
+  addObservableToLevelDropdown() {
+    this.attackRollsForm.get(&#x27;spellLevel&#x27;)!.valueChanges.subscribe(
+      (levelNum) &#x3D;&gt; {
+        levelNum &#x3D; levelNum ?? this.currentSpellRange[0];
+        this.diceBonusComponent.d4 &#x3D; this.selectedSpell?.damage[levelNum].d4 || 0;
+        this.diceBonusComponent.d6 &#x3D; this.selectedSpell?.damage[levelNum].d6 || 0;
+        this.diceBonusComponent.d8 &#x3D; this.selectedSpell?.damage[levelNum].d8 || 0;
+        this.diceBonusComponent.d10 &#x3D; this.selectedSpell?.damage[levelNum].d10 || 0;
+        this.diceBonusComponent.d12 &#x3D; this.selectedSpell?.damage[levelNum].d12 || 0;
+      }
+    )
+  }
+
+  /**
+   * Converts the SpellResponseResults type that the autocomplete values
+   * are stored as into the spell names that they show up as
+   * @param selectedValue current selected spell value
+   * @returns spell name or empty string
+   */
+  displaySpellAutocompleteValue(selectedValue: SpellResponseResults): string {
+    return selectedValue &amp;&amp; selectedValue.name ? selectedValue.name : &#x27;&#x27;;
+  }
+
+  /**
+   * Gets spell information from API to set filteredGroupSpellList variable that is used in spell autocomplete
+   */
+  setGroupedSpellList() {
+    let spellsGroups: Observable&lt;SpellResponseResults[]&gt;[] &#x3D; [];
+    for(let i &#x3D; 0; i &lt;&#x3D; 6; i++) {
+      spellsGroups.push(this.spellsService.getAllSpellsOfLevel(i).pipe(
+        map((response) &#x3D;&gt; response.results)
+      ))
+    }
+    this.filteredGroupSpellList &#x3D; this.attackRollsForm.get(&#x27;spell&#x27;)!.valueChanges.pipe(
+      startWith(&#x27;&#x27;),
+      switchMap(spellSearchInput &#x3D;&gt; {
+        let spellString &#x3D; typeof spellSearchInput &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? spellSearchInput : spellSearchInput?.name;
+        // let spellString &#x3D; spellSearchInput;
+        spellString &#x3D; spellString?.toLowerCase() || &#x27;&#x27;;
+        return forkJoin(spellsGroups).pipe(
+          map(spellGroup &#x3D;&gt; 
+            spellGroup.map(spellList &#x3D;&gt; 
+              spellList.filter(spell &#x3D;&gt;
+                spell.name.toLowerCase().startsWith(spellString || &#x27;&#x27;)
+              )
+            ).filter(spellList &#x3D;&gt; spellList.length &gt; 0)
+          )
+        )
+      })
+    )
+  }
+
+  generateTable(tableInput: DiceResults[] | undefined) {
+    this.vcr()?.clear();
+    this.#tableRef &#x3D; this.vcr()?.createComponent(DieRollResultsTableComponent);
+    if(tableInput) {
+      this.#tableRef?.setInput(&#x27;diceResults&#x27;, tableInput);
+    }
+  }
+
+  generateDiceSet(): DiceSetI {
+    let dieDict: DiceSetI &#x3D; new DiceSet(JSON.parse(
+      JSON.stringify(this.attackRollsForm.value))[&#x27;dieBonuses&#x27;]);
+    console.log(&#x27;submit received (attack-rolls)&#x27;, dieDict);
+    return dieDict;
+  }
+
+  attackRollsFormSubmit() {
+    let diceSet &#x3D; this.generateDiceSet();
+    // console.log(&#x27;submit&#x27;, diceSet);
+    let minElement &#x3D; document.getElementById(&#x27;damage-min&#x27;);
+    let maxElement &#x3D; document.getElementById(&#x27;damage-max&#x27;);
+    if(minElement &amp;&amp; maxElement) {
+      minElement.innerText &#x3D; this.diceCalcService.minRoll(diceSet).toString();
+      maxElement.innerText &#x3D; this.diceCalcService.maxRoll(diceSet).toString();
+    }
+
+    let diceCalcResults &#x3D; this.diceCalcService.diceCalcResults(diceSet);
+    this.generateTable(diceCalcResults);
+  }
+
+  constructor() { }
+
+  ngOnInit(): void {
+    this.rawSpellList$ &#x3D; this.spellsService.getAllSpells();
+    this.addObservableToAutocomplete();
+    this.addObservableToLevelDropdown();
+    this.setGroupedSpellList();
+    // this.generateTable(undefined);
+    this.attackRollsForm.valueChanges.subscribe(value &#x3D;&gt; 
+      console.log(&#x27;attack rolls form&#x27;, value));
+  }
+
+}
+</code></pre>
+        </div>
+    </div>
 
 
 

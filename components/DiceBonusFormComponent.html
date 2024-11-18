@@ -36,13 +36,13 @@
                         <a data-type="chapter-link" href="./"><span class="fa fa-home"></span>Getting started</a>
                         <ul class="links">
                                 <li class="link">
-                                    <a href="./"  class="active" ><span class="fa fa-file-text-o"></span>README</a>
+                                    <a href="./" ><span class="fa fa-file-text-o"></span>README</a>
                                 </li>
                                 <li class="link">
-                                    <a  href="./overview.html" 
+                                    <a 
                                         
                                          href="./overview.html" 
-                                        
+                                         href="./overview.html" 
                                         >
                                         <span class="fa fa-th"></span>Overview
                                     </a>
@@ -72,7 +72,7 @@
                                     <a href="components/CharacterSheetComponent.html" >CharacterSheetComponent</a>
                                 </li>
                                 <li class="link">
-                                    <a href="components/DiceBonusFormComponent.html" >DiceBonusFormComponent</a>
+                                    <a href="components/DiceBonusFormComponent.html"  class="active" >DiceBonusFormComponent</a>
                                 </li>
                                 <li class="link">
                                     <a href="components/DieRollResultsTableComponent.html" >DieRollResultsTableComponent</a>
@@ -217,13 +217,13 @@
                                <a data-type="chapter-link" href="./"><span class="fa fa-home"></span>Getting started</a>
                                <ul class="links">
                                        <li class="link">
-                                           <a href="./"  class="active" ><span class="fa fa-file-text-o"></span>README</a>
+                                           <a href="./" ><span class="fa fa-file-text-o"></span>README</a>
                                        </li>
                                        <li class="link">
-                                           <a  href="./overview.html" 
+                                           <a 
                                                
                                                 href="./overview.html" 
-                                               
+                                                href="./overview.html" 
                                                >
                                                <span class="fa fa-th"></span>Overview
                                            </a>
@@ -253,7 +253,7 @@
                                            <a href="components/CharacterSheetComponent.html" >CharacterSheetComponent</a>
                                        </li>
                                        <li class="link">
-                                           <a href="components/DiceBonusFormComponent.html" >DiceBonusFormComponent</a>
+                                           <a href="components/DiceBonusFormComponent.html"  class="active" >DiceBonusFormComponent</a>
                                        </li>
                                        <li class="link">
                                            <a href="components/DieRollResultsTableComponent.html" >DieRollResultsTableComponent</a>
@@ -376,45 +376,318 @@
                    
                    </nav>
                </div>
-               <div class="content readme">
+               <div class="content component">
                    <div class="content-data">
-<h1 id="angularbg3cheats">AngularBg3Cheats</h1>
-<p>Webpage found here: <a href="https://test-00-c77de.web.app/">https://test-00-c77de.web.app/</a></p>
-<p>This webpage is designed to show all possible values that could result in rolling certain amounts of dice.<br>This makes it easier to determine what the likelihood of each decision would be when playing dnd,<br>and properly understand how likely an action is to suceed when you try it in dnd.</p>
-<h2 id="technologies-used">Technologies Used</h2>
-<p>Angular is used to build website. API calls are made to <a href="https://www.dnd5eapi.co/">https://www.dnd5eapi.co/</a> to get the list of all spells in dnd.<br>TailwindCSS and Material are used for styling components, and organizing the layout.<br>Testing is done with Karma.<br>Documentation is built with compodoc, and deployed to github pages using github actions. Local testing of github actions was using act by nektos.<br>Deployment is handled by firebase.</p>
-<h2 id="pages">Pages</h2>
-<h3 id="services">Services</h3>
-<ul>
-<li>dice-calculations.service.ts -- This holds all the functions used in dice calculations</li>
-<li>spells.service.ts -- This holds all the functions used to access DnD API to get spell information</li>
-</ul>
-<h3 id="data-types">Data Types</h3>
-<ul>
-<li>spell.ts -- This holds all the data types used to organize data gotten from API</li>
-<li>diceset.ts -- This holds all the data types used to organize data related to dice rolls<ul>
-<li>Check <a href="https://creativepenguin.github.io/angular-bg-forms/injectables/DiceCalculationsService.html#skillCheckCalc">skillCheckCalc</a> function on diceset details main algorithm used to calculate dice rolls</li>
-</ul>
-</li>
-</ul>
-<h3 id="components">Components</h3>
-<ul>
-<li>skill-check.component.ts -- Skill Check Page<br>It contains frontend for calculating likelihood of skill check suceeeding.<br><img src="documentation_assets/skill-check-component.png" alt="skill-check-component-pic" class="img-responsive"></li>
-<li>attack-rolls.component.ts -- Attack Rolls Page<br>It contains frontend for calculating spell damage and likelihood.<br><img src="documentation_assets/attack-rolls-component.png" alt="attack-rolls-component-pic" class="img-responsive"></li>
-<li>stepper.component.ts -- Dice input<br>Modified form input (type=&quot;number&quot;, but with + and - buttons on the sides)<br><img src="documentation_assets/stepper-component.png" alt="stepper-component-pic" class="img-responsive"></li>
-<li>dice-bonus-form.component.ts -- Dice Form<br>Reusable form subsection that holds dice values that can be added to calculations<br><img src="documentation_assets/dice-bonus-form-component.png" alt="dice-bonus-form-component-pic" class="img-responsive"></li>
-<li>die-roll-results-table.component.ts -- Roll Table<br>Reusable form table that is dynamically added to dice calculations pages<br><img src="documentation_assets/die-roll-results-table.png" alt="die-roll-results-component-pic" class="img-responsive"></li>
-</ul>
-<h3 id="video-resources-used">Video Resources Used</h3>
-<ul>
-<li><a href="https://www.youtube.com/watch?v=UNCggEPZQ0c">Deploy to Firebase</a></li>
-<li><a href="https://www.youtube.com/watch?v=jBZfo2Mj1mY">Github Pages Deploy</a></li>
-<li><a href="https://www.youtube.com/watch?v=xTcJQaWiJ2c&amp;list=PLw5h0DiJ-9PDF6TTr0J7HmKK_7t6XTPuN">Custom form component (used in stepper.component.ts)</a></li>
-<li><a href="https://www.youtube.com/watch?v=o74WSoJxGPI">Reusable angular forms (used in dice-bonus-form.component)</a></li>
-<li><a href="https://www.youtube.com/watch?v=ncbftt3NWVo">Dynamic components (used to implement die-roll-results-table)</a></li>
-</ul>
 
 
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>DiceBonusFormComponent</li>
+</ol>
+
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#infos" id="infos-tab" role="tab" data-toggle="tab">Infos</a>
+        </li>
+        <li>
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab">Source</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane fade active in" id="infos"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/dice-bonus-form/dice-bonus-form.component.ts</code>
+</p>
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>This component holds all the dice values that the user is able to set and edit.<br>This component is used on both skill check component and attack rolls component<br>The dice values are added to the form control automatically</p>
+
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-dice-bonus-form</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>dice-bonus-form.component.html</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">viewProviders</td>
+                <td class="col-md-9">
+                    <code>
+                        { provide: ControlContainer, useFactory: () &#x3D;&gt; {} }
+                    </code>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+        <h3 id="inputs">Inputs</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <code>label</code>
+                        </td>
+                        <td class="col-md-10">
+                            <p>
+                              <em>Default value: </em><code>Bonus Dice</code>
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <code></code>
+                        </td>
+                        <td class="col-md-10">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
+
+
+
+
+    <section>
+        <h3 id="inputs">Properties</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Public</span> d10</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <span class="modifier-icon fa fa-circle"></span><code>d10:     <code>any</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Public</span> d12</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <span class="modifier-icon fa fa-circle"></span><code>d12:     <code>any</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Public</span> d4</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <span class="modifier-icon fa fa-circle"></span><code>d4:     <code>any</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Public</span> d6</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <span class="modifier-icon fa fa-circle"></span><code>d6:     <code>any</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b><span class="modifier">Public</span> d8</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <span class="modifier-icon fa fa-circle"></span><code>d8:     <code>any</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> parentContainer</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>parentContainer:     <code><a href="https://angular.io/docs/ts/latest/api/forms/index/ControlContainer-class.html" target="_blank" >ControlContainer</a></code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> parentFormGroup</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>parentFormGroup:     <code>any</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
+</div>
+        <div class="tab-pane fade tab-source-code" id="source">
+            <pre><code class="hljs javascript">import { Component, inject, Input } from &#x27;@angular/core&#x27;;
+import { ControlContainer, FormControl, FormGroup, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
+import { StepperComponent } from &#x27;../stepper/stepper.component&#x27;;
+import { MatCardModule } from &#x27;@angular/material/card&#x27;;
+
+/**
+ * This component holds all the dice values that the user is able to set and edit.
+ * This component is used on both skill check component and attack rolls component
+ * The dice values are added to the form control automatically
+ */
+@Component({
+  selector: &#x27;app-dice-bonus-form&#x27;,
+  standalone: true,
+  viewProviders: [
+    {
+      provide: ControlContainer,
+      useFactory: () &#x3D;&gt; inject(ControlContainer, {skipSelf: true})
+    }
+  ],
+  imports: [ReactiveFormsModule, StepperComponent, MatCardModule],
+  templateUrl: &#x27;./dice-bonus-form.component.html&#x27;,
+  styleUrl: &#x27;./dice-bonus-form.component.scss&#x27;
+})
+export class DiceBonusFormComponent {
+  parentContainer &#x3D; inject(ControlContainer);
+  @Input({required: true}) controlKey &#x3D; &#x27;&#x27;;
+  @Input() label &#x3D; &#x27;Bonus Dice&#x27;;
+
+  get parentFormGroup() {
+    return this.parentContainer.control as FormGroup;
+  }
+
+  public get d4(): FormControl {
+    return this.parentFormGroup.get(this.controlKey)?.get(&#x27;d4&#x27;) as FormControl
+  }
+
+  public set d4(diceNum: number) {
+    this.parentFormGroup.get(this.controlKey)?.get(&#x27;d4&#x27;)?.setValue(diceNum);
+  }
+
+  public get d6(): FormControl {
+    return this.parentFormGroup.get(this.controlKey)?.get(&#x27;d6&#x27;) as FormControl
+  }
+
+  public set d6(diceNum: number) {
+    this.parentFormGroup.get(this.controlKey)?.get(&#x27;d6&#x27;)?.setValue(diceNum);
+  }
+
+  public get d8(): FormControl {
+    return this.parentFormGroup.get(this.controlKey)?.get(&#x27;d8&#x27;) as FormControl
+  }
+
+  public set d8(diceNum: number) {
+    this.parentFormGroup.get(this.controlKey)?.get(&#x27;d8&#x27;)?.setValue(diceNum);
+  }
+  
+  public get d10(): FormControl {
+    return this.parentFormGroup.get(this.controlKey)?.get(&#x27;d10&#x27;) as FormControl
+  }
+
+  public set d10(diceNum: number) {
+    this.parentFormGroup.get(this.controlKey)?.get(&#x27;d10&#x27;)?.setValue(diceNum);
+  }
+  
+  public get d12(): FormControl {
+    return this.parentFormGroup.get(this.controlKey)?.get(&#x27;d12&#x27;) as FormControl
+  }
+
+  public set d12(diceNum: number) {
+    this.parentFormGroup.get(this.controlKey)?.get(&#x27;d12&#x27;)?.setValue(diceNum);
+  }
+
+  ngOnInit() {
+    this.parentFormGroup.addControl(this.controlKey,
+      new FormGroup({
+        d4: new FormControl(0),
+        d6: new FormControl(0),
+        d8: new FormControl(0),
+        d10: new FormControl(0),
+        d12: new FormControl(0),
+        modifier: new FormControl(0),
+      })
+    );
+  }
+
+  ngOnDestroy() {
+    this.parentFormGroup.removeControl(this.controlKey);
+  }
+}
+</code></pre>
+        </div>
+    </div>
 
 
 
