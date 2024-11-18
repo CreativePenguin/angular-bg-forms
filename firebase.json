@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/angular-bg3-cheats",
+    "public": "dist/angular-bg3-cheats/browser",
     "ignore": [
       "firebase.json",
       "**/.*",

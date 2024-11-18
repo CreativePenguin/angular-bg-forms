@@ -1,5 +1,7 @@
 # AngularBg3Cheats
 
+Webpage found here: <https://test-00-c77de.web.app/>
+
 This webpage is designed to show all possible values that could result in rolling certain amounts of dice.
 This makes it easier to determine what the likelihood of each decision would be when playing dnd,
 and properly understand how likely an action is to suceed when you try it in dnd.
@@ -9,7 +11,7 @@ and properly understand how likely an action is to suceed when you try it in dnd
 Angular is used to build website. API calls are made to <https://www.dnd5eapi.co/> to get the list of all spells in dnd.
 TailwindCSS and Material are used for styling components, and organizing the layout.
 Testing is done with Karma.
-Documentation is built with compodoc, and deployed to github pages using github actions.
+Documentation is built with compodoc, and deployed to github pages using github actions. Local testing of github actions was using act by nektos.
 Deployment is handled by firebase.
 
 ## Pages
