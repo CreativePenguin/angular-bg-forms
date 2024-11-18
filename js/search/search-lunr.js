@@ -1,12 +1,11 @@
-(function(compodoc) {
-
+(function (compodoc) {
     function LunrSearchEngine() {
-        this.index = null;
+        this.index = undefined;
         this.store = {};
         this.name = 'LunrSearchEngine';
     }
 
-    LunrSearchEngine.prototype.init = function() {
+    LunrSearchEngine.prototype.init = function () {
         var that = this,
             d = new promise.Promise();
 
@@ -17,13 +16,13 @@
         return d;
     };
 
-    LunrSearchEngine.prototype.search = function(q, offset, length) {
+    LunrSearchEngine.prototype.search = function (q, offset, length) {
         var that = this,
             results = [],
             d = new promise.Promise();
 
         if (this.index) {
-            results = $.map(this.index.search(q), function(result) {
+            results = this.index.search('*' + q + '*').map(function (result) {
                 var doc = that.store[result.ref];
 
                 return {
@@ -36,26 +35,16 @@
 
         d.done({
             query: q,
-            results: results.slice(0, length),
+            results: length === 0 ? results : results.slice(0, length),
             count: results.length
         });
 
         return d;
     };
 
-    compodoc.addEventListener(compodoc.EVENTS.READY, function(event) {
-        console.log('compodoc ready');
-
+    compodoc.addEventListener(compodoc.EVENTS.READY, function (event) {
         var engine = new LunrSearchEngine(),
             initialized = false;
-
-        engine.init()
-        .then(function() {
-            initialized = true;
-            compodoc.dispatchEvent({
-                type: compodoc.EVENTS.SEARCH_READY
-            });
-        });
 
         function query(q, offset, length) {
             if (!initialized) throw new Error('Search has not been initialized');
@@ -65,5 +54,12 @@
         compodoc.search = {
             query: query
         };
+
+        engine.init().then(function () {
+            initialized = true;
+            compodoc.dispatchEvent({
+                type: compodoc.EVENTS.SEARCH_READY
+            });
+        });
     });
 })(compodoc);

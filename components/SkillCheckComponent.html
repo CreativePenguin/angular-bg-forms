@@ -7,414 +7,140 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
-	    <link rel="stylesheet" href="./styles/style.css">
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-        <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="./" class="navbar-brand">angular-bg3-cheats documentation</a>
-            <button type="button" class="btn btn-default btn-menu fa fa-bars" id="btn-menu"></button>
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">angular-bg3-cheats documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-            <div id="book-search-input" role="search">
-                <input type="text" placeholder="Type to search">
-            </div>
-            <nav>
-            
-                <ul class="list">
-            
-                    <li class="title">
-                        <a href="./">angular-bg3-cheats documentation</a>
-                    </li>
-            
-                    <li class="divider"></li>
-            
-            
-                    <li class="chapter">
-                        <a data-type="chapter-link" href="./"><span class="fa fa-home"></span>Getting started</a>
-                        <ul class="links">
-                                <li class="link">
-                                    <a href="./" ><span class="fa fa-file-text-o"></span>README</a>
-                                </li>
-                                <li class="link">
-                                    <a 
-                                        
-                                         href="./overview.html" 
-                                         href="./overview.html" 
-                                        >
-                                        <span class="fa fa-th"></span>Overview
-                                    </a>
-                                </li>
-                        </ul>
-                    </li>
-            
-            
-                    <li class="chapter">
-                        <div class="simple">
-                            <span class="fa fa-cogs"></span>
-                            <span>Components</span>
-                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
-                                    data-target="#xs-components-links"
-                                ></span>
-                        </div>
-                        <ul class="links collapse in"
-                                id="xs-components-links"
-                            >
-                                <li class="link">
-                                    <a href="components/AppComponent.html" >AppComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="components/AttackRollsComponent.html" >AttackRollsComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="components/CharacterSheetComponent.html" >CharacterSheetComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="components/DiceBonusFormComponent.html" >DiceBonusFormComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="components/DieRollResultsTableComponent.html" >DieRollResultsTableComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="components/NavbarComponent.html" >NavbarComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="components/NotFoundComponent.html" >NotFoundComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="components/OverlayComponent.html" >OverlayComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="components/SkillCheckComponent.html"  class="active" >SkillCheckComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="components/StepperComponent.html" >StepperComponent</a>
-                                </li>
-                        </ul>
-                    </li>
-            
-            
-                    <li class="chapter">
-                        <div class="simple">
-                            <span class="fa fa-file-code-o"></span>
-                            <span>Classes</span>
-                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
-                                    data-target="#xs-classes-links"
-                                ></span>
-                        </div>
-                        <ul class="links collapse in"
-                                id="xs-classes-links"
-                            >
-                                <li class="link">
-                                    <a href="classes/DiceSet.html" >DiceSet</a>
-                                </li>
-                                <li class="link">
-                                    <a href="classes/Spell.html" >Spell</a>
-                                </li>
-                        </ul>
-                    </li>
-            
-            
-                    <li class="chapter">
-                        <div class="simple">
-                            <span class="fa fa-long-arrow-down"></span>
-                            <span>Injectables</span>
-                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
-                                    data-target="#xs-injectables-links"
-                                ></span>
-                        </div>
-                        <ul class="links collapse in"
-                                id="xs-injectables-links"
-                            >
-                                <li class="link">
-                                    <a href="injectables/DiceCalculationsService.html" >DiceCalculationsService</a>
-                                </li>
-                                <li class="link">
-                                    <a href="injectables/SpellsService.html" >SpellsService</a>
-                                </li>
-                        </ul>
-                    </li>
-            
-                    <li class="chapter">
-                        <div class="simple">
-                            <span class="fa fa-info"></span>
-                            <span>Interfaces</span>
-                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
-                                    data-target="#xs-interfaces-links"
-                                ></span>
-                        </div>
-                        <ul class="links collapse in"
-                                id="xs-interfaces-links"
-                            >
-                                <li class="link">
-                                    <a href="interfaces/CharacterStats.html" >CharacterStats</a>
-                                </li>
-                                <li class="link">
-                                    <a href="interfaces/DiceResults.html" >DiceResults</a>
-                                </li>
-                                <li class="link">
-                                    <a href="interfaces/DiceSetI.html" >DiceSetI</a>
-                                </li>
-                                <li class="link">
-                                    <a href="interfaces/DropdownGroup.html" >DropdownGroup</a>
-                                </li>
-                                <li class="link">
-                                    <a href="interfaces/DropdownItem.html" >DropdownItem</a>
-                                </li>
-                                <li class="link">
-                                    <a href="interfaces/SpellI.html" >SpellI</a>
-                                </li>
-                                <li class="link">
-                                    <a href="interfaces/SpellResponse.html" >SpellResponse</a>
-                                </li>
-                                <li class="link">
-                                    <a href="interfaces/SpellResponseResults.html" >SpellResponseResults</a>
-                                </li>
-                        </ul>
-                    </li>
-            
-            
-                    <li class="chapter">
-                        <a data-type="chapter-link" href="./miscellaneous.html" ><span class="fa fa-cubes"></span>Miscellaneous</a>
-                    </li>
-            
-                    <li class="chapter">
-                        <a data-type="chapter-link" href="./coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
-                    </li>
-            
-                    <li class="divider"></li>
-                    <li class="copyright">
-                            Documentation generated using <a href="https://compodoc.github.io/compodoc/" target="_blank">
-                                        <img src=".//images/compodoc-vectorise.svg" class="img-responsive">
-                            </a>
-                    </li>
-            
-                </ul>
-            
-            </nav>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
            <div class="row main">
-               <div class="hidden-xs menu">
-                   <nav>
-                   
-                       <ul class="list">
-                   
-                           <li class="title">
-                               <a href="./">angular-bg3-cheats documentation</a>
-                           </li>
-                   
-                           <li class="divider"></li>
-                   
-                               <div id="book-search-input" role="search">
-                                   <input type="text" placeholder="Type to search">
-                               </div>
-                   
-                           <li class="chapter">
-                               <a data-type="chapter-link" href="./"><span class="fa fa-home"></span>Getting started</a>
-                               <ul class="links">
-                                       <li class="link">
-                                           <a href="./" ><span class="fa fa-file-text-o"></span>README</a>
-                                       </li>
-                                       <li class="link">
-                                           <a 
-                                               
-                                                href="./overview.html" 
-                                                href="./overview.html" 
-                                               >
-                                               <span class="fa fa-th"></span>Overview
-                                           </a>
-                                       </li>
-                               </ul>
-                           </li>
-                   
-                   
-                           <li class="chapter">
-                               <div class="simple">
-                                   <span class="fa fa-cogs"></span>
-                                   <span>Components</span>
-                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
-                                           data-target="#components-links"
-                   ></span>
-                               </div>
-                               <ul class="links collapse in"
-                                       id="components-links"
-                   >
-                                       <li class="link">
-                                           <a href="components/AppComponent.html" >AppComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="components/AttackRollsComponent.html" >AttackRollsComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="components/CharacterSheetComponent.html" >CharacterSheetComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="components/DiceBonusFormComponent.html" >DiceBonusFormComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="components/DieRollResultsTableComponent.html" >DieRollResultsTableComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="components/NavbarComponent.html" >NavbarComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="components/NotFoundComponent.html" >NotFoundComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="components/OverlayComponent.html" >OverlayComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="components/SkillCheckComponent.html"  class="active" >SkillCheckComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="components/StepperComponent.html" >StepperComponent</a>
-                                       </li>
-                               </ul>
-                           </li>
-                   
-                   
-                           <li class="chapter">
-                               <div class="simple">
-                                   <span class="fa fa-file-code-o"></span>
-                                   <span>Classes</span>
-                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
-                                           data-target="#classes-links"
-                   ></span>
-                               </div>
-                               <ul class="links collapse in"
-                                       id="classes-links"
-                   >
-                                       <li class="link">
-                                           <a href="classes/DiceSet.html" >DiceSet</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="classes/Spell.html" >Spell</a>
-                                       </li>
-                               </ul>
-                           </li>
-                   
-                   
-                           <li class="chapter">
-                               <div class="simple">
-                                   <span class="fa fa-long-arrow-down"></span>
-                                   <span>Injectables</span>
-                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
-                                           data-target="#injectables-links"
-                   ></span>
-                               </div>
-                               <ul class="links collapse in"
-                                       id="injectables-links"
-                   >
-                                       <li class="link">
-                                           <a href="injectables/DiceCalculationsService.html" >DiceCalculationsService</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="injectables/SpellsService.html" >SpellsService</a>
-                                       </li>
-                               </ul>
-                           </li>
-                   
-                           <li class="chapter">
-                               <div class="simple">
-                                   <span class="fa fa-info"></span>
-                                   <span>Interfaces</span>
-                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
-                                           data-target="#interfaces-links"
-                   ></span>
-                               </div>
-                               <ul class="links collapse in"
-                                       id="interfaces-links"
-                   >
-                                       <li class="link">
-                                           <a href="interfaces/CharacterStats.html" >CharacterStats</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="interfaces/DiceResults.html" >DiceResults</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="interfaces/DiceSetI.html" >DiceSetI</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="interfaces/DropdownGroup.html" >DropdownGroup</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="interfaces/DropdownItem.html" >DropdownItem</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="interfaces/SpellI.html" >SpellI</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="interfaces/SpellResponse.html" >SpellResponse</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="interfaces/SpellResponseResults.html" >SpellResponseResults</a>
-                                       </li>
-                               </ul>
-                           </li>
-                   
-                   
-                           <li class="chapter">
-                               <a data-type="chapter-link" href="./miscellaneous.html" ><span class="fa fa-cubes"></span>Miscellaneous</a>
-                           </li>
-                   
-                           <li class="chapter">
-                               <a data-type="chapter-link" href="./coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
-                           </li>
-                   
-                           <li class="divider"></li>
-                           <li class="copyright">
-                                   Documentation generated using <a href="https://compodoc.github.io/compodoc/" target="_blank">
-                                               <img src=".//images/compodoc-vectorise.svg" class="img-responsive">
-                                   </a>
-                           </li>
-                   
-                       </ul>
-                   
-                   </nav>
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
                </div>
+               <!-- START CONTENT -->
                <div class="content component">
                    <div class="content-data">
 
 
+
+
 <ol class="breadcrumb">
-  <li>Components</li>
-  <li>SkillCheckComponent</li>
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  SkillCheckComponent</li>
 </ol>
 
-
-    <ul class="nav nav-tabs" role="tablist">
-        <li class="active">
-            <a href="#infos" id="infos-tab" role="tab" data-toggle="tab">Infos</a>
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
         </li>
-        <li>
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab">Source</a>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
         </li>
-    </ul>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
 
-    <div class="tab-content">
-        <div class="tab-pane fade active in" id="infos"><p class="comment">
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
     <h3>File</h3>
 </p>
 <p class="comment">
     <code>src/app/skill-check/skill-check.component.ts</code>
 </p>
 
+
     <p class="comment">
         <h3>Description</h3>
     </p>
     <p class="comment">
-        <p>This component allows for the checking of how likely a skill check is to succeed.<br>It generates a frontend to display results from dice calculations, and a form for the user to input their dice calc information</p>
+        <p>This component allows for the checking of how likely a skill check is to succeed.
+It generates a frontend to display results from dice calculations, and a form for the user to input their dice calc information</p>
 
     </p>
 
 
-<section>
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
     <h3>Metadata</h3>
-    <table class="table table-sm table-hover">
+    <table class="table table-sm table-hover metadata">
         <tbody>
 
 
@@ -433,101 +159,738 @@
                 <td class="col-md-9"><code>app-skill-check</code></td>
             </tr>
 
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>ReactiveFormsModule</code>
+                            <code>CommonModule</code>
+                            <code>MatCardModule</code>
+                            <code>MatSelectModule</code>
+                                <code><a href="../components/DiceBonusFormComponent.html" target="_self" >DiceBonusFormComponent</a></code>
+                            <code>MatButtonModule</code>
+                            <code>MatButtonToggleModule</code>
+                            <code>MatInputModule</code>
+                </td>
+            </tr>
+
 
 
 
             <tr>
                 <td class="col-md-3">templateUrl</td>
-                <td class="col-md-9"><code>skill-check.component.html</code></td>
+                <td class="col-md-9"><code>./skill-check.component.html</code></td>
             </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./skill-check.component.scss</code></td>
+            </tr>
+
+
+
 
 
         </tbody>
     </table>
 </section>
 
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="##tableRef" >#tableRef</a>
+                            </li>
+                            <li>
+                                <a href="#advantageAdvantage" >advantageAdvantage</a>
+                            </li>
+                            <li>
+                                <a href="#advantageDisadvantage" >advantageDisadvantage</a>
+                            </li>
+                            <li>
+                                <a href="#advantageEnum" >advantageEnum</a>
+                            </li>
+                            <li>
+                                <a href="#advantageNone" >advantageNone</a>
+                            </li>
+                            <li>
+                                <a href="#advantageOptions" >advantageOptions</a>
+                            </li>
+                            <li>
+                                <a href="#attemptsOptions" >attemptsOptions</a>
+                            </li>
+                            <li>
+                                <a href="#diceCalcService" >diceCalcService</a>
+                            </li>
+                            <li>
+                                <a href="#dieBonusForm" >dieBonusForm</a>
+                            </li>
+                            <li>
+                                <a href="#skillCheckForm" >skillCheckForm</a>
+                            </li>
+                            <li>
+                                <a href="#vcr" >vcr</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#createTableComponent" >createTableComponent</a>
+                            </li>
+                            <li>
+                                <a href="#generateDiceSet" >generateDiceSet</a>
+                            </li>
+                            <li>
+                                <a href="#isAdvantageNone" >isAdvantageNone</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#skillCheckSubmit" >skillCheckSubmit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
 
 
-    <section>
-        <h3 id="methods">Methods</h3>
-            <table class="table table-sm table-bordered">
-                <tbody>
-                    <tr>
-                        <td class="col-md-4">
-                            <b> ComponentRef</b>
-                        </td>
-                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/skill-check/skill-check.component.ts:110</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
     
-                    <tr>
-                        <td class="col-md-4">
-    <code>ComponentRef()</code>
-                        </td>
-                    </tr>
-    
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-description">
-                                    <b>Returns: </b>    <code>void</code>
-    
-                                </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-    </section>
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createTableComponent"></a>
+                    <span class="name">
+                        <span ><b>createTableComponent</b></span>
+                        <a href="#createTableComponent"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>createTableComponent(tableInput: <a href="../interfaces/DiceResults.html" target="_self">DiceResults[] | undefined</a>)</code>
+                </td>
+            </tr>
 
-    <section>
-        <h3 id="inputs">Properties</h3>
-            <table class="table table-sm table-bordered">
-                <tbody>
+
                     <tr>
                         <td class="col-md-4">
-                            <b> diceCalcService</b>
+                            <div class="io-line">Defined in <a href="" data-line="79"
+                                    class="link-to-prism">src/app/skill-check/skill-check.component.ts:79</a></div>
                         </td>
                     </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>tableInput</td>
+                                            <td>
+                                                            <code><a href="../interfaces/DiceResults.html" target="_self" >DiceResults[] | undefined</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>undefined</code>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="generateDiceSet"></a>
+                    <span class="name">
+                        <span ><b>generateDiceSet</b></span>
+                        <a href="#generateDiceSet"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>generateDiceSet()</code>
+                </td>
+            </tr>
+
+
                     <tr>
                         <td class="col-md-4">
-                            <code>diceCalcService:     <code><a href="../injectables/DiceCalculationsService.html" target="_self" >DiceCalculationsService</a></code>
-    </bcode>
+                            <div class="io-line">Defined in <a href="" data-line="67"
+                                    class="link-to-prism">src/app/skill-check/skill-check.component.ts:67</a></div>
                         </td>
                     </tr>
-                </tbody>
-            </table>
-            <table class="table table-sm table-bordered">
-                <tbody>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/DiceSetI.html" target="_self" >DiceSetI</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isAdvantageNone"></a>
+                    <span class="name">
+                        <span ><b>isAdvantageNone</b></span>
+                        <a href="#isAdvantageNone"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isAdvantageNone(currentAdvantageValue: <a href="../undefineds/Advantage.html" target="_self">Advantage</a>)</code>
+                </td>
+            </tr>
+
+
                     <tr>
                         <td class="col-md-4">
-                            <b> tableRef</b>
+                            <div class="io-line">Defined in <a href="" data-line="63"
+                                    class="link-to-prism">src/app/skill-check/skill-check.component.ts:63</a></div>
                         </td>
                     </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>currentAdvantageValue</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/enumerations.html#Advantage" target="_self" >Advantage</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
                     <tr>
                         <td class="col-md-4">
-                            <code>tableRef:     <code>boolean</code>
-    </bcode>
+                            <div class="io-line">Defined in <a href="" data-line="105"
+                                    class="link-to-prism">src/app/skill-check/skill-check.component.ts:105</a></div>
                         </td>
                     </tr>
-                </tbody>
-            </table>
-            <table class="table table-sm table-bordered">
-                <tbody>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="skillCheckSubmit"></a>
+                    <span class="name">
+                        <span ><b>skillCheckSubmit</b></span>
+                        <a href="#skillCheckSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>skillCheckSubmit()</code>
+                </td>
+            </tr>
+
+
                     <tr>
                         <td class="col-md-4">
-                            <b> vcr</b>
+                            <div class="io-line">Defined in <a href="" data-line="88"
+                                    class="link-to-prism">src/app/skill-check/skill-check.component.ts:88</a></div>
                         </td>
                     </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="#tableRef"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>#tableRef</b></span>
+                        <a href="##tableRef"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../components/DieRollResultsTableComponent.html" target="_self" >ComponentRef&lt;DieRollResultsTableComponent&gt; | undefined</a></code>
+
+                    </td>
+                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <code>vcr:     <code>Signal&lt;ViewContainerRef&gt;</code>
-    </bcode>
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/skill-check/skill-check.component.ts:32</a></div>
                         </td>
                     </tr>
-                </tbody>
-            </table>
-    </section>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="advantageAdvantage"></a>
+                    <span class="name">
+                        <span ><b>advantageAdvantage</b></span>
+                        <a href="#advantageAdvantage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>Advantage.Advantage</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/skill-check/skill-check.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="advantageDisadvantage"></a>
+                    <span class="name">
+                        <span ><b>advantageDisadvantage</b></span>
+                        <a href="#advantageDisadvantage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>Advantage.Disadvantage</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/skill-check/skill-check.component.ts:55</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="advantageEnum"></a>
+                    <span class="name">
+                        <span ><b>advantageEnum</b></span>
+                        <a href="#advantageEnum"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>Advantage</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/skill-check/skill-check.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="advantageNone"></a>
+                    <span class="name">
+                        <span ><b>advantageNone</b></span>
+                        <a href="#advantageNone"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>Advantage.None</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/skill-check/skill-check.component.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="advantageOptions"></a>
+                    <span class="name">
+                        <span ><b>advantageOptions</b></span>
+                        <a href="#advantageOptions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {id: 1, name: &#x27;None&#x27;, value: Advantage.None},
+    {id: 2, name: &#x27;Advantage&#x27;, value: Advantage.Advantage},
+    {id: 3, name: &#x27;Disadvantage&#x27;, value: Advantage.Disadvantage},
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/skill-check/skill-check.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="attemptsOptions"></a>
+                    <span class="name">
+                        <span ><b>attemptsOptions</b></span>
+                        <a href="#attemptsOptions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[1, 2, 3, 4]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/skill-check/skill-check.component.ts:61</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="diceCalcService"></a>
+                    <span class="name">
+                        <span ><b>diceCalcService</b></span>
+                        <a href="#diceCalcService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/DiceCalculationsService.html" target="_self" >DiceCalculationsService</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(DiceCalculationsService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/skill-check/skill-check.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dieBonusForm"></a>
+                    <span class="name">
+                        <span ><b>dieBonusForm</b></span>
+                        <a href="#dieBonusForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new FormGroup({
+    &#x27; d4&#x27;: new FormControl(0),
+    &#x27; d6&#x27;: new FormControl(0),
+    &#x27; d8&#x27;: new FormControl(0),
+    &#x27;d10&#x27;: new FormControl(0),
+    &#x27;d12&#x27;: new FormControl(0),
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/skill-check/skill-check.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="skillCheckForm"></a>
+                    <span class="name">
+                        <span ><b>skillCheckForm</b></span>
+                        <a href="#skillCheckForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new FormGroup({
+    targetDC: new FormControl&lt;number&gt;(0, [
+      Validators.required,
+      Validators.min(0)
+    ]),
+    advantage: new FormControl&lt;Advantage&gt;(Advantage.None),
+    attempts: new FormControl&lt;number&gt;(1, [
+      Validators.required,
+      Validators.min(1)
+    ])
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/skill-check/skill-check.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="vcr"></a>
+                    <span class="name">
+                        <span ><b>vcr</b></span>
+                        <a href="#vcr"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>viewChild(&#x27;tableContainer&#x27;, {read: ViewContainerRef})</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/skill-check/skill-check.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
 </div>
-        <div class="tab-pane fade tab-source-code" id="source">
-            <pre><code class="hljs javascript">import { CommonModule } from &#x27;@angular/common&#x27;;
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
 import { Component, ComponentRef, inject, OnInit, viewChild, ViewContainerRef } from &#x27;@angular/core&#x27;;
 import { FormControl, ReactiveFormsModule, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
 import { DiceSet, DiceSetI, Advantage, DiceResults } from &#x27;../diceset&#x27;;
@@ -641,8 +1004,113 @@ export class SkillCheckComponent implements OnInit {
   constructor() {}
 }
 </code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;mat-card class&#x3D;&quot;m-2 p-3&quot;&gt;
+  &lt;mat-card-header&gt;
+    &lt;mat-card-title&gt;
+      &lt;span id&#x3D;&quot;success-chance&quot;&gt;95&lt;/span&gt;% chance to succeed with target DC &lt;span id&#x3D;&quot;target-dc-value&quot;&gt;0&lt;/span&gt;
+    &lt;/mat-card-title&gt;
+    &lt;mat-card-subtitle&gt;
+      Note: 100% and 0% are impossible since regardless of DC, a natural 20 is an automatic success, and a natural 1 is an automatic fail. Percentages are rounded to two decimals.
+    &lt;/mat-card-subtitle&gt;
+  &lt;/mat-card-header&gt;
+  &lt;form [formGroup]&#x3D;&quot;skillCheckForm&quot; (ngSubmit)&#x3D;&quot;skillCheckSubmit()&quot;&gt;
+    &lt;div class&#x3D;&quot;flex flex-wrap flex-row&quot;&gt;
+      &lt;div class&#x3D;&quot;grow-[2] content-center m-2&quot;&gt;
+        &lt;mat-form-field class&#x3D;&quot;tertiary-element w-full&quot;&gt;
+          &lt;mat-label&gt;Target DC&lt;/mat-label&gt;
+          &lt;input matInput formControlName&#x3D;&quot;targetDC&quot; type&#x3D;&quot;number&quot; /&gt;
+        &lt;/mat-form-field&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;content-center m-2&quot;&gt;
+        &lt;mat-button-toggle-group formControlName&#x3D;&quot;advantage&quot;&gt;
+        @for (option of advantageOptions; track option.id) {
+          @if (option.value &#x3D;&#x3D; &#x27;0&#x27;) {
+            &lt;mat-button-toggle value&#x3D;{{option.value}} id&#x3D;&quot;{{option.id}}&quot; checked&gt;
+              {{option.name}}
+            &lt;/mat-button-toggle&gt;
+          } @else {
+            &lt;mat-button-toggle value&#x3D;{{option.value}} id&#x3D;&quot;{{option.id}}&quot;&gt;
+              {{option.name}}
+            &lt;/mat-button-toggle&gt;
+          }
+        }
+        &lt;/mat-button-toggle-group&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;flex-1 content-center m-2&quot;&gt;
+        &lt;mat-form-field class&#x3D;&quot;w-full&quot;&gt;
+          &lt;mat-label&gt;Attempts&lt;/mat-label&gt;
+          &lt;mat-select formControlName&#x3D;&quot;attempts&quot;&gt;
+            @for(item of attemptsOptions; track $index) {
+              &lt;mat-option [value]&#x3D;&quot;item&quot;&gt;{{item}}&lt;/mat-option&gt;
+            }
+          &lt;/mat-select&gt;
+        &lt;/mat-form-field&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;app-dice-bonus-form label&#x3D;&quot;Die Bonus&quot; controlKey&#x3D;&quot;dieBonuses&quot;&gt;&lt;/app-dice-bonus-form&gt;
+    &lt;div class&#x3D;&quot;m-2&quot;&gt;
+      &lt;button mat-stroked-button type&#x3D;&quot;submit&quot;&gt;Calc!&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/form&gt;
+&lt;/mat-card&gt;
+&lt;ng-container #tableContainer&gt;
+
+&lt;/ng-container&gt;
+&lt;div class&#x3D;&quot;m-3&quot;&gt;
+  &lt;div&gt;Icons made by &lt;a href&#x3D;&quot;https://www.freepik.com&quot; title&#x3D;&quot;Freepik&quot;&gt;Freepik&lt;/a&gt; from &lt;a
+      href&#x3D;&quot;https://www.flaticon.com/&quot; title&#x3D;&quot;Flaticon&quot;&gt;www.flaticon.com&lt;/a&gt;&lt;/div&gt;
+  &lt;div&gt;Icons made by &lt;a href&#x3D;&quot;https://www.flaticon.com/authors/pixel-perfect&quot; title&#x3D;&quot;Pixel perfect&quot;&gt;Pixel perfect&lt;/a&gt; from
+    &lt;a href&#x3D;&quot;https://www.flaticon.com/&quot; title&#x3D;&quot;Flaticon&quot;&gt;www.flaticon.com&lt;/a&gt;&lt;/div&gt;
+  &lt;div&gt;Icons made by &lt;a href&#x3D;&quot;https://www.flaticon.com/authors/nadiinko&quot; title&#x3D;&quot;Nadiinko&quot;&gt;Nadiinko&lt;/a&gt; from &lt;a
+      href&#x3D;&quot;https://www.flaticon.com/&quot; title&#x3D;&quot;Flaticon&quot;&gt;www.flaticon.com&lt;/a&gt;&lt;/div&gt;
+  &lt;div&gt;Icons made by &lt;a href&#x3D;&quot;https://www.flaticon.com/authors/flowicon&quot; title&#x3D;&quot;Flowicon&quot;&gt;Flowicon&lt;/a&gt; from &lt;a
+      href&#x3D;&quot;https://www.flaticon.com/&quot; title&#x3D;&quot;Flaticon&quot;&gt;www.flaticon.com&lt;/a&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
         </div>
     </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><mat-card class="m-2 p-3">  <mat-card-header>    <mat-card-title>      <span id="success-chance">95</span>% chance to succeed with target DC <span id="target-dc-value">0</span>    </mat-card-title>    <mat-card-subtitle>      Note: 100% and 0% are impossible since regardless of DC, a natural 20 is an automatic success, and a natural 1 is an automatic fail. Percentages are rounded to two decimals.    </mat-card-subtitle>  </mat-card-header>  <form [formGroup]="skillCheckForm" (ngSubmit)="skillCheckSubmit()">    <div class="flex flex-wrap flex-row">      <div class="grow-[2] content-center m-2">        <mat-form-field class="tertiary-element w-full">          <mat-label>Target DC</mat-label>          <input matInput formControlName="targetDC" type="number" />        </mat-form-field>      </div>      <div class="content-center m-2">        <mat-button-toggle-group formControlName="advantage">        @for (option of advantageOptions; track option.id) {          @if (option.value == \'0\') {            <mat-button-toggle value={{option.value}} id="{{option.id}}" checked>              {{option.name}}            </mat-button-toggle>          } @else {            <mat-button-toggle value={{option.value}} id="{{option.id}}">              {{option.name}}            </mat-button-toggle>          }        }        </mat-button-toggle-group>      </div>      <div class="flex-1 content-center m-2">        <mat-form-field class="w-full">          <mat-label>Attempts</mat-label>          <mat-select formControlName="attempts">            @for(item of attemptsOptions; track $index) {              <mat-option [value]="item">{{item}}</mat-option>            }          </mat-select>        </mat-form-field>      </div>    </div>    <app-dice-bonus-form label="Die Bonus" controlKey="dieBonuses"></app-dice-bonus-form>    <div class="m-2">      <button mat-stroked-button type="submit">Calc!</button>    </div>  </form></mat-card><ng-container #tableContainer></ng-container><div class="m-3">  <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a      href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>  <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from    <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>  <div>Icons made by <a href="https://www.flaticon.com/authors/nadiinko" title="Nadiinko">Nadiinko</a> from <a      href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>  <div>Icons made by <a href="https://www.flaticon.com/authors/flowicon" title="Flowicon">Flowicon</a> from <a      href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AttackRollsComponent', 'selector': 'app-attack-rolls'},{'name': 'CharacterSheetComponent', 'selector': 'app-character-sheet'},{'name': 'DiceBonusFormComponent', 'selector': 'app-dice-bonus-form'},{'name': 'DieRollResultsTableComponent', 'selector': 'app-die-roll-results-table'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'OverlayComponent', 'selector': 'app-overlay'},{'name': 'SkillCheckComponent', 'selector': 'app-skill-check'},{'name': 'StepperComponent', 'selector': 'app-stepper'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'SkillCheckComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
 
 
 
@@ -663,32 +1131,64 @@ export class SkillCheckComponent implements OnInit {
     </div>
 </div>
 </div>
+               <!-- END CONTENT -->
            </div>
        </div>
 
-       <script src="./js/libs/bootstrap-native.js"></script>
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
 
-       <script src="./js/libs/es6-shim.min.js"></script>
-       <script src="./js/libs/EventDispatcher.js"></script>
-       <script src="./js/libs/promise.min.js"></script>
-       <script src="./js/libs/zepto.min.js"></script>
-
-       <script src="./js/compodoc.js"></script>
-
-       <script src="./js/search/search.js"></script>
-       <script src="./js/search/lunr.min.js"></script>
-       <script src="./js/search/search-lunr.js"></script>
-
-       <script src="./js/menu.js"></script>
-       <script src="./js/libs/highlight.pack.js"></script>
-       <script src="./js/libs/highlightjs-line-numbers.min.js"></script>
-       <script src="./js/search/search_index.js"></script>
        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                hljs.initHighlightingOnLoad();
-                hljs.initLineNumbersOnLoad();
-            });
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'SkillCheckComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
 
     </body>
 </html>
