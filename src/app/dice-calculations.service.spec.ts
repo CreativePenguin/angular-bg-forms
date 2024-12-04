@@ -23,6 +23,9 @@ fdescribe('DiceCalculationsService', () => {
   let diceSet4: DiceSetI = new DiceSet({
     d6: 2, target: 7
   });
+  let diceSetBicicleta: DiceSetI = new DiceSet({
+    d4: 1, d20: 1, modifier: 9, target: 26
+  });
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -55,6 +58,39 @@ fdescribe('DiceCalculationsService', () => {
     let diceset = new DiceSet({d4: 2});
     expect(service.numPossibleDieRolls(diceset)).toEqual(16);
   });
+
+  it('should return correct map for testing sofia bicicleta jump', () => {
+    let valuesMap = new Map([
+      [9, 1.25],
+      [10, 2.5],
+      [11, 3.75],
+      [12, 5],
+      [13, 5],
+      [14, 5],
+      [15, 5],
+      [16, 5],
+      [17, 5],
+      [18, 5],
+      [19, 5],
+      [20, 5],
+      [21, 5],
+      [22, 5],
+      [23, 5],
+      [24, 5],
+      [25, 5],
+      [26, 5],
+      [27, 5],
+      [28, 5],
+      [29, 3.75],
+      [30, 2.5],
+      [31, 1.25],
+    ])
+    expect(service.diceCalcMap(diceSetBicicleta)).toEqual(valuesMap);
+  });
+
+  it('should return correct dc for testing sofia bicicleta jump', () => {
+    expect(service.skillCheckCalc(diceSetBicicleta)).toBeCloseTo(17.5);
+  })
 
   it('should have functioning possibleDieValues', () => {
     expect(service.possibleDiceValues(diceSet3)).toEqual(

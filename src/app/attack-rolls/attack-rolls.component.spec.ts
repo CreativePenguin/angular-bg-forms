@@ -11,7 +11,7 @@ import { SpellsService } from '../spells.service';
 import { firstValueFrom } from 'rxjs';
 import { mockSpellResponse } from '../../mocks/mockSpells';
 
-fdescribe('AttackRollsComponent', () => {
+describe('AttackRollsComponent', () => {
   let component: AttackRollsComponent;
   let fixture: ComponentFixture<AttackRollsComponent>;
   let httpTesting: HttpTestingController;
