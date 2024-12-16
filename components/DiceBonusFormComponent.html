@@ -960,39 +960,40 @@ export class DiceBonusFormComponent {
   &lt;mat-card class&#x3D;&quot;m-2&quot;&gt;
     &lt;mat-card-header&gt;{{label}}&lt;/mat-card-header&gt;
     &lt;div class&#x3D;&quot;inline-flex flex-wrap&quot;&gt;
-      &lt;div class&#x3D;&quot;rounded-lg border px-3 py-2 flex vert-align-center m-3&quot;&gt;
+      &lt;div class&#x3D;&quot;rounded-lg border px-3 py-2 flex vert-align-center m-3 grow&quot;&gt;
       &lt;!-- &lt;div class&#x3D;&quot;flex items-center rounded-s-lg border p-3&quot;&gt; --&gt;
         &lt;span&gt;&amp;nbsp;d4:&lt;/span&gt;
         &lt;img class&#x3D;&quot;h-10 m-1&quot; src&#x3D;&quot;../../assets/001-d4.png&quot;&gt;
         &lt;app-stepper formControlName&#x3D;&quot;d4&quot;&gt;&lt;/app-stepper&gt;
       &lt;/div&gt;
-      &lt;div class&#x3D;&quot;rounded-lg border px-3 py-2 flex vert-align-center m-3&quot;&gt;
+      &lt;div class&#x3D;&quot;rounded-lg border px-3 py-2 flex vert-align-center m-3 grow&quot;&gt;
         &lt;span&gt;&amp;nbsp;d6:&lt;/span&gt;
         &lt;img class&#x3D;&quot;h-10 m-1&quot; src&#x3D;&quot;../../assets/002-d6.png&quot;&gt;
         &lt;app-stepper formControlName&#x3D;&quot;d6&quot;&gt;&lt;/app-stepper&gt;
       &lt;/div&gt;
-      &lt;div class&#x3D;&quot;rounded-lg border px-3 py-2 flex vert-align-center m-3&quot;&gt;
+      &lt;div class&#x3D;&quot;rounded-lg border px-3 py-2 flex vert-align-center m-3 grow&quot;&gt;
         &lt;span&gt;&amp;nbsp;d8:&lt;/span&gt;
         &lt;img class&#x3D;&quot;h-12 m-1&quot; src&#x3D;&quot;../../assets/003-d8.png&quot;&gt;
         &lt;app-stepper formControlName&#x3D;&quot;d8&quot;&gt;&lt;/app-stepper&gt;
       &lt;/div&gt;
-      &lt;div class&#x3D;&quot;rounded-lg border px-3 py-2 flex vert-align-center m-3&quot;&gt;
+      &lt;div class&#x3D;&quot;rounded-lg border px-3 py-2 flex vert-align-center m-3 grow&quot;&gt;
         &lt;span&gt;d10:&lt;/span&gt;
         &lt;img class&#x3D;&quot;h-10 m-1&quot; src&#x3D;&quot;../../assets/004-d10.png&quot;&gt;
         &lt;app-stepper formControlName&#x3D;&quot;d10&quot;&gt;&lt;/app-stepper&gt;
       &lt;/div&gt;
-      &lt;div class&#x3D;&quot;rounded-lg border px-3 py-2 flex vert-align-center m-3&quot;&gt;
+      &lt;div class&#x3D;&quot;rounded-lg border px-3 py-2 flex vert-align-center m-3 grow&quot;&gt;
         &lt;span&gt;d12:&lt;/span&gt;
         &lt;img class&#x3D;&quot;h-10 m-1&quot; src&#x3D;&quot;../../assets/005-d12.png&quot;&gt;
         &lt;app-stepper formControlName&#x3D;&quot;d12&quot;&gt;&lt;/app-stepper&gt;
       &lt;/div&gt;
-      &lt;div class&#x3D;&quot;rounded-lg border px-3 py-2 flex vert-align-center m-3&quot;&gt;
+      &lt;div class&#x3D;&quot;rounded-lg border px-3 py-2 flex vert-align-center m-3 grow&quot;&gt;
         &lt;span class&#x3D;&quot;min-w-15 p-2&quot;&gt;modifier:&lt;/span&gt;
         &lt;app-stepper formControlName&#x3D;&quot;modifier&quot;&gt;&lt;/app-stepper&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   &lt;/mat-card&gt;
-&lt;/fieldset&gt;</code></pre>
+&lt;/fieldset&gt;
+</code></pre>
     </div>
 
 
@@ -1021,7 +1022,7 @@ export class DiceBonusFormComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><!-- <fieldset [formGroupName]="controlKey">  <legend>{{label}}</legend>  <img width=16px src="../../assets/001-d4.png">  <label for="d4">d4:</label>  <app-stepper id="d4" formControlName="d4"></app-stepper>  <img width=16px src="../../assets/002-d6.png">  <label for="d6">d6:</label>  <app-stepper id="d6" formControlName="d6"></app-stepper>  <img width=16px src="../../assets/003-d8.png">  <label for="d8">d8:</label>  <app-stepper id="d8" formControlName="d8"></app-stepper>  <img width="16px" src="../../assets/004-d10.png">  <label for="d10">d10:</label>  <app-stepper id="d10" formControlName="d10"></app-stepper>  <img width="16px" src="../../assets/005-d12.png">  <label for="d12">d12:</label>  <app-stepper id="d12" formControlName="d12"></app-stepper></fieldset> --><fieldset [formGroupName]="controlKey">  <mat-card class="m-2">    <mat-card-header>{{label}}</mat-card-header>    <div class="inline-flex flex-wrap">      <div class="rounded-lg border px-3 py-2 flex vert-align-center m-3">      <!-- <div class="flex items-center rounded-s-lg border p-3"> -->        <span>&nbsp;d4:</span>        <img class="h-10 m-1" src="../../assets/001-d4.png">        <app-stepper formControlName="d4"></app-stepper>      </div>      <div class="rounded-lg border px-3 py-2 flex vert-align-center m-3">        <span>&nbsp;d6:</span>        <img class="h-10 m-1" src="../../assets/002-d6.png">        <app-stepper formControlName="d6"></app-stepper>      </div>      <div class="rounded-lg border px-3 py-2 flex vert-align-center m-3">        <span>&nbsp;d8:</span>        <img class="h-12 m-1" src="../../assets/003-d8.png">        <app-stepper formControlName="d8"></app-stepper>      </div>      <div class="rounded-lg border px-3 py-2 flex vert-align-center m-3">        <span>d10:</span>        <img class="h-10 m-1" src="../../assets/004-d10.png">        <app-stepper formControlName="d10"></app-stepper>      </div>      <div class="rounded-lg border px-3 py-2 flex vert-align-center m-3">        <span>d12:</span>        <img class="h-10 m-1" src="../../assets/005-d12.png">        <app-stepper formControlName="d12"></app-stepper>      </div>      <div class="rounded-lg border px-3 py-2 flex vert-align-center m-3">        <span class="min-w-15 p-2">modifier:</span>        <app-stepper formControlName="modifier"></app-stepper>      </div>    </div>  </mat-card></fieldset></div>'
+        var COMPONENT_TEMPLATE = '<div><!-- <fieldset [formGroupName]="controlKey">  <legend>{{label}}</legend>  <img width=16px src="../../assets/001-d4.png">  <label for="d4">d4:</label>  <app-stepper id="d4" formControlName="d4"></app-stepper>  <img width=16px src="../../assets/002-d6.png">  <label for="d6">d6:</label>  <app-stepper id="d6" formControlName="d6"></app-stepper>  <img width=16px src="../../assets/003-d8.png">  <label for="d8">d8:</label>  <app-stepper id="d8" formControlName="d8"></app-stepper>  <img width="16px" src="../../assets/004-d10.png">  <label for="d10">d10:</label>  <app-stepper id="d10" formControlName="d10"></app-stepper>  <img width="16px" src="../../assets/005-d12.png">  <label for="d12">d12:</label>  <app-stepper id="d12" formControlName="d12"></app-stepper></fieldset> --><fieldset [formGroupName]="controlKey">  <mat-card class="m-2">    <mat-card-header>{{label}}</mat-card-header>    <div class="inline-flex flex-wrap">      <div class="rounded-lg border px-3 py-2 flex vert-align-center m-3 grow">      <!-- <div class="flex items-center rounded-s-lg border p-3"> -->        <span>&nbsp;d4:</span>        <img class="h-10 m-1" src="../../assets/001-d4.png">        <app-stepper formControlName="d4"></app-stepper>      </div>      <div class="rounded-lg border px-3 py-2 flex vert-align-center m-3 grow">        <span>&nbsp;d6:</span>        <img class="h-10 m-1" src="../../assets/002-d6.png">        <app-stepper formControlName="d6"></app-stepper>      </div>      <div class="rounded-lg border px-3 py-2 flex vert-align-center m-3 grow">        <span>&nbsp;d8:</span>        <img class="h-12 m-1" src="../../assets/003-d8.png">        <app-stepper formControlName="d8"></app-stepper>      </div>      <div class="rounded-lg border px-3 py-2 flex vert-align-center m-3 grow">        <span>d10:</span>        <img class="h-10 m-1" src="../../assets/004-d10.png">        <app-stepper formControlName="d10"></app-stepper>      </div>      <div class="rounded-lg border px-3 py-2 flex vert-align-center m-3 grow">        <span>d12:</span>        <img class="h-10 m-1" src="../../assets/005-d12.png">        <app-stepper formControlName="d12"></app-stepper>      </div>      <div class="rounded-lg border px-3 py-2 flex vert-align-center m-3 grow">        <span class="min-w-15 p-2">modifier:</span>        <app-stepper formControlName="modifier"></app-stepper>      </div>    </div>  </mat-card></fieldset></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AttackRollsComponent', 'selector': 'app-attack-rolls'},{'name': 'CharacterSheetComponent', 'selector': 'app-character-sheet'},{'name': 'DiceBonusFormComponent', 'selector': 'app-dice-bonus-form'},{'name': 'DieRollResultsTableComponent', 'selector': 'app-die-roll-results-table'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'OverlayComponent', 'selector': 'app-overlay'},{'name': 'SkillCheckComponent', 'selector': 'app-skill-check'},{'name': 'StepperComponent', 'selector': 'app-stepper'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'DiceBonusFormComponent'};
