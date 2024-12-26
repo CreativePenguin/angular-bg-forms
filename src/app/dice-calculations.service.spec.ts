@@ -26,6 +26,12 @@ fdescribe('DiceCalculationsService', () => {
   let diceSetBicicleta: DiceSetI = new DiceSet({
     d4: 1, d20: 1, modifier: 9, target: 26
   });
+  let diceSetFireball: DiceSetI = new DiceSet({
+    d6: 11, target: 50
+  });
+  let diceSetStressTest: DiceSetI = new DiceSet({
+    d20: 10, target: 50
+  })
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -61,35 +67,35 @@ fdescribe('DiceCalculationsService', () => {
 
   it('should return correct map for testing sofia bicicleta jump', () => {
     let valuesMap = new Map([
-      [9, 1.25],
-      [10, 2.5],
-      [11, 3.75],
-      [12, 5],
-      [13, 5],
-      [14, 5],
-      [15, 5],
-      [16, 5],
-      [17, 5],
-      [18, 5],
-      [19, 5],
-      [20, 5],
-      [21, 5],
-      [22, 5],
-      [23, 5],
-      [24, 5],
-      [25, 5],
-      [26, 5],
-      [27, 5],
-      [28, 5],
-      [29, 3.75],
-      [30, 2.5],
-      [31, 1.25],
+      [11, 1],
+      [12, 2],
+      [13, 3],
+      [14, 4],
+      [15, 4],
+      [16, 4],
+      [17, 4],
+      [18, 4],
+      [19, 4],
+      [20, 4],
+      [21, 4],
+      [22, 4],
+      [23, 4],
+      [24, 4],
+      [25, 4],
+      [26, 4],
+      [27, 4],
+      [28, 4],
+      [29, 4],
+      [30, 4],
+      [31, 3],
+      [32, 2],
+      [33, 1],
     ])
     expect(service.diceCalcMap(diceSetBicicleta)).toEqual(valuesMap);
   });
 
   it('should return correct dc for testing sofia bicicleta jump', () => {
-    expect(service.skillCheckCalc(diceSetBicicleta)).toBeCloseTo(17.5);
+    expect(service.skillCheckCalc(diceSetBicicleta)).toBeCloseTo(32.5);
   })
 
   it('should have functioning possibleDieValues', () => {
@@ -114,14 +120,14 @@ fdescribe('DiceCalculationsService', () => {
     // should look something like [[1, 1], [2, 3], [3, 5], [4, 7]]
     let expectedValues = new Map<number, number>();
     for(let i = 1; i <= 20; i++) {
-      expectedValues.set(i, i * 2 - 1)
+      expectedValues.set(i, i * 2 - 1);
     }
     expect(service.diceCalcMapAdvantage(diceSet0A)).toEqual(expectedValues);
     let expectedValues2 = new Map<number, number>();
     for(let i = 1; i <= 20; i++) {
       expectedValues2.set(21 - i, i * 2 - 1);
     }
-    expect(service.diceCalcMapAdvantage(diceSet0D)).toEqual(expectedValues2)
+    expect(service.diceCalcMapAdvantage(diceSet0D)).toEqual(expectedValues2);
   })
 
   it('should have working two decimal percentage', () => {
@@ -184,5 +190,12 @@ fdescribe('DiceCalculationsService', () => {
     let sDiceSet2 = new DiceSet({}, '4d6 + 5d6');
     expect(sDiceSet).toEqual(new DiceSet({d4: 4}));
     expect(sDiceSet2).toEqual(new DiceSet({d6: 9}));
+  })
+
+  it('should still have reasonable runtime for large dice numbers', () => {
+    let diceSetFireball1 = new DiceSet({d6: 10, target: 50});
+    let diceSetFireball2 = new DiceSet({d6: 11, target: 50})
+    expect(service.skillCheckCalc(diceSetFireball1)).toBeCloseTo(.29);
+    expect(service.skillCheckCalc(diceSetFireball2)).toBeCloseTo(.29);
   })
 });

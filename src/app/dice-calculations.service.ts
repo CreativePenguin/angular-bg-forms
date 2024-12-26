@@ -202,14 +202,45 @@ export class DiceCalculationsService {
     let sums1: number[] = [0];
     // This array will get the new dice sums pushed to it
     let sums2: number[] = [];
+    let sums3: number[] = [];
+    // sums2.length = Math.min(0xffffffff, sums2.length + 1);
     for(let diceFaces of possibleValues) {
       for(let currentDieValue of diceFaces) {
         for(let currentSum of sums1) {
           sums2.push(currentSum + currentDieValue);
+          if(sums2.length >= 112813858) {
+            console.log('the length is big boy now :DD')
+          }
+          try {
+            sums2.push(currentSum + currentDieValue);
+            // sums2[sums2.length] = currentSum + currentDieValue;
+          } catch(e) {
+            sums3 = sums2.slice();
+            // sums2.length += 1;
+            // sums2.push(currentSum + currentDieValue);
+            console.log('push happened', sums2.length);
+            sums2.length = 0;
+            console.log('error found', 'sums2 length', sums2.length);
+            console.log(`------------ERROR FOUND----------------`);
+            // console.log(e);
+            console.log(`sums2 length: ${sums2.length}, 2 ** 32 - 1: ${Math.pow(2, 32) - 1}`);
+            console.log(`Additional debug info: currentSum: ${currentSum}, currentDieValue: ${currentDieValue}`);
+            // console.log(sums2.push(42));
+          }
         }
       }
-      sums1 = sums2.slice(); // create deep copy of array
-      sums2 = [];
+      if(sums3.length > 0) {
+        console.log('sums 3 used', diceset);
+        sums1 = sums3.slice();
+        for(let i of sums2) {
+          sums1.push(i);
+        }
+      } else {
+        sums1 = sums2.slice();
+      }
+      // sums1 = sums2.slice(); // create deep copy of array
+      sums2.length = 0;
+      sums3.length = 0;
     }
     let numRollsAboveTarget = sums1.filter((x) => x >= target).length;
     let numPossibleRolls = this.numPossibleDieRolls(diceset);
@@ -247,7 +278,7 @@ export class DiceCalculationsService {
   adjustProbabilityForAttempts(
     likelihoodTarget: number, attempts: number
   ): number {
-    console.log(`adjust probability for attempts ${likelihoodTarget} ${attempts}`);
+    // console.log(`adjust probability for attempts ${likelihoodTarget} ${attempts}`);
     return 1 - (1 - likelihoodTarget) ** attempts;
   }
 
