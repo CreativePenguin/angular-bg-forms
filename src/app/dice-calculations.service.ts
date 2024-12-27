@@ -199,50 +199,34 @@ export class DiceCalculationsService {
     let target = diceset.target - diceset.modifier;
     let possibleValues = this.possibleDiceValues(diceset);
     // This array holds the sums of the already iterated through dice.
-    let sums1: number[] = [0];
+    let sums1: number[][] = [[0]];
     // This array will get the new dice sums pushed to it
-    let sums2: number[] = [];
-    let sums3: number[] = [];
+    let sums2: number[][] = [[]];
+    let counter = 0;
     // sums2.length = Math.min(0xffffffff, sums2.length + 1);
     for(let diceFaces of possibleValues) {
       for(let currentDieValue of diceFaces) {
-        for(let currentSum of sums1) {
-          sums2.push(currentSum + currentDieValue);
-          if(sums2.length >= 112813858) {
-            console.log('the length is big boy now :DD')
-          }
-          try {
-            sums2.push(currentSum + currentDieValue);
-            // sums2[sums2.length] = currentSum + currentDieValue;
-          } catch(e) {
-            sums3 = sums2.slice();
-            // sums2.length += 1;
-            // sums2.push(currentSum + currentDieValue);
-            console.log('push happened', sums2.length);
-            sums2.length = 0;
-            console.log('error found', 'sums2 length', sums2.length);
-            console.log(`------------ERROR FOUND----------------`);
-            // console.log(e);
-            console.log(`sums2 length: ${sums2.length}, 2 ** 32 - 1: ${Math.pow(2, 32) - 1}`);
-            console.log(`Additional debug info: currentSum: ${currentSum}, currentDieValue: ${currentDieValue}`);
-            // console.log(sums2.push(42));
+        for(let sums1Slice of sums1) {
+          for(let currentSum of sums1Slice) {
+            if((sums2[counter].length ?? 0) >= 112813858) {
+              console.log('the length is big boy now :DD');
+              sums2.push([]);
+              counter++;
+            }
+            sums2[counter].push(currentSum + currentDieValue);
           }
         }
       }
-      if(sums3.length > 0) {
-        console.log('sums 3 used', diceset);
-        sums1 = sums3.slice();
-        for(let i of sums2) {
-          sums1.push(i);
-        }
-      } else {
-        sums1 = sums2.slice();
-      }
-      // sums1 = sums2.slice(); // create deep copy of array
-      sums2.length = 0;
-      sums3.length = 0;
+      sums1 = sums2.slice(); // create deep copy of array
+      sums2 = [[]];
+      counter = 0;
     }
-    let numRollsAboveTarget = sums1.filter((x) => x >= target).length;
+    // if(sums1.length > 1) console.log(`sums1: ${sums1[1]}`);
+    let numRollsAboveTarget = 0;
+    for(let sums of sums1) {
+      numRollsAboveTarget += sums.filter((x) => x >= target).length;
+    }
+    // let numRollsAboveTarget = sums1.filter((x) => x >= target).length;
     let numPossibleRolls = this.numPossibleDieRolls(diceset);
     let fractionAboveTarget = numRollsAboveTarget / numPossibleRolls;
     return this.skillCheckCalcModifiers(diceset, fractionAboveTarget);

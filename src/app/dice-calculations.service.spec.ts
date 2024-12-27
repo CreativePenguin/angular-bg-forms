@@ -190,7 +190,13 @@ fdescribe('DiceCalculationsService', () => {
     let sDiceSet2 = new DiceSet({}, '4d6 + 5d6');
     expect(sDiceSet).toEqual(new DiceSet({d4: 4}));
     expect(sDiceSet2).toEqual(new DiceSet({d6: 9}));
-  })
+  });
+
+  // it('should have non-overflow for dicesets just below the threshold', () => {
+  //   let diceSetD6 = new DiceSet({d6: 10, target: 50});
+  //   let diceSetD12 = new DiceSet({d12: 8, target: 50});
+  //   expect(service.skillCheckCalc(diceSetD6))
+  // })
 
   it('should still have reasonable runtime for large dice numbers', () => {
     let diceSetFireball1 = new DiceSet({d6: 10, target: 50});
