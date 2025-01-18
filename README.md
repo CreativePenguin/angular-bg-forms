@@ -1,4 +1,4 @@
-# AngularBg3Cheats
+# Dice Calculator
 
 Webpage found here: <https://test-00-c77de.web.app/>
 
